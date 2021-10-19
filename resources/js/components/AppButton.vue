@@ -28,7 +28,7 @@ export default defineComponent({
   },
   setup(props) {
     const bgColor = computed(() => {
-      return `bg-${props.color}-500 hover:bg-${props.color}-700 `;
+      return `bg-${props.color}-500 hover:bg-${props.color}-700`;
     });
 
     return {
