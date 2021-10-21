@@ -8,7 +8,7 @@ use Inertia\Inertia;
 class AppController extends Controller
 {
     /**
-     * index
+     * list all users
      *
      * @return \Inertia\Response
      */
