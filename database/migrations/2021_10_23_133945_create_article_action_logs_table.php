@@ -15,6 +15,7 @@ class CreateArticleActionLogsTable extends Migration
     {
         Schema::create('article_action_logs', function (Blueprint $table) {
             $table->id();
+            $table->softDeletes();
             $table->timestamps();
             $table->foreignId('person_id')->nullable(False)->constrained('persons')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('article_id')->nullable(False)->constrained('articles')->onUpdate('cascade')->onDelete('cascade');
