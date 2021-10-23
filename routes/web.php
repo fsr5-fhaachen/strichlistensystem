@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AppController::class, 'index']);
-Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/', [AppController::class, 'index'])->middleware('vpn');
+Route::get('/user/{id}', [UserController::class, 'show'])->middleware('vpn.or.user');
