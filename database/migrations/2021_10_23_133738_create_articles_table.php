@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 50)->nullable(False);
-            $table->string('icon', 50);
+            $table->enum('icon', ['beer', 'lemon', 'wine-bottle', 'faucet'])->nullable(False);
             $table->integer('show_order')->nullable(False);
         });
     }
