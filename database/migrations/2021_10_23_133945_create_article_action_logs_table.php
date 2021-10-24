@@ -19,7 +19,6 @@ class CreateArticleActionLogsTable extends Migration
             $table->timestamps();
             $table->foreignId('person_id')->nullable(False)->constrained('persons')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('article_id')->nullable(False)->constrained('articles')->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('action', ['added', 'removed'])->nullable(False);
         });
     }
 

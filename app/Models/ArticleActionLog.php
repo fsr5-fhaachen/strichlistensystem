@@ -12,8 +12,7 @@ class ArticleActionLog extends Model
     use SoftDeletes;
 
     protected $fillable = [
-      'person_id',
-      'article_id',
-      'action'
+        'person_id',
+        'article_id'
     ];
 }
