@@ -20,7 +20,7 @@ class CreatePersonsTable extends Migration
             $table->string('lastname', 30)->nullable(False);
             $table->string('email', 100)->nullable(False)->unique();
             $table->enum('course', ['ET', 'INF', 'MCD', 'WI'])->nullable(False);
-            $table->string('image_url', 100);
+            $table->string('img', 100);
             $table->boolean('is_tutor')->nullable(False);
             $table->boolean('is_special')->nullable(False);
         });

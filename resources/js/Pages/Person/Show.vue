@@ -17,9 +17,9 @@
        auf die Startseite geleitet.
       </p>
     <div class="grid gap-4 col-span-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5"> 
-      <UserCard
+      <PersonCard
         :canBeHovered="false"
-        :user="user"
+        :person="person"
       />
       <ItemCard
         :item="{
@@ -85,7 +85,7 @@ import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
-import UserCard from "../../components/UserCard.vue";
+import PersonCard from "../../components/PersonCard.vue";
 import ItemCard from "../../components/ItemCard.vue";
 
 export default defineComponent({
@@ -94,11 +94,11 @@ export default defineComponent({
     AppButton,
     LayoutContainer,
     Link,
-    UserCard,
+    PersonCard,
     ItemCard,
   },
   props: {
-    user: {
+    person: {
       type: Object,
       required: true,
     },

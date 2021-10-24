@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Person;
 use Inertia\Inertia;
 
 
@@ -14,6 +15,10 @@ class AppController extends Controller
      */
     public function index()
     {
-        return Inertia::render('App/Index');
+        $persons = Person::all();
+
+        return Inertia::render('App/Index', [
+            'persons' => $persons
+        ]);
     }
 }

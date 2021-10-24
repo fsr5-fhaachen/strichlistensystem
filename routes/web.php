@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AppController::class, 'index'])->middleware('vpn');
-Route::get('/user/{id}', [UserController::class, 'show'])->middleware('vpn.or.user');
+Route::get('/person/{id}', [PersonController::class, 'show'])->middleware('vpn.or.person');

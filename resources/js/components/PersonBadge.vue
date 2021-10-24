@@ -12,7 +12,7 @@
 import { computed, defineComponent } from "vue";
 
 export default defineComponent({
-  name: "UserBadge",
+  name: "PersonBadge",
   props: {
     color: {
       type: String,

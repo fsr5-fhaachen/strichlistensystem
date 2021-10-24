@@ -65,6 +65,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'vpn' => \App\Http\Middleware\Vpn::class,
-        'vpn.or.user' => \App\Http\Middleware\VpnOrUser::class,
+        'vpn.or.person' => \App\Http\Middleware\VpnOrPerson::class,
     ];
 }
