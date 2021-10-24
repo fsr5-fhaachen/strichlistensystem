@@ -9,7 +9,7 @@
         <AppButton title="Ausloggen" color="red" :icon="['fas', 'sign-out-alt']" />
       </Link>
     </div>
-    <p v-if="!isPersonAuth" class="col-span-4 text-center text-red-700 text-2xl">
+    <p v-if="!isPersonAuth" class="col-span-4 text-center text-red-700 dark:text-red-500 text-2xl">
       Du wirst in 
       <template v-if="redirectCountdown == 1">
         einer Sekunde
@@ -30,18 +30,18 @@
         @click="buy(article)"
       />
     </div>    
-    <div class="col-span-4 bg-gray-100 border-2 border-gray-500 rounded-lg p-3"> 
+    <div class="col-span-4 bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 rounded-lg p-3"> 
       <h1 class="text-2xl mb-4">Deine letzten 20 Aktivitäten</h1>
       <ul v-if="articleActionLogs" class="flex flex-col gap-3">
         <li v-for="articleActionLog in articleActionLogs" :key="articleActionLog.id" class="flex gap-2 items-center">
-          <span class="text-gray-600 font-bold w-56">{{ articleActionLog.createdAtFormatted }}</span>
-          <span v-if="articleActionLog.deleted_at" class="text-lg text-red-800">
+          <span class="text-gray-600 dark:text-gray-400 font-bold w-56">{{ articleActionLog.createdAtFormatted }}</span>
+          <span v-if="articleActionLog.deleted_at" class="text-lg text-red-800 dark:text-red-500">
             Du hast den Artikel "<span class="font-bold">{{ articleActionLog.article.name }}</span>" am <span class="font-bold">{{ articleActionLog.deletedAtFormatted }}</span> storniert.
           </span>
-          <span v-else class="text-lg text-green-600">
+          <span v-else class="text-lg text-green-600 dark:text-green-500">
             Du hast den Artikel "<span class="font-bold">{{ articleActionLog.article.name }}</span>" gekauft.
           </span>
-          <a v-if="!articleActionLog.deleted_at && articleActionLog.cancelUntilTimestamp * 1000 >= Date.now()" class="text-red-700 uppercase font-bold text-lg cursor-pointer" @click="cancel(articleActionLog)">[stornieren]</a>
+          <a v-if="!articleActionLog.deleted_at && articleActionLog.cancelUntilTimestamp * 1000 >= Date.now()" class="text-red-700 dark:text-red-400 uppercase font-bold text-lg cursor-pointer" @click="cancel(articleActionLog)">[stornieren]</a>
         </li>
       </ul>
     </div>
@@ -50,7 +50,7 @@
     <div class="flex min-h-screen items-center justify-center">
       <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity justify-center" @click="openQRCodeModal = false"></div>
 
-      <div class="bg-white border-2 border-gray-500 rounded-lg p-3 shadow-xl transform transition-all">
+      <div class="bg-white border-2 border-gray-500 dark:border-gray-900 rounded-lg p-3 shadow-xl transform transition-all">
         <vue-qrcode :value="authLink" :options="{ width: 400 }"></vue-qrcode>
       </div>
     </div>

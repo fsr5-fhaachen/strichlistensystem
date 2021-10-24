@@ -30654,7 +30654,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "col-span-4 text-center text-red-700 text-2xl"
+  "class": "col-span-4 text-center text-red-700 dark:text-red-500 text-2xl"
 }, " Du hast keine Berechtigung für diese Anfrage ", -1
 /* HOISTED */
 );
@@ -30820,7 +30820,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "col-span-4 text-center text-green-700 text-2xl"
+  "class": "col-span-4 text-center text-green-700 dark:text-green-500 text-2xl"
 }, " Du wurdest erfolgreich ausgeloggt. ", -1
 /* HOISTED */
 );
@@ -30858,7 +30858,7 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = {
   key: 0,
-  "class": "col-span-4 text-center text-red-700 text-2xl"
+  "class": "col-span-4 text-center text-red-700 dark:text-red-500 text-2xl"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Du wirst in ");
@@ -30871,7 +30871,7 @@ var _hoisted_6 = {
   "class": "grid gap-4 col-span-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5"
 };
 var _hoisted_7 = {
-  "class": "col-span-4 bg-gray-100 border-2 border-gray-500 rounded-lg p-3"
+  "class": "col-span-4 bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 rounded-lg p-3"
 };
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
@@ -30885,11 +30885,11 @@ var _hoisted_9 = {
   "class": "flex flex-col gap-3"
 };
 var _hoisted_10 = {
-  "class": "text-gray-600 font-bold w-56"
+  "class": "text-gray-600 dark:text-gray-400 font-bold w-56"
 };
 var _hoisted_11 = {
   key: 0,
-  "class": "text-lg text-red-800"
+  "class": "text-lg text-red-800 dark:text-red-500"
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Du hast den Artikel \"");
@@ -30908,7 +30908,7 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 var _hoisted_17 = {
   key: 1,
-  "class": "text-lg text-green-600"
+  "class": "text-lg text-green-600 dark:text-green-500"
 };
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Du hast den Artikel \"");
@@ -30928,7 +30928,7 @@ var _hoisted_23 = {
   "class": "flex min-h-screen items-center justify-center"
 };
 var _hoisted_24 = {
-  "class": "bg-white border-2 border-gray-500 rounded-lg p-3 shadow-xl transform transition-all"
+  "class": "bg-white border-2 border-gray-500 dark:border-gray-900 rounded-lg p-3 shadow-xl transform transition-all"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AppButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AppButton");
@@ -31021,7 +31021,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* TEXT */
         ), _hoisted_20])), !articleActionLog.deleted_at && articleActionLog.cancelUntilTimestamp * 1000 >= Date.now() ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
           key: 2,
-          "class": "text-red-700 uppercase font-bold text-lg cursor-pointer",
+          "class": "text-red-700 dark:text-red-400 uppercase font-bold text-lg cursor-pointer",
           onClick: function onClick($event) {
             return _ctx.cancel(articleActionLog);
           }
@@ -31100,7 +31100,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-gray-100 border-2 border-gray-500 w-full rounded-lg p-8 flex flex-col gap-8 justify-center hover:bg-green-300 hover:border-green-800 cursor-pointer"
+  "class": "bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 w-full rounded-lg p-8 flex flex-col gap-8 justify-center hover:bg-green-300 hover:border-green-800 dark:hover:bg-green-500 cursor-pointer"
 };
 var _hoisted_2 = {
   "class": "text-center"
@@ -31163,7 +31163,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_font_awesome_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("font-awesome-icon");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex justify-center items-center p-2 text-white font-semibold rounded-full shadow-md h-10 w-10", _ctx.bgColor])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex justify-center items-center p-2 text-gray-200 font-semibold rounded-full shadow-md h-10 w-10", _ctx.bgColor])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
     icon: _ctx.icon
   }, null, 8
@@ -31199,7 +31199,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_PersonBadge = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PersonBadge");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["bg-gray-100 border-2 border-gray-500 w-full rounded-lg p-3 flex flex-col gap-2", _ctx.borderColor])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 w-full rounded-lg p-3 flex flex-col gap-2", _ctx.borderColor])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: _ctx.person.img ? _ctx.person.img : '/images/default.png',
     "class": "w-full rounded-lg flex-grow",
