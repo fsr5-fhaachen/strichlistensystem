@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class Vpn
 {
@@ -17,9 +18,7 @@ class Vpn
     public function handle(Request $request, Closure $next)
     {
         if ($request->ip() != env('APP_VPN_IP')) {
-            return response()->json([
-                'error' => 'Not authorized.'
-            ], 403);
+            return Redirect::route('error');
         }
 
         return $next($request);

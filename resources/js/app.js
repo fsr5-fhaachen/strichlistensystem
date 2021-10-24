@@ -1,6 +1,6 @@
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { createApp, h } from 'vue';
+import { createInertiaApp } from '@inertiajs/inertia-vue3';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
   faArrowLeft,
   faBeer,
@@ -12,11 +12,15 @@ import {
   faPaintBrush,
   faQrcode,
   faRobot,
+  faSignOutAlt,
   faStar,
   faUsers,
   faWineBottle,
- } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+ } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import VueQrcode from '@chenfengyuan/vue-qrcode';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 // fontawesome
 library.add(
@@ -30,21 +34,29 @@ library.add(
   faPaintBrush,
   faQrcode,
   faRobot,
+  faSignOutAlt,
   faStar,
   faUsers,
   faWineBottle,
-)
+);
 
 //import { InertiaProgress } from '@inertiajs/progress'
 
 //InertiaProgress.init()
 
+
+
 createInertiaApp({
   resolve: name => require(`./Pages/${name}`),
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+    const app = createApp({ render: () => h(App, props) })
       .use(plugin)
+      .use(VueAxios, axios)
       .component('font-awesome-icon', FontAwesomeIcon)
-      .mount(el)
+      .component(VueQrcode.name, VueQrcode);
+    app.provide('axios', app.config.globalProperties.axios);
+
+    return app.mount(el);
   },
 })
+

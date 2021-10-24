@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 
 class AppController extends Controller
@@ -20,5 +21,33 @@ class AppController extends Controller
         return Inertia::render('App/Index', [
             'persons' => $persons,
         ]);
+    }
+
+    /**
+     * logout and destroy all sessions
+     *
+     * @param  Request $request
+     * 
+     * @return 
+     */
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+
+        return Inertia::render('App/Logout');
+    }
+
+    /**
+     * error page
+     *
+     * @param  Request $request
+     * 
+     * @return 
+     */
+    public function error(Request $request)
+    {
+        $request->session()->flush();
+
+        return Inertia::render('App/Error');
     }
 }

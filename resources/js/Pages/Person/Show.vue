@@ -1,12 +1,15 @@
 <template>
   <LayoutContainer>
-    <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4" >
-      <Link href="/">
+    <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4">
+      <Link href="/" v-if="!isPersonAuth">
         <AppButton title="Zurück zur Übersicht" color="gray" :icon="['fas', 'arrow-left']" />
       </Link>
-      <AppButton title="QR-Code erstellen" color="blue" :icon="['fas', 'qrcode']" />
+      <AppButton v-if="!isPersonAuth" title="QR-Code erstellen" color="blue" :icon="['fas', 'qrcode']" @click="generateAuthToken()"/>
+      <Link href="/logout" v-if="isPersonAuth">
+        <AppButton title="Ausloggen" color="red" :icon="['fas', 'sign-out-alt']" />
+      </Link>
     </div>
-    <p class="col-span-4 text-center text-red-700 text-2xl">
+    <p v-if="!isPersonAuth" class="col-span-4 text-center text-red-700 text-2xl">
       Du wirst in 
       <template v-if="redirectCountdown == 1">
         einer Sekunde
@@ -15,7 +18,7 @@
         {{ redirectCountdown }} Sekunden
       </template>
        auf die Startseite geleitet.
-      </p>
+    </p>
     <div class="grid gap-4 col-span-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5"> 
       <PersonCard
         :canBeHovered="false"
@@ -43,10 +46,19 @@
       </ul>
     </div>
   </LayoutContainer>
+  <div class="fixed z-10 inset-0 overflow-y-auto" v-if="openQRCodeModal && authLink">
+    <div class="flex min-h-screen items-center justify-center">
+      <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity justify-center" @click="openQRCodeModal = false"></div>
+
+      <div class="bg-white border-2 border-gray-500 rounded-lg p-3 shadow-xl transform transition-all">
+        <vue-qrcode :value="authLink" :options="{ width: 400 }"></vue-qrcode>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, inject, ref } from "vue";
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 import AppButton from "../../components/AppButton.vue";
@@ -76,9 +88,16 @@ export default defineComponent({
       type: Array,
       required: true,
     },
+    isPersonAuth: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
-    const redirectCountdown = ref(20);
+    const redirectCountdown = ref(3000);
+    const openQRCodeModal = ref(false);
+    const authLink = ref('');
+    const axios = inject('axios');
 
     const buy = (article) => {
       redirectCountdown.value = 20;
@@ -93,6 +112,13 @@ export default defineComponent({
         preserveScroll: true,
       });
     }
+    const generateAuthToken = () => {
+      redirectCountdown.value = 40;
+      axios.post('/person/' + props.person.id + '/generate-auth-link').then((res) => {
+        authLink.value = res.data.authLink;
+        openQRCodeModal.value = true;
+      });
+    }
 
     const countdown = () => {
       if (redirectCountdown.value > 1) {
@@ -103,11 +129,16 @@ export default defineComponent({
       }
     };
 
-    countdown();
+    if(!props.isPersonAuth) {
+      countdown();
+    }
 
     return {
+      authLink,
       buy,
       cancel,
+      generateAuthToken,
+      openQRCodeModal,
       redirectCountdown,
     };
   }

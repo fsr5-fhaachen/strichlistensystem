@@ -23,6 +23,7 @@ class CreatePersonsTable extends Migration
             $table->string('img', 100);
             $table->boolean('is_tutor')->nullable(False);
             $table->boolean('is_special')->nullable(False);
+            $table->string('auth_token', 128)->default('');
         });
     }
 
