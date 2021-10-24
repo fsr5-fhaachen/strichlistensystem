@@ -18,8 +18,8 @@ class TutorSeeder extends Seeder
         $csvFile = fopen($importPath, 'r');
         $isFirstLine = True;
 
-        while (($data = fgetcsv($csvFile, 2000, ';')) !== False){
-            if ($isFirstLine){
+        while (($data = fgetcsv($csvFile, 2000, ';')) !== False) {
+            if ($isFirstLine) {
                 $isFirstLine = False;
                 continue;
             }
@@ -31,7 +31,7 @@ class TutorSeeder extends Seeder
                 'lastname' => $data[0],
                 'email' => $data[1] . '.' . $data[0] . '@alumni.fh-aachen.de',
                 'course' => $data[2],
-                'image_url' => 'N/A',
+                'img' => '',
                 'is_tutor' => True,
                 'is_special' => !empty($data[3])
             ]);
