@@ -9,9 +9,12 @@ class Article extends Model
 {
     use HasFactory;
 
+    /**
+     * @inheritDoc
+     */
     protected $fillable = [
-      'name',
-      'icon',
-      'show_order'
+        'name',
+        'icon',
+        'show_order'
     ];
 }

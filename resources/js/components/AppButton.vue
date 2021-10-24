@@ -24,11 +24,15 @@ export default defineComponent({
     },
     icon: {
       type: Array,
+    },
+    active: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
     const bgColor = computed(() => {
-      return `bg-${props.color}-500 hover:bg-${props.color}-700`;
+      return (props.active ? 'bg-' + props.color + '-700' : 'bg-' + props.color + '-500' ) + ' hover:bg-' +props.color + '-700';
     });
 
     return {

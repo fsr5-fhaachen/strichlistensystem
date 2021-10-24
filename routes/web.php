@@ -16,4 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AppController::class, 'index'])->middleware('vpn');
-Route::get('/person/{id}', [PersonController::class, 'show'])->middleware('vpn.or.person');
+
+Route::group([
+    'prefix' => 'person',
+    'middleware' => ['vpn.or.person']
+], function () {
+    Route::get('/{id}', [PersonController::class, 'show'])->name('person.show');
+    Route::post('/{id}/buy/{articleId}', [PersonController::class, 'buy'])->where('id', '[0-9]+')->where('articleId', '[0-9]+')->name('person.buy.article');
+    Route::post('/{id}/cancel/{articleActionLogId}', [PersonController::class, 'cancel'])->where('id', '[0-9]+')->where('articleActionLogId', '[0-9]+')->name('person.cancel.article');
+});

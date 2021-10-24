@@ -21,58 +21,24 @@
         :canBeHovered="false"
         :person="person"
       />
-      <ItemCard
-        :item="{
-          id: 1,
-          title: 'Bier',
-          icon: ['fas', 'beer'],
-        }"
-      />
-      <ItemCard
-        :item="{
-          id: 2,
-          title: 'Radler',
-          icon: ['fas', 'lemon'],
-        }"
-      />
-      <ItemCard
-        :item="{
-          id: 1,
-          title: 'Softdrinks',
-          icon: ['fas', 'wine-bottle'],
-        }"
-      />
-      <ItemCard
-        :item="{
-          id: 1,
-          title: 'Wasser',
-          icon: ['fas', 'faucet'],
-        }"
+      <ArticleCard
+        v-for="article in articles"
+        :article="article"
+        @click="buy(article)"
       />
     </div>    
     <div class="col-span-4 bg-gray-100 border-2 border-gray-500 rounded-lg p-3"> 
       <h1 class="text-2xl mb-4">Deine letzten 20 Aktivitäten</h1>
-      <ul class="flex flex-col gap-3">
-        <li class="flex gap-2 items-center">
-          <span class="text-gray-600 font-bold w-44">23.10.2021 23:14 Uhr</span>
-          <span class="text-green-800 text-lg">Du hast den Artikel "XXX" gekauft.</span>
-          <a class="text-red-700 uppercase font-bold text-lg cursor-pointer">[stornieren]</a>
-        </li>
-        <li class="flex gap-2 items-center">
-          <span class="text-gray-600 font-bold w-44">23.10.2021 23:11 Uhr</span>
-          <span class="text-red-800 text-lg">Du hast den Artikel "XXX" storniert.</span>
-        </li>
-        <li class="flex gap-2 items-center">
-          <span class="text-gray-600 font-bold w-44">23.10.2021 23:11 Uhr</span>
-          <span class="text-green-800 text-lg">Du hast den Artikel "XXX" gekauft.</span>
-        </li>
-        <li class="flex gap-2 items-center">
-          <span class="text-gray-600 font-bold w-44">23.10.2021 15:54 Uhr</span>
-          <span class="text-green-800 text-lg">Du hast den Artikel "XXX" gekauft.</span>
-        </li>
-        <li class="flex gap-2 items-center">
-          <span class="text-gray-600 font-bold w-44">23.10.2021 12:32 Uhr</span>
-          <span class="text-green-800 text-lg">Du hast den Artikel "XXX" gekauft.</span>
+      <ul v-if="articleActionLogs" class="flex flex-col gap-3">
+        <li v-for="articleActionLog in articleActionLogs" :key="articleActionLog.id" class="flex gap-2 items-center">
+          <span class="text-gray-600 font-bold w-56">{{ articleActionLog.createdAtFormatted }}</span>
+          <span v-if="articleActionLog.deleted_at" class="text-lg text-red-800">
+            Du hast den Artikel "<span class="font-bold">{{ articleActionLog.article.name }}</span>" am <span class="font-bold">{{ articleActionLog.deletedAtFormatted }}</span> storniert.
+          </span>
+          <span v-else class="text-lg text-green-600">
+            Du hast den Artikel "<span class="font-bold">{{ articleActionLog.article.name }}</span>" gekauft.
+          </span>
+          <a v-if="!articleActionLog.deleted_at && articleActionLog.cancelUntilTimestamp * 1000 >= Date.now()" class="text-red-700 uppercase font-bold text-lg cursor-pointer" @click="cancel(articleActionLog)">[stornieren]</a>
         </li>
       </ul>
     </div>
@@ -86,7 +52,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
 import PersonCard from "../../components/PersonCard.vue";
-import ItemCard from "../../components/ItemCard.vue";
+import ArticleCard from "../../components/ArticleCard.vue";
 
 export default defineComponent({
   name: "Index",
@@ -95,16 +61,38 @@ export default defineComponent({
     LayoutContainer,
     Link,
     PersonCard,
-    ItemCard,
+    ArticleCard,
   },
   props: {
     person: {
       type: Object,
       required: true,
     },
+    articles: {
+      type: Array,
+      required: true,
+    },
+    articleActionLogs: {
+      type: Array,
+      required: true,
+    },
   },
-  setup() {
-    const redirectCountdown = ref(50);
+  setup(props) {
+    const redirectCountdown = ref(20);
+
+    const buy = (article) => {
+      redirectCountdown.value = 20;
+      Inertia.post('/person/' + props.person.id + '/buy/' + article.id, null, {
+        preserveScroll: true,
+      });
+    }
+
+    const cancel = (articleActionLog) => {
+      redirectCountdown.value = 20;
+      Inertia.post('/person/' + props.person.id + '/cancel/' + articleActionLog.id, null, {
+        preserveScroll: true,
+      });
+    }
 
     const countdown = () => {
       if (redirectCountdown.value > 1) {
@@ -118,6 +106,8 @@ export default defineComponent({
     countdown();
 
     return {
+      buy,
+      cancel,
       redirectCountdown,
     };
   }

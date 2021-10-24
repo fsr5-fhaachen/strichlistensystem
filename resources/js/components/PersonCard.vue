@@ -2,15 +2,15 @@
   <div
     class="bg-gray-100 border-2 border-gray-500 w-full rounded-lg p-3 flex flex-col gap-2"
     :class="borderColor">
-      <img v-if="person.img" :src="person.img" class="w-full rounded-lg flex-grow" loading="lazy" />
+      <img :src="(person.img ? person.img : '/images/default.png')" class="w-full rounded-lg flex-grow" loading="lazy" />
       <h1 class="text-lg text-center">{{ person.firstname }} {{ person.lastname }}</h1>
       <div class="flex gap-2 justify-center">
         <PersonBadge v-if="person.course == 'INF'" color="blue" :icon="['fas', 'code']" />
         <PersonBadge v-if="person.course == 'ET'" color="yellow" :icon="['fas', 'bolt']" />
         <PersonBadge v-if="person.course == 'WI'" color="green" :icon="['fas', 'chart-line']" />
         <PersonBadge v-if="person.course == 'MCD'" color="purple" :icon="['fas', 'paint-brush']" />
-        <PersonBadge v-if="person.isTutor" color="indigo" :icon="['fas', 'robot']" />
-        <PersonBadge v-if="person.isSpecial" color="pink" :icon="['fas', 'star']" />
+        <PersonBadge v-if="person.is_tutor" color="indigo" :icon="['fas', 'robot']" />
+        <PersonBadge v-if="person.is_special" color="pink" :icon="['fas', 'star']" />
       </div>
   </div>
 </template>
@@ -39,9 +39,9 @@ export default defineComponent({
       if(!props.canBeHovered) {
         return '';
       }
-      if (props.person.isSpecial) {
+      if (props.person.is_special) {
         return 'hover:border-pink-700';
-      } else if (props.person.isTutor) {
+      } else if (props.person.is_tutor) {
         return 'hover:border-indigo-700';
       } else if (props.person.course == 'INF') {
         return 'hover:border-blue-700';

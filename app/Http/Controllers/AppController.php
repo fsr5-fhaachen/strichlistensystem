@@ -15,10 +15,10 @@ class AppController extends Controller
      */
     public function index()
     {
-        $persons = Person::all();
+        $persons = Person::orderBy('firstname')->orderBy('lastname')->get();
 
         return Inertia::render('App/Index', [
-            'persons' => $persons
+            'persons' => $persons,
         ]);
     }
 }
