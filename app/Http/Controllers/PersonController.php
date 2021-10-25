@@ -119,7 +119,7 @@ class PersonController extends Controller
         if ($person->id == $articleActionLog->person_id) {
             $person->cancelArticle($articleActionLog);
 
-            Telegram::info('Cancel the article "*' . $articleActionLog->article->name . '*" (ID: `' . $articleActionLog->article->id . '`)', $request, $person);
+            Telegram::info('Cancel the article "*' . $articleActionLog->article->name . '*" (ID: `' . $articleActionLog->article->id . '`). Bought at "' . $articleActionLog->created_at . '" and canceld at "' . $articleActionLog->deleted_at . '". Could have cancelled by "' . $articleActionLog->cancelUntil . '" (ID: `' . $articleActionLog->id . '`)', $request, $person);
 
             $count = ArticleActionLog::withTrashed()->where('person_id', $person->id)
                 ->where('deleted_at', '>=', now()->subMinutes(5))
