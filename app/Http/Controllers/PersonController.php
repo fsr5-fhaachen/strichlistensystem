@@ -18,10 +18,11 @@ class PersonController extends Controller
      *
      * @param  Request $request
      * @param  Person $person
+     * @param  bool $enableLog
      * 
      * @return null|\Illuminate\Http\RedirectResponse
      */
-    public function validateAuthToken(Request $request, Person $person)
+    public function validateAuthToken(Request $request, Person $person, bool $enableLog = true)
     {
         if ($request->session()->missing('authToken')) {
             return;
@@ -30,7 +31,9 @@ class PersonController extends Controller
         $authTokenPerson = Person::where('auth_token', $request->session()->get('authToken'))->first();
 
         if ($person->id != $authTokenPerson->id) {
-            Telegram::warning('Try to access "*' . $person->fullname . '*"\'s page with invalid auth token', $request, $authTokenPerson);
+            if ($enableLog) {
+                Telegram::warning('Try to access "*' . $person->fullname . '*"\'s (ID: `' . $person->id . '`) page with invalid auth token', $request, $authTokenPerson);
+            }
 
             return Redirect::route('error');
         }
@@ -48,7 +51,7 @@ class PersonController extends Controller
     {
         $person = Person::findOrFail($id);
         if ($this->validateAuthToken($request, $person)) {
-            return $this->validateAuthToken($request, $person);
+            return $this->validateAuthToken($request, $person, false);
         }
 
         $articles = Article::orderBy('show_order')->get();
@@ -75,14 +78,14 @@ class PersonController extends Controller
     {
         $person = Person::findOrFail($id);
         if ($this->validateAuthToken($request, $person)) {
-            return $this->validateAuthToken($request, $person);
+            return $this->validateAuthToken($request, $person, false);
         }
 
         $article = Article::findOrFail($articleID);
 
         $person->buyArticle($article, $request->ip());
 
-        Telegram::info('Bought the article "*' . $article->name . '*"', $request, $person);
+        Telegram::info('Bought the article "*' . $article->name . '*" (ID: `' . $article->id . '`)', $request, $person);
 
         $count = ArticleActionLog::where('person_id', $person->id)
             ->where('created_at', '>=', now()->subMinutes(5))
@@ -108,7 +111,7 @@ class PersonController extends Controller
     {
         $person = Person::findOrFail($id);
         if ($this->validateAuthToken($request, $person)) {
-            return $this->validateAuthToken($request, $person);
+            return $this->validateAuthToken($request, $person, false);
         }
 
         $articleActionLog = ArticleActionLog::findOrFail($articleActionLogId);
@@ -116,7 +119,7 @@ class PersonController extends Controller
         if ($person->id == $articleActionLog->person_id) {
             $person->cancelArticle($articleActionLog);
 
-            Telegram::info('Cancel the article "*' . $articleActionLog->article->name . '*"', $request, $person);
+            Telegram::info('Cancel the article "*' . $articleActionLog->article->name . '*" (ID: `' . $articleActionLog->id . '`)', $request, $person);
 
             $count = ArticleActionLog::withTrashed()->where('person_id', $person->id)
                 ->where('deleted_at', '>=', now()->subMinutes(5))
@@ -142,10 +145,10 @@ class PersonController extends Controller
     {
         $person = Person::findOrFail($id);
         if ($this->validateAuthToken($request, $person)) {
-            return $this->validateAuthToken($request, $person);
+            return $this->validateAuthToken($request, $person, false);
         }
 
-        Telegram::info('Generate auth link for "*' . $person->fullname . '*"', $request, $person);
+        Telegram::info('Generate auth link for "*' . $person->fullname . '*" (ID: `' . $person->id . '`)', $request, $person);
 
         return response()->json([
             'authLink' => $person->createAuthLink()
@@ -171,7 +174,7 @@ class PersonController extends Controller
 
         $request->session()->put('authToken', $person->auth_token);
 
-        Telegram::info('Auth "*' . $person->fullname . '*"', $request, $person);
+        Telegram::info('Auth "*' . $person->fullname . '*" (ID: `' . $person->id . '`)', $request, $person);
 
         return Redirect::route('person.show', ['id' => $id]);
     }
