@@ -27,7 +27,9 @@ class Person extends Model
         'course',
         'img',
         'is_tutor',
-        'is_special'
+        'is_special',
+        'is_disabled',
+        'auth_token',
     ];
 
     /**
