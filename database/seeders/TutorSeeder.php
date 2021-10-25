@@ -31,9 +31,10 @@ class TutorSeeder extends Seeder
                 'lastname' => $data[0],
                 'email' => $data[1] . '.' . $data[0] . '@alumni.fh-aachen.de',
                 'course' => $data[2],
-                'img' => '',
+                'img' => $data[1] . $data[0] . '.jpg',
                 'is_tutor' => True,
-                'is_special' => !empty($data[3])
+                'is_special' => !empty($data[3]),
+                'is_disabled' => !empty($erstiData[4])
             ]);
         }
 
