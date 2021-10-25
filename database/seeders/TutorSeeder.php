@@ -34,7 +34,7 @@ class TutorSeeder extends Seeder
                 'img' => $data[1] . $data[0] . '.jpg',
                 'is_tutor' => True,
                 'is_special' => !empty($data[3]),
-                'is_disabled' => !empty($erstiData[4])
+                'is_disabled' => !empty($data[4])
             ]);
         }
 
