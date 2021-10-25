@@ -67,7 +67,7 @@ class Telegram
             $output .= '*IP:* `' . $request->ip() . '`' . PHP_EOL;
         }
         if ($person) {
-            $output .= '*Person:* ' . $person->fullname . PHP_EOL;
+            $output .= '*Person:* ' . $person->fullname . ' (ID: `' . $person->id . '`)' . PHP_EOL;
         }
         if ($request->session()->has('authToken')) {
             $output .= '*AuthToken:* `' . $request->session()->get('authToken') . '`' . PHP_EOL;
