@@ -29,6 +29,7 @@
         "@inertiajs/inertia": "^0.10.1",
         "@inertiajs/inertia-vue3": "^0.5.2",
         "@inertiajs/progress": "^0.2.6",
+        "postcss-import": "^14.0.2",
         "vue": "^3.2.20",
         "vue-axios": "^3.3.7"
     }
