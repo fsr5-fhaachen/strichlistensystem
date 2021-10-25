@@ -77,7 +77,7 @@ class PersonController extends Controller
 
         $article = Article::findOrFail($articleID);
 
-        $person->buyArticle($article);
+        $person->buyArticle($article, $request->ip());
 
         return Redirect::route('person.show', ['id' => $id]);
     }
