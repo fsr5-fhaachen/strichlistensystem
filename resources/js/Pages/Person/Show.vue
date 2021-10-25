@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { defineComponent, inject, ref } from "vue";
+import { defineComponent, inject, onBeforeUnmount, ref } from "vue";
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 import AppButton from "../../components/AppButton.vue";
@@ -94,26 +94,26 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const redirectCountdown = ref(20);
+    const redirectCountdown = ref(40);
     const openQRCodeModal = ref(false);
     const authLink = ref('');
     const axios = inject('axios');
 
     const buy = (article) => {
-      redirectCountdown.value = 20;
+      redirectCountdown.value = 30;
       Inertia.post('/person/' + props.person.id + '/buy/' + article.id, null, {
         preserveScroll: true,
       });
     }
 
     const cancel = (articleActionLog) => {
-      redirectCountdown.value = 20;
+      redirectCountdown.value = 30;
       Inertia.post('/person/' + props.person.id + '/cancel/' + articleActionLog.id, null, {
         preserveScroll: true,
       });
     }
     const generateAuthToken = () => {
-      redirectCountdown.value = 40;
+      redirectCountdown.value = 60;
       axios.post('/person/' + props.person.id + '/generate-auth-link').then((res) => {
         authLink.value = res.data.authLink;
         openQRCodeModal.value = true;
@@ -123,14 +123,17 @@ export default defineComponent({
     const countdown = () => {
       if (redirectCountdown.value > 1) {
         redirectCountdown.value--;
-        setTimeout(countdown, 1000);
       } else {
         Inertia.visit('/')
       }
     };
 
     if(!props.isPersonAuth) {
-      countdown();
+      const cooldownInterval = setInterval(countdown, 1000);
+
+      onBeforeUnmount(() => {
+        clearInterval(cooldownInterval);
+      });
     }
 
     return {
@@ -141,7 +144,7 @@ export default defineComponent({
       openQRCodeModal,
       redirectCountdown,
     };
-  }
+  },
 });
 </script>
 
