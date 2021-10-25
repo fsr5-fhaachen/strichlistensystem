@@ -37,7 +37,7 @@ class ErstiSeeder extends Seeder
                 'is_special' => False
             ]);
 
-            $fileSys->move($file, $movePath . $fileName . '.png');
+            $fileSys->move($file, $movePath . $fileName . '.jpg');
 
             foreach ($erstiData as $data) {
                 fwrite($handle, $data . ';');

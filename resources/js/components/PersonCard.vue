@@ -2,7 +2,7 @@
   <div
     class="bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 w-full rounded-lg p-3 flex flex-col gap-2"
     :class="borderColor">
-      <img :src="(person.img ? person.img : '/images/default.png')" class="w-full rounded-lg flex-grow" loading="lazy" />
+      <img :src="(person.img ? person.img : '/images/default.jpg')" class="w-full rounded-lg flex-grow" loading="lazy" />
       <h1 class="text-lg text-center">{{ person.firstname }} {{ person.lastname }}</h1>
       <div class="flex gap-2 justify-center">
         <PersonBadge v-if="person.course == 'INF'" color="blue" :icon="['fas', 'code']" />
