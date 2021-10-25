@@ -1,6 +1,6 @@
 <template>
   <LayoutContainer>
-    <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4" >
+    <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4">
       <AppButton title="Alle" bgColor="bg-gray-500 dark:bg-gray-700 hover:bg-gray-700" bgColorActive="bg-gray-900" :icon="['fas', 'users']" :active="filter == 'all'" @click="filter = 'all'"/>
       <AppButton title="INF" bgColor="bg-blue-500 hover:bg-blue-700" bgColorActive="bg-blue-700" :icon="['fas', 'code']" :active="filter == 'inf'" @click="filter = 'inf'"/>
       <AppButton title="ET" bgColor="bg-yellow-500 hover:bg-yellow-700" bgColorActive="bg-yellow-700" :icon="['fas', 'bolt']" :active="filter == 'et'" @click="filter = 'et'"/>

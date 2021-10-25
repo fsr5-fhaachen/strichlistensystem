@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Utils\Telegram;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
+use NotificationChannels\Telegram\TelegramMessage;
 
 class Person extends Model
 {
@@ -27,6 +29,23 @@ class Person extends Model
         'is_tutor',
         'is_special'
     ];
+
+    /**
+     * @inheritDoc
+     */
+    protected $appends = [
+        'fullName',
+    ];
+
+    /**
+     * get the person's full name.
+     *
+     * @return string
+     */
+    public function getFullnameAttribute()
+    {
+        return "{$this->firstname} {$this->lastname}";
+    }
 
     /**
      * buy an give article

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use App\Utils\Telegram;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -32,6 +33,10 @@ class AppController extends Controller
      */
     public function logout(Request $request)
     {
+        $authTokenPerson = Person::where('auth_token', $request->session()->get('authToken'))->first();
+
+        Telegram::info('User logged out', $request, $authTokenPerson);
+
         $request->session()->flush();
 
         return Inertia::render('App/Logout');

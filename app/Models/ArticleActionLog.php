@@ -29,7 +29,8 @@ class ArticleActionLog extends Model
         'cancelUntil',
         'cancelUntilTimestamp',
         'createdAtFormatted',
-        'deletedAtFormatted'
+        'deletedAtFormatted',
+        'person',
     ];
 
     /**
@@ -80,5 +81,15 @@ class ArticleActionLog extends Model
     public function getDeletedAtFormattedAttribute()
     {
         return Carbon::parse($this->deleted_at)->format('d.m.Y \u\m H:i:s \U\h\r');
+    }
+
+    /**
+     * get the person that this action log belongs to
+     *
+     * @return Person
+     */
+    public function getPersonAttribute()
+    {
+        return Person::find($this->person_id);
     }
 }
