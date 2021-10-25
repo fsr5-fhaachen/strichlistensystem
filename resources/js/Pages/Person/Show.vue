@@ -1,6 +1,6 @@
 <template>
   <LayoutContainer>
-    <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4">
+    <div class="flex flex-wrap gap-4 justify-center col-span-4">
       <Link href="/" v-if="!isPersonAuth">
         <AppButton title="Zurück zur Übersicht" bgColor="bg-gray-500 dark:bg-gray-700 hover:bg-gray-700" bgColorActive="bg-gray-900" :icon="['fas', 'arrow-left']" />
       </Link>
