@@ -17,7 +17,7 @@ class AppController extends Controller
      */
     public function index()
     {
-        $persons = Person::orderBy('firstname')->orderBy('lastname')->get();
+        $persons = Person::where('is_disabled', '=', false)->orderBy('firstname')->orderBy('lastname')->get();
 
         return Inertia::render('App/Index', [
             'persons' => $persons,

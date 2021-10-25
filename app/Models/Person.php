@@ -25,7 +25,7 @@ class Person extends Model
         'lastname',
         'email',
         'course',
-        'image_url',
+        'img',
         'is_tutor',
         'is_special'
     ];
@@ -35,7 +35,22 @@ class Person extends Model
      */
     protected $appends = [
         'fullName',
+        'image'
     ];
+
+    /**
+     * get the person's image.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        if (!empty($this->img) && file_exists(public_path() . '/images/' . $this->img)) {
+            return '/images/' . $this->img;
+        } else {
+            return '/images/default.jpg';
+        }
+    }
 
     /**
      * get the person's full name.
