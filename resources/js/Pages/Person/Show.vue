@@ -33,8 +33,8 @@
     <div class="col-span-4 bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 rounded-lg p-3"> 
       <h1 class="text-2xl mb-4">Deine letzten 20 Aktivitäten</h1>
       <ul v-if="articleActionLogs" class="flex flex-col gap-3">
-        <li v-for="articleActionLog in articleActionLogs" :key="articleActionLog.id" class="flex gap-2 items-center">
-          <span class="text-gray-600 dark:text-gray-400 font-bold w-60">{{ articleActionLog.createdAtFormatted }}</span>
+        <li v-for="articleActionLog in articleActionLogs" :key="articleActionLog.id" class="flex flex-col lg:flex-row gap-2 items-center">
+          <span class="text-gray-600 dark:text-gray-400 font-bold lg:w-60">{{ articleActionLog.createdAtFormatted }}</span>
           <span v-if="articleActionLog.deleted_at" class="text-lg text-red-800 dark:text-red-500">
             Du hast den Artikel "<span class="font-bold">{{ articleActionLog.article.name }}</span>" am <span class="font-bold">{{ articleActionLog.deletedAtFormatted }}</span> storniert.
           </span>
@@ -94,7 +94,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const redirectCountdown = ref(3000);
+    const redirectCountdown = ref(20);
     const openQRCodeModal = ref(false);
     const authLink = ref('');
     const axios = inject('axios');
