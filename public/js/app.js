@@ -30885,7 +30885,7 @@ var _hoisted_9 = {
   "class": "flex flex-col gap-3"
 };
 var _hoisted_10 = {
-  "class": "text-gray-600 dark:text-gray-400 font-bold w-56"
+  "class": "text-gray-600 dark:text-gray-400 font-bold w-60"
 };
 var _hoisted_11 = {
   key: 0,

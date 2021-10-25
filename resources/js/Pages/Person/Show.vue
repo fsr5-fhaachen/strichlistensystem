@@ -34,7 +34,7 @@
       <h1 class="text-2xl mb-4">Deine letzten 20 Aktivitäten</h1>
       <ul v-if="articleActionLogs" class="flex flex-col gap-3">
         <li v-for="articleActionLog in articleActionLogs" :key="articleActionLog.id" class="flex gap-2 items-center">
-          <span class="text-gray-600 dark:text-gray-400 font-bold w-56">{{ articleActionLog.createdAtFormatted }}</span>
+          <span class="text-gray-600 dark:text-gray-400 font-bold w-60">{{ articleActionLog.createdAtFormatted }}</span>
           <span v-if="articleActionLog.deleted_at" class="text-lg text-red-800 dark:text-red-500">
             Du hast den Artikel "<span class="font-bold">{{ articleActionLog.article.name }}</span>" am <span class="font-bold">{{ articleActionLog.deletedAtFormatted }}</span> storniert.
           </span>
