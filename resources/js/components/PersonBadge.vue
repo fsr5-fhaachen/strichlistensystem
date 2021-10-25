@@ -14,23 +14,14 @@ import { computed, defineComponent } from "vue";
 export default defineComponent({
   name: "PersonBadge",
   props: {
-    color: {
+    bgColor: {
       type: String,
-      default: "gray"
+      default: "bg-gray-500"
     },
     icon: {
       type: Array,
     }
   },
-  setup(props) {
-    const bgColor = computed(() => {
-      return `bg-${props.color}-500`;
-    });
-
-    return {
-      bgColor
-    };
-  }
 });
 </script>
 
