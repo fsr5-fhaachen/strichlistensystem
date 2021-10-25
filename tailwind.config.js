@@ -1,12 +1,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  // purge: [
-  //   './resources/**/*.blade.php',
-  //   './resources/**/*.js',
-  //   './resources/**/*.vue',
-  //   './resources/**/**/*.vue'
-  // ],
+  purge: [
+    './resources/**/*.blade.php',
+    './resources/**/*.js',
+    './resources/**/*.vue'
+  ],
   purge: false,
   darkMode: 'media',
   theme: {
