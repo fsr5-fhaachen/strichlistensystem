@@ -1,0 +1,8 @@
+{
+    "name": "Strichlistensystem",
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
