@@ -17,7 +17,8 @@ class ArticleActionLog extends Model
      */
     protected $fillable = [
         'person_id',
-        'article_id'
+        'article_id',
+        'ip'
     ];
 
     /**

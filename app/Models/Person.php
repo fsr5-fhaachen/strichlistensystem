@@ -32,13 +32,16 @@ class Person extends Model
      * buy an give article
      *
      * @param  Article $article
+     * @param  string $ip
+     * 
      * @return void
      */
-    public function buyArticle(Article $article)
+    public function buyArticle(Article $article, string $ip)
     {
         ArticleActionLog::create([
             'person_id' => $this->id,
             'article_id' => $article->id,
+            'ip' => $ip,
         ]);
     }
 
@@ -46,6 +49,7 @@ class Person extends Model
      * cancel an article by given article action log
      *
      * @param  ArticleActionLog $articleActionLog
+     * 
      * @return bool
      */
     public function cancelArticle(ArticleActionLog $articleActionLog)

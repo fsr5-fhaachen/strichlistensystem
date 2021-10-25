@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AppController::class, 'index'])->middleware('vpn');
 Route::post('/person/{id}/generate-auth-link', [PersonController::class, 'generateAuthLink'])->middleware('vpn');
-Route::get('/person/{id}/auth/{token}', [PersonController::class, 'authWithToken'])->where('id', '[0-9]+')->where('token', '[a-f0-9]+')->name('person.authWithToken');
+Route::get('/person/{id}/auth/{token}', [PersonController::class, 'authWithToken'])->where('id', '[0-9]+')->where('token', '[a-f0-9]+')->middleware('throttle:3,30')->name('person.authWithToken');
 Route::get('/logout', [AppController::class, 'logout']);
 Route::get('/error', [AppController::class, 'error'])->name('error');
 
