@@ -32,7 +32,7 @@ class PersonController extends Controller
 
         if ($person->id != $authTokenPerson->id) {
             if ($enableLog) {
-                Telegram::warning('Try to access "*' . $person->fullname . '*"\'s (ID: `' . $person->id . '`) page with invalid auth token', $request, $authTokenPerson);
+                Telegram::warning('Try to access "*' . $person->fullname . '*"\'s (ID: `' . $person->id . '`) page with an invalid auth token', $request, $authTokenPerson);
             }
 
             return Redirect::route('error');
@@ -119,7 +119,7 @@ class PersonController extends Controller
         if ($person->id == $articleActionLog->person_id) {
             $person->cancelArticle($articleActionLog);
 
-            Telegram::info('Cancel the article "*' . $articleActionLog->article->name . '*" (ID: `' . $articleActionLog->id . '`)', $request, $person);
+            Telegram::info('Cancel the article "*' . $articleActionLog->article->name . '*" (ID: `' . $articleActionLog->article->id . '`)', $request, $person);
 
             $count = ArticleActionLog::withTrashed()->where('person_id', $person->id)
                 ->where('deleted_at', '>=', now()->subMinutes(5))
@@ -148,7 +148,7 @@ class PersonController extends Controller
             return $this->validateAuthToken($request, $person, false);
         }
 
-        Telegram::info('Generate auth link for "*' . $person->fullname . '*" (ID: `' . $person->id . '`)', $request, $person);
+        Telegram::info('Generate an auth link for "*' . $person->fullname . '*" (ID: `' . $person->id . '`)', $request, $person);
 
         return response()->json([
             'authLink' => $person->createAuthLink()
