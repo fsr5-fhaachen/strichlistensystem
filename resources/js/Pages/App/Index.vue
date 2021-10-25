@@ -23,7 +23,7 @@
   </LayoutContainer>
 </template>
 <script>
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import { Link } from '@inertiajs/inertia-vue3'
 import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
@@ -46,10 +46,13 @@ export default defineComponent({
   },
   setup(props) {
     var filter = ref("all");
+
+    watch(filter, (filter, prevFilter) => {
+      console.log(filter, prevFilter);
+      NProgress.start();
+    })
     
     var filteredPersons = computed(() => {
-      NProgress.start();
-      
       if (filter.value === "all") {
         const tmp = props.persons;
         NProgress.done();
