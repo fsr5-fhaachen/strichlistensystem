@@ -19,16 +19,18 @@
       </template>
        auf die Startseite geleitet.
     </p>
-    <div class="grid gap-4 col-span-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5"> 
+    <div class="grid gap-y-4 md:gap-x-4 col-span-4 md:grid-cols-4"> 
       <PersonCard
         :canBeHovered="false"
         :person="person"
       />
-      <ArticleCard
-        v-for="article in articles"
-        :article="article"
-        @click="buy(article)"
-      />
+      <div class="grid gap-4 col-span-3 grid-cols-2">
+        <ArticleCard
+          v-for="article in articles"
+          :article="article"
+          @click="buy(article)"
+        />
+      </div>
     </div>    
     <div class="col-span-4 bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 rounded-lg p-3"> 
       <h1 class="text-2xl mb-4">Deine letzten 20 Aktivitäten</h1>

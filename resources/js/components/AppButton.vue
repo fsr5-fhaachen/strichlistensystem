@@ -1,6 +1,6 @@
 <template>
   <button
-    class="py-2 px-4 flex gap-2 justify-center items-center text-white font-semibold rounded-lg shadow-md focus:outline-none"
+    class="py-2 px-4 flex gap-2 justify-center items-center text-lg text-white font-semibold rounded-lg shadow-md focus:outline-none"
     :class="(active ? bgColorActiv : bgColor)"
   >
     <font-awesome-icon v-if="icon" :icon="icon" />
