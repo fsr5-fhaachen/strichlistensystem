@@ -5,12 +5,12 @@
       <img :src="(person.img ? person.img : '/images/default.jpg')" class="w-full rounded-lg flex-grow" loading="lazy" />
       <h1 class="text-lg text-center">{{ person.firstname }} {{ person.lastname }}</h1>
       <div class="flex gap-2 justify-center">
-        <PersonBadge v-if="person.course == 'INF'" color="blue" :icon="['fas', 'code']" />
-        <PersonBadge v-if="person.course == 'ET'" color="yellow" :icon="['fas', 'bolt']" />
-        <PersonBadge v-if="person.course == 'WI'" color="green" :icon="['fas', 'chart-line']" />
-        <PersonBadge v-if="person.course == 'MCD'" color="purple" :icon="['fas', 'paint-brush']" />
-        <PersonBadge v-if="person.is_tutor" color="indigo" :icon="['fas', 'robot']" />
-        <PersonBadge v-if="person.is_special" color="pink" :icon="['fas', 'star']" />
+        <PersonBadge v-if="person.course == 'INF'" bgColor="bg-blue-500" :icon="['fas', 'code']" />
+        <PersonBadge v-if="person.course == 'ET'" bgColor="bg-yellow-500" :icon="['fas', 'bolt']" />
+        <PersonBadge v-if="person.course == 'WI'" bgColor="bg-green-500" :icon="['fas', 'chart-line']" />
+        <PersonBadge v-if="person.course == 'MCD'" bgColor="bg-purple-500" :icon="['fas', 'paint-brush']" />
+        <PersonBadge v-if="person.is_tutor" bgColor="bg-indigo-500" :icon="['fas', 'robot']" />
+        <PersonBadge v-if="person.is_special" bgColor="bg-pink-500" :icon="['fas', 'star']" />
       </div>
   </div>
 </template>

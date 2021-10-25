@@ -2,11 +2,11 @@
   <LayoutContainer>
     <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4">
       <Link href="/" v-if="!isPersonAuth">
-        <AppButton title="Zurück zur Übersicht" color="gray" :icon="['fas', 'arrow-left']" />
+        <AppButton title="Zurück zur Übersicht" bgColor="bg-gray-500 hover:bg-gray-700" bgColorActive="bg-gray-700" :icon="['fas', 'arrow-left']" />
       </Link>
-      <AppButton v-if="!isPersonAuth" title="QR-Code erstellen" color="blue" :icon="['fas', 'qrcode']" @click="generateAuthToken()"/>
+      <AppButton v-if="!isPersonAuth" title="QR-Code erstellen" bgColor="bg-blue-500 hover:bg-blue-700" bgColorActive="bg-blue-700" :icon="['fas', 'qrcode']" @click="generateAuthToken()"/>
       <Link href="/logout" v-if="isPersonAuth">
-        <AppButton title="Ausloggen" color="red" :icon="['fas', 'sign-out-alt']" />
+        <AppButton title="Ausloggen" bgColor="bg-red-500 hover:bg-red-700" bgColorActive="bg-red-700" :icon="['fas', 'sign-out-alt']" />
       </Link>
     </div>
     <p v-if="!isPersonAuth" class="col-span-4 text-center text-red-700 dark:text-red-500 text-2xl">

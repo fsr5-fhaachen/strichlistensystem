@@ -1,13 +1,13 @@
 <template>
   <LayoutContainer>
     <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4" >
-      <AppButton title="Alle" color="gray" :icon="['fas', 'users']" :active="filter == 'all'" @click="filter = 'all'"/>
-      <AppButton title="INF" color="blue" :icon="['fas', 'code']" :active="filter == 'inf'" @click="filter = 'inf'"/>
-      <AppButton title="ET" color="yellow" :icon="['fas', 'bolt']" :active="filter == 'et'" @click="filter = 'et'"/>
-      <AppButton title="WI" color="green" :icon="['fas', 'chart-line']" :active="filter == 'wi'" @click="filter = 'wi'"/>
-      <AppButton title="MCD" color="purple" :icon="['fas', 'paint-brush']" :active="filter == 'mcd'" @click="filter = 'mcd'"/>
-      <AppButton title="Tutor" color="indigo" :icon="['fas', 'robot']" :active="filter == 'tutor'" @click="filter = 'tutor'"/>
-      <AppButton title="Special" color="pink" :icon="['fas', 'star']" :active="filter == 'special'" @click="filter = 'special'"/>
+      <AppButton title="Alle" bgColor="bg-gray-500 hover:bg-gray-700" bgColorActive="bg-gray-700" :icon="['fas', 'users']" :active="filter == 'all'" @click="filter = 'all'"/>
+      <AppButton title="INF" bgColor="bg-blue-500 hover:bg-blue-700" bgColorActive="bg-blue-700" :icon="['fas', 'code']" :active="filter == 'inf'" @click="filter = 'inf'"/>
+      <AppButton title="ET" bgColor="bg-yellow-500 hover:bg-yellow-700" bgColorActive="bg-yellow-700" :icon="['fas', 'bolt']" :active="filter == 'et'" @click="filter = 'et'"/>
+      <AppButton title="WI" bgColor="bg-green-500 hover:bg-green-700" bgColorActive="bg-green-700" :icon="['fas', 'chart-line']" :active="filter == 'wi'" @click="filter = 'wi'"/>
+      <AppButton title="MCD" bgColor="bg-purple-500 hover:bg-purple-700" bgColorActive="bg-purple-700" :icon="['fas', 'paint-brush']" :active="filter == 'mcd'" @click="filter = 'mcd'"/>
+      <AppButton title="Tutor" bgColor="bg-indigo-500 hover:bg-indigo-700" bgColorActive="bg-indigo-700" :icon="['fas', 'robot']" :active="filter == 'tutor'" @click="filter = 'tutor'"/>
+      <AppButton title="Special" bgColor="bg-pink-500 hover:bg-pink-700" bgColorActive="bg-pink-700" :icon="['fas', 'star']" :active="filter == 'special'" @click="filter = 'special'"/>
     </div>
     <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:col-span-2 md:grid-cols-4 lg:col-span-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8"> 
       <Link
