@@ -30402,27 +30402,27 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   setup: function setup(props) {
-    var redirectCountdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(20);
+    var redirectCountdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(40);
     var openQRCodeModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var authLink = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var axios = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)('axios');
 
     var buy = function buy(article) {
-      redirectCountdown.value = 20;
+      redirectCountdown.value = 30;
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post('/person/' + props.person.id + '/buy/' + article.id, null, {
         preserveScroll: true
       });
     };
 
     var cancel = function cancel(articleActionLog) {
-      redirectCountdown.value = 20;
+      redirectCountdown.value = 30;
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post('/person/' + props.person.id + '/cancel/' + articleActionLog.id, null, {
         preserveScroll: true
       });
     };
 
     var generateAuthToken = function generateAuthToken() {
-      redirectCountdown.value = 40;
+      redirectCountdown.value = 60;
       axios.post('/person/' + props.person.id + '/generate-auth-link').then(function (res) {
         authLink.value = res.data.authLink;
         openQRCodeModal.value = true;

@@ -94,26 +94,26 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const redirectCountdown = ref(20);
+    const redirectCountdown = ref(40);
     const openQRCodeModal = ref(false);
     const authLink = ref('');
     const axios = inject('axios');
 
     const buy = (article) => {
-      redirectCountdown.value = 20;
+      redirectCountdown.value = 30;
       Inertia.post('/person/' + props.person.id + '/buy/' + article.id, null, {
         preserveScroll: true,
       });
     }
 
     const cancel = (articleActionLog) => {
-      redirectCountdown.value = 20;
+      redirectCountdown.value = 30;
       Inertia.post('/person/' + props.person.id + '/cancel/' + articleActionLog.id, null, {
         preserveScroll: true,
       });
     }
     const generateAuthToken = () => {
-      redirectCountdown.value = 40;
+      redirectCountdown.value = 60;
       axios.post('/person/' + props.person.id + '/generate-auth-link').then((res) => {
         authLink.value = res.data.authLink;
         openQRCodeModal.value = true;
