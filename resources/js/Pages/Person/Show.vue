@@ -2,7 +2,7 @@
   <LayoutContainer>
     <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4">
       <Link href="/" v-if="!isPersonAuth">
-        <AppButton title="Zurück zur Übersicht" bgColor="bg-gray-500 hover:bg-gray-700" bgColorActive="bg-gray-700" :icon="['fas', 'arrow-left']" />
+        <AppButton title="Zurück zur Übersicht" bgColor="bg-gray-500 dark:bg-gray-700 hover:bg-gray-700" bgColorActive="bg-gray-900" :icon="['fas', 'arrow-left']" />
       </Link>
       <AppButton v-if="!isPersonAuth" title="QR-Code erstellen" bgColor="bg-blue-500 hover:bg-blue-700" bgColorActive="bg-blue-700" :icon="['fas', 'qrcode']" @click="generateAuthToken()"/>
       <Link href="/logout" v-if="isPersonAuth">
@@ -19,12 +19,12 @@
       </template>
        auf die Startseite geleitet.
     </p>
-    <div class="grid gap-y-4 md:gap-x-4 col-span-4 md:grid-cols-4"> 
+    <div class="grid gap-y-4 md:gap-x-4 col-span-4 md:grid-cols-3"> 
       <PersonCard
         :canBeHovered="false"
         :person="person"
       />
-      <div class="grid gap-4 col-span-3 grid-cols-2">
+      <div class="grid gap-4 col-span-2 grid-cols-2">
         <ArticleCard
           v-for="article in articles"
           :article="article"
