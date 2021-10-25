@@ -28,6 +28,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
 import PersonCard from "../../components/PersonCard.vue";
+import NProgress from 'nprogress';
 
 export default defineComponent({
   name: "Index",
@@ -47,10 +48,14 @@ export default defineComponent({
     var filter = ref("all");
     
     var filteredPersons = computed(() => {
+      NProgress.start();
+      
       if (filter.value === "all") {
-        return props.persons;
+        const tmp = props.persons;
+        NProgress.done();
+        return tmp;
       }
-      return props.persons.filter((person) => {
+      const tmp = props.persons.filter((person) => {
         if(filter.value === "inf") {
           return person.course === "INF";
         } else if(filter.value === "et") {
@@ -65,6 +70,8 @@ export default defineComponent({
           return person.is_special;
         }
       });
+      NProgress.done();
+      return tmp;
     });
 
 

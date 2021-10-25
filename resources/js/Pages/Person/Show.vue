@@ -67,6 +67,7 @@ import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
 import PersonCard from "../../components/PersonCard.vue";
 import ArticleCard from "../../components/ArticleCard.vue";
+import NProgress from 'nprogress';
 
 export default defineComponent({
   name: "Index",
@@ -115,10 +116,12 @@ export default defineComponent({
       });
     }
     const generateAuthToken = () => {
+      NProgress.start();
       redirectCountdown.value = 60;
       axios.post('/person/' + props.person.id + '/generate-auth-link').then((res) => {
         authLink.value = res.data.authLink;
         openQRCodeModal.value = true;
+        NProgress.done();
       });
     }
 
