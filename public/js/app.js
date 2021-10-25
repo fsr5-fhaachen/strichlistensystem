@@ -30432,14 +30432,16 @@ __webpack_require__.r(__webpack_exports__);
     var countdown = function countdown() {
       if (redirectCountdown.value > 1) {
         redirectCountdown.value--;
-        setTimeout(countdown, 1000);
       } else {
         _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.visit('/');
       }
     };
 
     if (!props.isPersonAuth) {
-      countdown();
+      var cooldownInterval = setInterval(countdown, 1000);
+      (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeUnmount)(function () {
+        clearInterval(cooldownInterval);
+      });
     }
 
     return {

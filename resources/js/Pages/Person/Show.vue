@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { defineComponent, inject, ref } from "vue";
+import { defineComponent, inject, onBeforeUnmount, ref } from "vue";
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 import AppButton from "../../components/AppButton.vue";
@@ -123,14 +123,17 @@ export default defineComponent({
     const countdown = () => {
       if (redirectCountdown.value > 1) {
         redirectCountdown.value--;
-        setTimeout(countdown, 1000);
       } else {
         Inertia.visit('/')
       }
     };
 
     if(!props.isPersonAuth) {
-      countdown();
+      const cooldownInterval = setInterval(countdown, 1000);
+
+      onBeforeUnmount(() => {
+        clearInterval(cooldownInterval);
+      });
     }
 
     return {
@@ -141,7 +144,7 @@ export default defineComponent({
       openQRCodeModal,
       redirectCountdown,
     };
-  }
+  },
 });
 </script>
 
