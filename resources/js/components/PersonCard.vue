@@ -2,7 +2,7 @@
   <div
     class="bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 w-full rounded-lg p-3 flex flex-col gap-2"
     :class="borderColor">
-      <img :src="(person.img ? person.img : '/images/default.jpg')" class="w-full rounded-lg flex-grow" loading="lazy" />
+      <img :src="person.image" class="w-full rounded-lg flex-grow" loading="lazy" />
       <div>
         <h1 class="text-lg text-center">{{ person.firstname }}</h1>
         <h1 class="text-lg text-center">{{ person.lastname }}</h1>

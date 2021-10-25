@@ -64,7 +64,7 @@ class Telegram
         // parse output
         $output = '';
         if ($request->ip()) {
-            $output .= '*IP:* `' . $request->ip() . '`' . PHP_EOL;
+            $output .= '*IP:* `' . ($request->ip() == env('APP_VPN_IP') ? 'VPN' : $request->ip()) . '`' . PHP_EOL;
         }
         if ($person) {
             $output .= '*Person:* ' . $person->fullname . ' (ID: `' . $person->id . '`)' . PHP_EOL;
