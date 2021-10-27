@@ -7,6 +7,7 @@
 
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
     <link rel="manifest" href="/manifest.json">
 
     <script src="{{ mix('/js/app.js') }}" defer></script>

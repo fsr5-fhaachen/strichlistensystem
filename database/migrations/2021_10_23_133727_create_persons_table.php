@@ -19,10 +19,11 @@ class CreatePersonsTable extends Migration
             $table->string('firstname', 30)->nullable(False);
             $table->string('lastname', 30)->nullable(False);
             $table->string('email', 100)->nullable(False)->unique();
-            $table->enum('course', ['ET', 'INF', 'MCD', 'WI'])->nullable(False);
+            $table->enum('course', ['ET', 'INF', 'MCD', 'WI'])->nullable(True)->default(null);
             $table->string('img', 100);
-            $table->boolean('is_tutor')->nullable(False);
-            $table->boolean('is_special')->nullable(False);
+            $table->boolean('is_tutor')->nullable(False)->default(False);
+            $table->boolean('is_special')->nullable(False)->default(False);
+            $table->boolean('is_disabled')->nullable(False)->default(False);
             $table->string('auth_token', 128)->default('');
         });
     }

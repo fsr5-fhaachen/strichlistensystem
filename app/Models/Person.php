@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Utils\Telegram;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
+use NotificationChannels\Telegram\TelegramMessage;
 
 class Person extends Model
 {
@@ -23,10 +25,44 @@ class Person extends Model
         'lastname',
         'email',
         'course',
-        'image_url',
+        'img',
         'is_tutor',
-        'is_special'
+        'is_special',
+        'is_disabled',
+        'auth_token',
     ];
+
+    /**
+     * @inheritDoc
+     */
+    protected $appends = [
+        'fullName',
+        'image'
+    ];
+
+    /**
+     * get the person's image.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        if (!empty($this->img) && file_exists(public_path() . '/images/' . $this->img)) {
+            return '/images/' . $this->img;
+        } else {
+            return '/images/default.jpg';
+        }
+    }
+
+    /**
+     * get the person's full name.
+     *
+     * @return string
+     */
+    public function getFullnameAttribute()
+    {
+        return "{$this->firstname} {$this->lastname}";
+    }
 
     /**
      * buy an give article

@@ -32,9 +32,7 @@ class ErstiSeeder extends Seeder
                 'lastname' => $erstiData[1],
                 'email' => $erstiData[0] . '.' . $erstiData[1] . '@alumni.fh-aachen.de',
                 'course' => $erstiData[2],
-                'img' => '/images/' . $file->getFilename(),
-                'is_tutor' => False,
-                'is_special' => False
+                'img' => $file->getFilename(),
             ]);
 
             $fileSys->move($file, $movePath . $fileName . '.jpg');

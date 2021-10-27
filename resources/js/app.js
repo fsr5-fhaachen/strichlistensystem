@@ -21,6 +21,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueQrcode from '@chenfengyuan/vue-qrcode';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+//import { InertiaProgress } from '@inertiajs/progress'
+import { Inertia } from '@inertiajs/inertia';
+import NProgress from 'nprogress';
 
 // fontawesome
 library.add(
@@ -40,11 +43,8 @@ library.add(
   faWineBottle,
 );
 
-//import { InertiaProgress } from '@inertiajs/progress'
-
-//InertiaProgress.init()
-
-
+Inertia.on('start', () => NProgress.start());
+Inertia.on('finish', () => NProgress.done());
 
 createInertiaApp({
   resolve: name => require(`./Pages/${name}`),

@@ -1,7 +1,7 @@
 <template>
   <button
-    class="py-2 px-4 flex gap-2 justify-center items-center text-white font-semibold rounded-lg shadow-md focus:outline-none"
-    :class="bgColor"
+    class="py-2 px-4 flex gap-2 justify-center items-center text-lg text-white font-semibold rounded-lg shadow-md focus:outline-none"
+    :class="(active ? bgColorActive : bgColor)"
   >
     <font-awesome-icon v-if="icon" :icon="icon" />
     <span>{{ title }}</span>
@@ -18,9 +18,13 @@ export default defineComponent({
       type: String,
       required: true
     },
-    color: {
+    bgColor: {
       type: String,
-      default: "gray"
+      default: "bg-gray-500 hover:bg-gray-700"
+    },
+    bgColorActive: {
+      type: String,
+      default: "bg-gray-700"
     },
     icon: {
       type: Array,
@@ -30,15 +34,6 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props) {
-    const bgColor = computed(() => {
-      return (props.active ? 'bg-' + props.color + '-700' : 'bg-' + props.color + '-500' ) + ' hover:bg-' +props.color + '-700';
-    });
-
-    return {
-      bgColor
-    };
-  }
 });
 </script>
 

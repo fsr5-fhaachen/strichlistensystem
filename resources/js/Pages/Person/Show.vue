@@ -1,12 +1,12 @@
 <template>
   <LayoutContainer>
-    <div class="flex flex-wrap gap-4 justify-center md:col-span-2 lg:col-span-4">
+    <div class="flex flex-wrap gap-4 justify-center col-span-4">
       <Link href="/" v-if="!isPersonAuth">
-        <AppButton title="Zurück zur Übersicht" color="gray" :icon="['fas', 'arrow-left']" />
+        <AppButton title="Zurück zur Übersicht" bgColor="bg-gray-500 dark:bg-gray-700 hover:bg-gray-700" bgColorActive="bg-gray-900" :icon="['fas', 'arrow-left']" />
       </Link>
-      <AppButton v-if="!isPersonAuth" title="QR-Code erstellen" color="blue" :icon="['fas', 'qrcode']" @click="generateAuthToken()"/>
+      <AppButton v-if="!isPersonAuth" title="QR-Code erstellen" bgColor="bg-blue-500 hover:bg-blue-700" bgColorActive="bg-blue-700" :icon="['fas', 'qrcode']" @click="generateAuthToken()"/>
       <Link href="/logout" v-if="isPersonAuth">
-        <AppButton title="Ausloggen" color="red" :icon="['fas', 'sign-out-alt']" />
+        <AppButton title="Ausloggen" bgColor="bg-red-500 hover:bg-red-700" bgColorActive="bg-red-700" :icon="['fas', 'sign-out-alt']" />
       </Link>
     </div>
     <p v-if="!isPersonAuth" class="col-span-4 text-center text-red-700 dark:text-red-500 text-2xl">
@@ -19,16 +19,18 @@
       </template>
        auf die Startseite geleitet.
     </p>
-    <div class="grid gap-4 col-span-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5"> 
+    <div class="grid gap-y-4 md:gap-x-4 col-span-4 md:grid-cols-3"> 
       <PersonCard
         :canBeHovered="false"
         :person="person"
       />
-      <ArticleCard
-        v-for="article in articles"
-        :article="article"
-        @click="buy(article)"
-      />
+      <div class="grid gap-4 col-span-2 grid-cols-2">
+        <ArticleCard
+          v-for="article in articles"
+          :article="article"
+          @click="buy(article)"
+        />
+      </div>
     </div>    
     <div class="col-span-4 bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 rounded-lg p-3"> 
       <h1 class="text-2xl mb-4">Deine letzten 20 Aktivitäten</h1>
@@ -65,6 +67,7 @@ import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
 import PersonCard from "../../components/PersonCard.vue";
 import ArticleCard from "../../components/ArticleCard.vue";
+import NProgress from 'nprogress';
 
 export default defineComponent({
   name: "Index",
@@ -113,10 +116,12 @@ export default defineComponent({
       });
     }
     const generateAuthToken = () => {
+      NProgress.start();
       redirectCountdown.value = 60;
       axios.post('/person/' + props.person.id + '/generate-auth-link').then((res) => {
         authLink.value = res.data.authLink;
         openQRCodeModal.value = true;
+        NProgress.done();
       });
     }
 
