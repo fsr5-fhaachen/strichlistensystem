@@ -59,7 +59,7 @@ class ExportController extends Controller
                     ['article_id', '=', 4]
                 ])->count();
 
-                fputcsv($file, array($row['Nachname'], $row['Vorname'], $row['Email'], $row['Anz_Bier'], $row['Anz_Radler'], $row['Anz_Softdrink'], $row['Anz_Wasser']));
+                fputcsv($file, array($row['Nachname'], $row['Vorname'], $row['Email'], $row['Anz_Bier'], $row['Anz_Radler'], $row['Anz_Softdrink'], $row['Anz_Wasser']), ';');
             }
 
             fclose($file);

@@ -77,10 +77,14 @@ class Telegram
         }
 
         // send message
-        $url = 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN') . '/sendMessage';
-        $data = array('chat_id' => $channelID, 'text' => $output, 'parse_mode' => 'markdown');
-        $options = array('http' => array('method' => 'POST', 'header' => "Content-Type:application/x-www-form-urlencoded\r\n", 'content' => http_build_query($data)));
-        $context = stream_context_create($options);
-        return file_get_contents($url, false, $context);
+        try {
+            $url = 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN') . '/sendMessage';
+            $data = array('chat_id' => $channelID, 'text' => $output, 'parse_mode' => 'markdown');
+            $options = array('http' => array('method' => 'POST', 'header' => "Content-Type:application/x-www-form-urlencoded\r\n", 'content' => http_build_query($data)));
+            $context = stream_context_create($options);
+            return file_get_contents($url, false, $context);
+        } catch (\Exception) {
+            return;
+        }
     }
 }
