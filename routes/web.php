@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,5 @@ Route::group([
     Route::post('/{id}/buy/{articleId}', [PersonController::class, 'buy'])->where('id', '[0-9]+')->where('articleId', '[0-9]+')->name('person.buy.article');
     Route::post('/{id}/cancel/{articleActionLogId}', [PersonController::class, 'cancel'])->where('id', '[0-9]+')->where('articleActionLogId', '[0-9]+')->name('person.cancel.article');
 });
+
+Route::get('/exportcsv/{password}', [ExportController::class, 'exportCsv']);
