@@ -17,7 +17,8 @@ class ExportController extends Controller
         $persons = Person::all();
 
         $headers = array(
-            'Content-type' => 'text/csv',
+            'Content-type' => 'text/csv; charset=UTF-8',
+            'Content-Encoding' => 'UTF-8',
             'Content-Disposition' => "attachment; filename=$fileName",
             'Pragma' => 'no-cache',
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
@@ -36,7 +37,7 @@ class ExportController extends Controller
 
         $callback = function() use($persons, $columns){
             $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
+            fputcsv($file, $columns, ';');
 
             foreach ($persons as $person) {
                 $row['Nachname'] = $person->lastname;
