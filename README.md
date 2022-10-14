@@ -67,30 +67,6 @@ and the vite dev server:
 npm run dev
 ```
 
-### type generation
-
-To generate the typescript types for the frontend, run:
-
-```sh
-php artisan typescript:generate
-```
-
-### linting
-
-You can lint the code with the following commands:
-
-```sh
-npm run lint
-php artisan fixer:fix --dry-run -vvv
-```
-
-and try to fix the errors with:
-
-```sh
-npm run lint:fix
-php artisan fixer:fix -vvv
-```
-
 ### testing
 
 You can run the tests with:
