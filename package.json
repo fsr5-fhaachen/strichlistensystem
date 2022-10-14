@@ -1,5 +1,12 @@
 {
-    "private": true,
+    "name": "@fsr5-fhaachen/strichlistensystem",
+    "description": "Tally system for the first week of the Department of Electrical Engineering and Information Technology at FH Aachen - University of Applied Sciences.",
+    "version": "2.0.0",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/fsr5-fhaachen/strichlistensystem"
+    },
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
