@@ -37,6 +37,8 @@ services:
       REDIS_HOST: '${REDIS_HOST}'
       REDIS_PASSWORD: '${REDIS_PASSWORD}'
       REDIS_PORT: '${REDIS_PORT}'
+    volumes:
+      - /opt/strichlistensystem/images:/var/www/html/resources/img_import:ro
     ports:
       - "8000:8000"
     networks:
@@ -65,6 +67,26 @@ services:
       - strichlistensystem_mariadb:/var/lib/mysql/
     networks:
       - strichlistensystem
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: strichlistensystem-wireguard
+    restart: unless-stopped
+    ports:
+      - "51820:51820/udp"
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Berlin
+      SERVERURL: vpn.gerolstein.fsr5.de
+      LOG_CONFS: true
+    volumes:
+      - /opt/strichlistensystem/wireguard/:/config
+      - /lib/modules:/lib/modules
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    cap_add:
+      - "NET_ADMIN"
+      - "SYS_MODULE"
 networks:
   strichlistensystem:
 volumes:
