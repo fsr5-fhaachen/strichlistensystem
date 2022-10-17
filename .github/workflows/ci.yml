@@ -33,7 +33,7 @@ jobs:
         run: composer update --ignore-platform-req=php+ --no-interaction --no-progress
       - name: Install Node.js Dependencies
         run: |
-          npm ci
+          npm ci --force --legacy-peer-deps
       - name: Execute build
         run: npm run build --if-present
       - name: Generate key
