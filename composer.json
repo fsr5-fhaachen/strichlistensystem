@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "fsr5-fhaachen/strichlistensystem",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Tally system for the first week of the Department of Electrical Engineering and Information Technology at FH Aachen - University of Applied Sciences.",
+    "keywords": [],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
