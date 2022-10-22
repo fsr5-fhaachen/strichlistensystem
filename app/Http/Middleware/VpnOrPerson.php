@@ -19,7 +19,7 @@ class VpnOrPerson
     public function handle(Request $request, Closure $next)
     {
         if (
-            $request->ip() != env('APP_VPN_IP') &&
+            $_SERVER['HTTP_X_REAL_IP'] != env('APP_VPN_IP') &&
             ($request->session()->missing('authToken') ||
                 !Person::where('auth_token', $request->session()->get('authToken'))->count())
         ) {
