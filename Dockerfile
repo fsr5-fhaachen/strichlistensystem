@@ -39,7 +39,7 @@ RUN apk add --no-cache nodejs npm
 RUN npm install
 
 # build application
-RUN npm run prod
+RUN npm run production
 
 # install roadrunner
 COPY --from=spiralscout/roadrunner:latest /usr/bin/rr /usr/bin/rr
