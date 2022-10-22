@@ -87,6 +87,5 @@ class Telegram
         // } catch (\Exception) {
         //     return;
         // }
-        return
     }
 }
