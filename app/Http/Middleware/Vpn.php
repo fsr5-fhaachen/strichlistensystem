@@ -17,7 +17,7 @@ class Vpn
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($_SERVER['HTTP_X_REAL_IP'] != env('APP_VPN_IP')) {
+        if (!$_SERVER['HTTP_X_REAL_IP'] || $_SERVER['HTTP_X_REAL_IP'] != env('APP_VPN_IP')) {
             return Redirect::route('error');
         }
 
