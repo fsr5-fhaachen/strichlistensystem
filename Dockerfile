@@ -1,4 +1,4 @@
-FROM php:8.0.24-cli-alpine
+FROM php:8.1-cli-alpine
 
 WORKDIR /var/www/html
 
@@ -18,6 +18,8 @@ RUN docker-php-ext-install bcmath sockets pdo_mysql
 #    pdo \
 #    tokenizer \
 #    xml
+
+RUN apk add --no-cache pcre-dev $PHPIZE_DEPS && pecl install redis && docker-php-ext-enable redis.so
 
 # install composer
 RUN EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
