@@ -14,9 +14,10 @@ services:
       APP_DEBUG: '${APP_DEBUG}'
       APP_URL: '${APP_URL}'
       APP_VPN_IP: '${APP_VPN_IP}'
-      TELEGRAM_BOT_TOKEN: '${TELEGRAM_BOT_TOKEN}'
-      TELEGRAM_BOT_INFO_CHANNEL_ID: '${TELEGRAM_BOT_INFO_CHANNEL_ID}'
-      TELEGRAM_BOT_WARNING_CHANNEL_ID: '${TELEGRAM_BOT_WARNING_CHANNEL_ID}'
+      CSV_EXPORT_PW: '${CSV_EXPORT_PW}'
+      #TELEGRAM_BOT_TOKEN: '${TELEGRAM_BOT_TOKEN}'
+      #TELEGRAM_BOT_INFO_CHANNEL_ID: '${TELEGRAM_BOT_INFO_CHANNEL_ID}'
+      #TELEGRAM_BOT_WARNING_CHANNEL_ID: '${TELEGRAM_BOT_WARNING_CHANNEL_ID}'
       OCTANE_HTTPS: '${OCTANE_HTTPS}' # set to false if you want to test without https
       OCTANE_WORKERS: '${OCTANE_WORKERS}'
       OCTANE_MAX_REQUESTS: '${OCTANE_MAX_REQUESTS}'
@@ -38,7 +39,8 @@ services:
       REDIS_PASSWORD: '${REDIS_PASSWORD}'
       REDIS_PORT: '${REDIS_PORT}'
     volumes:
-      - /opt/strichlistensystem/images:/var/www/html/resources/img_import:ro
+      - /opt/strichlistensystem/images:/var/www/html/resources/img_import
+      - /opt/strichlistensystem/imported_images:/var/www/html/public/images
     ports:
       - "8000:8000"
     networks:
