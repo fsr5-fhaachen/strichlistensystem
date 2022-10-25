@@ -17,9 +17,9 @@ class TutorSeeder extends Seeder
         $importPath = resource_path('Tutorenliste.csv');
         $csvFile = fopen($importPath, 'r');
 
-        while (($data = fgetcsv($csvFile, 2000, ';')) !== False) {
-            // if (empty($data[0])) continue;
+        $header = fgetcsv($csvFile);  //Skips header line with col names
 
+        while (($data = fgetcsv($csvFile, 2000, ';')) !== False) {
             Person::create([
                 'lastname' => $data[0],
                 'firstname' => $data[1],
