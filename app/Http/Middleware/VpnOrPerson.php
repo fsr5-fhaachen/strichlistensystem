@@ -18,6 +18,11 @@ class VpnOrPerson
      */
     public function handle(Request $request, Closure $next)
     {
+        // skip if not in production
+        if (app()->environment() !== 'production') {
+            return $next($request);
+        }
+        
         if (!$_SERVER['HTTP_X_REAL_IP'] || ($_SERVER['HTTP_X_REAL_IP'] != env('APP_VPN_IP') &&
             ($request->session()->missing('authToken') ||
                 !Person::where('auth_token', $request->session()->get('authToken'))->count()))

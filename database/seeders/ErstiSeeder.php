@@ -35,7 +35,7 @@ class ErstiSeeder extends Seeder
                 'img' => $file->getFilename(),
             ]);
 
-            $fileSys->move($file, $movePath . $fileName . '.jpg');
+            $fileSys->move($file, $movePath . $file->getFilename());
 
             foreach ($erstiData as $data) {
                 fwrite($handle, $data . ';');
