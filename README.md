@@ -1,64 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<h1 align="center">Welcome to strichlistensystem 👋</h1>
+<p>
+  <a href="https://github.com/fsr5-fhaachen/strichlistensystem/blob/main/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/fsr5-fhaachen/strichlistensystem" />
+  </a>
+  <a href="https://twitter.com/fsr5_fhaachen" target="_blank">
+    <img alt="Twitter: fsr5_fhaachen" src="https://img.shields.io/twitter/follow/fsr5_fhaachen.svg?style=social" />
+  </a>
 </p>
 
-## About Laravel
+> Tally system for the first week of the Department of Electrical Engineering and Information Technology at FH Aachen - University of Applied Sciences.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## main
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<a href="https://github.com/fsr5-fhaachen/strichlistensystem/actions/workflows/ci.yml" target="_blank">
+  <img alt="CI" src="https://github.com/fsr5-fhaachen/strichlistensystem/actions/workflows/ci.yml/badge.svg" />
+</a>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## dev
 
-## Learning Laravel
+<a href="https://github.com/fsr5-fhaachen/strichlistensystem/actions/workflows/ci.yml" target="_blank">
+  <img alt="CI dev" src="https://github.com/fsr5-fhaachen/strichlistensystem/actions/workflows/ci.yml/badge.svg?branch=dev" />
+</a>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Install
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Clone the repository and install the dependencies:
 
-## Laravel Sponsors
+```sh
+git clone git@github.com:fsr5-fhaachen/strichlistensystem.git
+cd strichlistensystem
+npm install
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Copy .env.example to .env and fill in the database credentials.
 
-### Premium Partners
+```sh
+cp .env.example .env
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+Generate the application key:
 
-## Contributing
+```sh
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Run the migrations:
 
-## Code of Conduct
+```sh
+php artisan migrate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Usage
 
-## Security Vulnerabilities
+### development
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+For development, you can use the built-in PHP server:
 
-## License
+```sh
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+and the vite dev server:
+
+```sh
+npm run dev
+```
+
+### testing
+
+You can run the tests with:
+
+```sh
+vendor/bin/phpunit
+```
+
+### build
+
+You can build the application with:
+
+```sh
+npm run build
+```
+
+### production
+This project uses laravel octane with roadrunner as production server. You can install the server with:
+_This step will also ask you to download the roadrunner binary._
+
+```sh
+php artisan octane:install
+```
+
+You can run the production server with:
+_Define the worker-count and max-requests to fit your needs._
+
+```sh
+php artisan octane:start --max-requests=512 --workers=4
+```
+
+### docker
+
+If you want to use docker, use the following commands:
+
+```sh
+docker build -t ghcr.io/fsr5-fhaachen/strichlistensystem:latest .
+docker-compose up -d
+docker exec -it strichlistensystem-web php artisan migrate:fresh --seed
+```
+
+## Authors
+
+👤 **Titus Kirch (main author)**
+
+- Website: https://tkirch.dev/
+- LinkedIn: [Titus Kirch](https://www.linkedin.com/in/tituskirch/)
+- Twitter: [@TitusKirch](https://twitter.com/TitusKirch)
+- Github: [@TitusKirch](https://github.com/TitusKirch)
+
+👤 **Benedikt Haas (main author)**
+
+- LinkedIn: [Benedikt Haas](https://www.linkedin.com/in/benedikt-haas-ab698924a/)
+- Github: [@BenediktHaas96](https://github.com/BenediktHaas96)
+
+👤 **Simon Ostendorf**
+
+- LinkedIn: [Simon Ostendorf](https://www.linkedin.com/in/simonostendorf/)
+- Github: [@simonostendorf](https://github.com/simonostendorf)
+
+Show here to see the full list of [contributors](https://github.com/fsr5-fhaachen/strichlistensystem/graphs/contributors) who participated in this project.
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/fsr5-fhaachen/strichlistensystem/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2022 [fsr5-fhaachen](https://github.com/fsr5-fhaachen).<br />
+This project is [MIT](https://github.com/fsr5-fhaachen/strichlistensystem/blob/main/LICENSE) licensed.

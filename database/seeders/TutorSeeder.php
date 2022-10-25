@@ -14,27 +14,21 @@ class TutorSeeder extends Seeder
      */
     public function run()
     {
-        $importPath = resource_path('Tutorenliste.csv');
+        $importPath = resource_path('tutors.csv');
         $csvFile = fopen($importPath, 'r');
-        $isFirstLine = True;
+
+        $header = fgetcsv($csvFile);  //Skips header line with col names
 
         while (($data = fgetcsv($csvFile, 2000, ';')) !== False) {
-            if ($isFirstLine) {
-                $isFirstLine = False;
-                continue;
-            }
-
-            if (empty($data[0])) continue;
-
             Person::create([
-                'firstname' => $data[1],
                 'lastname' => $data[0],
-                'email' => $data[1] . '.' . $data[0] . '@alumni.fh-aachen.de',
+                'firstname' => $data[1],
                 'course' => (!empty($data[2]) ? $data[2] : null),
-                'img' => $data[1] . $data[0] . '.jpg',
+                'email' => $data[3],
+                'img' => "",
                 'is_tutor' => True,
-                'is_special' => !empty($data[3]),
-                'is_disabled' => !empty($data[4])
+                'is_special' => !empty($data[4]),
+                'is_disabled' => !empty($data[5])
             ]);
         }
 
