@@ -14,7 +14,7 @@ class TutorSeeder extends Seeder
      */
     public function run()
     {
-        $importPath = resource_path('Tutorenliste.csv');
+        $importPath = resource_path('tutors.csv');
         $csvFile = fopen($importPath, 'r');
 
         $header = fgetcsv($csvFile);  //Skips header line with col names
