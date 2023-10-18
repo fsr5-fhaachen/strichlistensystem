@@ -58,10 +58,10 @@ class ExportController extends Controller
                     ['person_id', '=', $person->id],
                     ['article_id', '=', 4]
                 ])->count();
-
-                fputcsv($file, array($row['Nachname'], $row['Vorname'], $row['Anz_Bier'], $row['Anz_Radler'], $row['Anz_Softdrink'], $row['Anz_Wasser']), ';');
+                $array = array($row['Nachname'], $row['Vorname'], $row['Anz_Bier'], $row['Anz_Radler'], $row['Anz_Softdrink'], $row['Anz_Wasser']);
+                $array = array_map("utf8_decode", $array);
+                fputcsv($file, $array, ';');
             }
-
             fclose($file);
         };
 
