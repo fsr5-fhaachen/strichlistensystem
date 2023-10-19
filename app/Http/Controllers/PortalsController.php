@@ -81,9 +81,15 @@ class PortalsController extends Controller
                 if(!in_array($abbreviation, ['INF', 'ET', 'WI', 'DIB', 'MCD'])) {
                     if($abbreviation == 'SBE') {
                         $abbreviation = 'ET';
+<<<<<<< HEAD
                     } else if($abbreviation == 'ET-MASTER') {
                         $abbreviation = 'ET';
                     } else if($abbreviation == 'ISE-MASTER') {
+=======
+                    } else if($abbreviation == 'ET-Master') {
+                        $abbreviation = 'ET';
+                    } else if($abbreviation == 'ISE-Master') {
+>>>>>>> 625c235 (Implement portals import)
                         $abbreviation = 'INF';
                     } else {
                         $abbreviation = 'INF';
@@ -94,7 +100,11 @@ class PortalsController extends Controller
             }
 
             // import image
+<<<<<<< HEAD
             $person->img = (!empty($user['avatarUrl']) ? $user['avatarUrl'] : '');
+=======
+            $person->img = '';
+>>>>>>> 625c235 (Implement portals import)
 
             // cheeck roles
             $roles = $user['roles'];
