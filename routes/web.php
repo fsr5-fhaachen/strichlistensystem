@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\PortalsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,5 @@ Route::group([
 });
 
 Route::get('/exportcsv/{password}', [ExportController::class, 'exportCsv']);
+
+Route::get('/importusers/{password}', [PortalsController::class, 'importUsers']);
