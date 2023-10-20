@@ -81,9 +81,9 @@ class PortalsController extends Controller
                 if(!in_array($abbreviation, ['INF', 'ET', 'WI', 'DIB', 'MCD'])) {
                     if($abbreviation == 'SBE') {
                         $abbreviation = 'ET';
-                    } else if($abbreviation == 'ET-Master') {
+                    } else if($abbreviation == 'ET-MASTER') {
                         $abbreviation = 'ET';
-                    } else if($abbreviation == 'ISE-Master') {
+                    } else if($abbreviation == 'ISE-MASTER') {
                         $abbreviation = 'INF';
                     } else {
                         $abbreviation = 'INF';
