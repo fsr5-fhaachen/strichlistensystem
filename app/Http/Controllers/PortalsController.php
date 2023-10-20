@@ -94,7 +94,7 @@ class PortalsController extends Controller
             }
 
             // import image
-            $person->img = '';
+            $person->img = (!empty($user['avatarUrl']) ? $user['avatarUrl'] : '');
 
             // cheeck roles
             $roles = $user['roles'];
