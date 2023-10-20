@@ -67,6 +67,10 @@ and the vite dev server:
 npm run dev
 ```
 
+### devcontainer
+
+If you want to use the provided devcontainer via laravel sail you need vscode and the devcontainer extension.
+
 ### testing
 
 You can run the tests with:
