@@ -45,7 +45,7 @@ RUN npm install
 # RUN npm run production
 
 # install roadrunner
-COPY --from=spiralscout/roadrunner:latest /usr/bin/rr /usr/bin/rr
+COPY --from=spiralscout/roadrunner:2023.3.2 /usr/bin/rr /usr/bin/rr
 
 # configure roadrunner
 RUN php artisan octane:install --server=roadrunner
