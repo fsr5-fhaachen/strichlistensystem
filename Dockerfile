@@ -10,7 +10,7 @@ RUN chown www-data:www-data -R /var/www/html
 #RUN apk add --no-cache bzip2-dev curl-dev libxml2-dev enchant-2
 
 # install php extensions
-RUN docker-php-ext-install bcmath sockets pdo_mysql
+RUN docker-php-ext-install bcmath sockets pdo_mysql pdo pdo_pgsql pgsql pcntl 
 #    ctype \
 #    json \
 #    mbstring \
