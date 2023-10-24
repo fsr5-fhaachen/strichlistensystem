@@ -5,6 +5,7 @@
       <AppButton title="INF" bgColor="bg-blue-500 hover:bg-blue-700" bgColorActive="bg-blue-700" :icon="['fas', 'code']" :active="filter == 'inf'" @click="filter = 'inf'"/>
       <AppButton title="ET" bgColor="bg-yellow-500 hover:bg-yellow-700" bgColorActive="bg-yellow-700" :icon="['fas', 'bolt']" :active="filter == 'et'" @click="filter = 'et'"/>
       <AppButton title="WI" bgColor="bg-green-500 hover:bg-green-700" bgColorActive="bg-green-700" :icon="['fas', 'chart-line']" :active="filter == 'wi'" @click="filter = 'wi'"/>
+      <AppButton title="DIB" bgColor="bg-fuchsia-500 hover:bg-fuchsia-700" bgColorActive="bg-fuchsia-700" :icon="['fas', 'briefcase']" :active="filter == 'dib'" @click="filter = 'dib'"/>
       <AppButton title="MCD" bgColor="bg-purple-500 hover:bg-purple-700" bgColorActive="bg-purple-700" :icon="['fas', 'paint-brush']" :active="filter == 'mcd'" @click="filter = 'mcd'"/>
       <AppButton title="Tutor" bgColor="bg-indigo-500 hover:bg-indigo-700" bgColorActive="bg-indigo-700" :icon="['fas', 'robot']" :active="filter == 'tutor'" @click="filter = 'tutor'"/>
       <AppButton title="Special" bgColor="bg-pink-500 hover:bg-pink-700" bgColorActive="bg-pink-700" :icon="['fas', 'star']" :active="filter == 'special'" @click="filter = 'special'"/>
@@ -65,6 +66,8 @@ export default defineComponent({
           return person.course === "ET";
         } else if(filter.value === "wi") {
           return person.course === "WI";
+        } else if(filter.value === "dib") {
+          return person.course === "DIB";
         } else if(filter.value === "mcd") {
           return person.course === "MCD";
         } else if(filter.value === "tutor") {

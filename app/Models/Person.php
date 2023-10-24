@@ -47,8 +47,8 @@ class Person extends Model
      */
     public function getImageAttribute()
     {
-        if (!empty($this->img) && file_exists(public_path() . '/images/' . $this->img)) {
-            return '/images/' . $this->img;
+        if (!empty($this->img)) {
+            return $this->img;
         } else {
             return '/images/default.jpg';
         }
