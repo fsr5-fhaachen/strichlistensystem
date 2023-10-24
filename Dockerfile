@@ -9,7 +9,10 @@ RUN chown www-data:www-data -R /var/www/html
 # install packages for php
 #RUN apk add --no-cache bzip2-dev curl-dev libxml2-dev enchant-2
 
+RUN apk add libpq-dev
+
 # install php extensions
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 RUN docker-php-ext-install bcmath sockets pdo_mysql pdo pdo_pgsql pgsql pcntl 
 #    ctype \
 #    json \
