@@ -22,7 +22,7 @@ RUN docker-php-ext-install bcmath sockets pdo_mysql pdo pdo_pgsql pgsql pcntl
 #    tokenizer \
 #    xml
 
-RUN apk add --no-cache pcre-dev $PHPIZE_DEPS && pecl install redis && docker-php-ext-enable redis.so
+RUN apk add --no-cache pcre-dev $PHPIZE_DEPS && pecl install redis-5.3.7 && docker-php-ext-enable redis.so
 
 # install composer
 RUN EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
