@@ -117,9 +117,15 @@ class Person extends Model
     {
         $this->generateAuthToken();
 
-        return route('person.authWithToken', [
+        // generate the route
+        $personAuthWithTokenRoute = route('person.authWithToken', [
             'id' => $this->id,
             'token' => $this->auth_token
         ]);
+
+        // get only the path
+        $personAuthWithTokenRoute = parse_url($personAuthWithTokenRoute, PHP_URL_PATH);
+
+        return config('app.public_url') . $personAuthWithTokenRoute;
     }
 }
