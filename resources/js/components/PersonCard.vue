@@ -13,6 +13,7 @@
         <PersonBadge v-if="person.course == 'INF'" bgColor="bg-blue-500" :icon="['fas', 'code']" />
         <PersonBadge v-if="person.course == 'ET'" bgColor="bg-yellow-500" :icon="['fas', 'bolt']" />
         <PersonBadge v-if="person.course == 'WI'" bgColor="bg-green-500" :icon="['fas', 'chart-line']" />
+        <PersonBadge v-if="person.course == 'DIB'" bgColor="bg-fuchsia-500" :icon="['fas', 'briefcase']" />
         <PersonBadge v-if="person.course == 'MCD'" bgColor="bg-purple-500" :icon="['fas', 'paint-brush']" />
         <PersonBadge v-if="person.is_tutor" bgColor="bg-indigo-500" :icon="['fas', 'robot']" />
         <PersonBadge v-if="person.is_special" bgColor="bg-pink-500" :icon="['fas', 'star']" />
@@ -54,6 +55,8 @@ export default defineComponent({
         return 'hover:border-yellow-700';
       } else if (props.person.course == 'WI') {
         return 'hover:border-green-700';
+      } else if (props.person.course == 'DIB') {
+        return 'hover:border-fuchsia-700';
       } else if (props.person.course == 'MCD') {
         return 'hover:border-purple-700';
       } else {

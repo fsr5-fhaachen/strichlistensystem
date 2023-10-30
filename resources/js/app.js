@@ -16,6 +16,7 @@ import {
   faStar,
   faUsers,
   faWineBottle,
+  faBriefcase,
  } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueQrcode from '@chenfengyuan/vue-qrcode';
@@ -41,6 +42,7 @@ library.add(
   faStar,
   faUsers,
   faWineBottle,
+  faBriefcase,
 );
 
 Inertia.on('start', () => NProgress.start());

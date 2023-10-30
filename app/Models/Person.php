@@ -47,8 +47,8 @@ class Person extends Model
      */
     public function getImageAttribute()
     {
-        if (!empty($this->img) && file_exists(public_path() . '/images/' . $this->img)) {
-            return '/images/' . $this->img;
+        if (!empty($this->img)) {
+            return $this->img;
         } else {
             return '/images/default.jpg';
         }
@@ -117,9 +117,15 @@ class Person extends Model
     {
         $this->generateAuthToken();
 
-        return route('person.authWithToken', [
+        // generate the route
+        $personAuthWithTokenRoute = route('person.authWithToken', [
             'id' => $this->id,
             'token' => $this->auth_token
         ]);
+
+        // get only the path
+        $personAuthWithTokenRoute = parse_url($personAuthWithTokenRoute, PHP_URL_PATH);
+
+        return config('app.public_url') . $personAuthWithTokenRoute;
     }
 }

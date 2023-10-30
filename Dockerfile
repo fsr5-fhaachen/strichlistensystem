@@ -9,8 +9,11 @@ RUN chown www-data:www-data -R /var/www/html
 # install packages for php
 #RUN apk add --no-cache bzip2-dev curl-dev libxml2-dev enchant-2
 
+RUN apk add libpq-dev
+
 # install php extensions
-RUN docker-php-ext-install bcmath sockets pdo_mysql
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
+RUN docker-php-ext-install bcmath sockets pdo_mysql pdo pdo_pgsql pgsql pcntl 
 #    ctype \
 #    json \
 #    mbstring \
@@ -19,7 +22,7 @@ RUN docker-php-ext-install bcmath sockets pdo_mysql
 #    tokenizer \
 #    xml
 
-RUN apk add --no-cache pcre-dev $PHPIZE_DEPS && pecl install redis && docker-php-ext-enable redis.so
+RUN apk add --no-cache pcre-dev $PHPIZE_DEPS && pecl install redis-5.3.7 && docker-php-ext-enable redis.so
 
 # install composer
 RUN EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
@@ -42,7 +45,7 @@ RUN npm install
 # RUN npm run production
 
 # install roadrunner
-COPY --from=spiralscout/roadrunner:latest /usr/bin/rr /usr/bin/rr
+COPY --from=spiralscout/roadrunner:2023.3.2 /usr/bin/rr /usr/bin/rr
 
 # configure roadrunner
 RUN php artisan octane:install --server=roadrunner

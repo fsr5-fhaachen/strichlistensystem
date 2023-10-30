@@ -67,6 +67,10 @@ and the vite dev server:
 npm run dev
 ```
 
+### devcontainer
+
+If you want to use the provided devcontainer via laravel sail you need vscode and the devcontainer extension.
+
 ### testing
 
 You can run the tests with:
@@ -115,7 +119,7 @@ docker exec -it strichlistensystem-web php artisan migrate:fresh --seed
 - Website: https://tkirch.dev/
 - LinkedIn: [Titus Kirch](https://www.linkedin.com/in/tituskirch/)
 - Twitter: [@TitusKirch](https://twitter.com/TitusKirch)
-- Github: [@TitusKirch](https://github.com/TitusKirch)
+- GitHub: [@TitusKirch](https://github.com/TitusKirch)
 
 👤 **Benedikt Haas (main author)**
 
@@ -125,7 +129,11 @@ docker exec -it strichlistensystem-web php artisan migrate:fresh --seed
 👤 **Simon Ostendorf**
 
 - LinkedIn: [Simon Ostendorf](https://www.linkedin.com/in/simonostendorf/)
-- Github: [@simonostendorf](https://github.com/simonostendorf)
+- GitHub: [@simonostendorf](https://github.com/simonostendorf)
+
+👤 **Till Voss**
+
+- GitHub: [@TiltedPhosphor](https://github.com/TiltedPhosphor)
 
 Show here to see the full list of [contributors](https://github.com/fsr5-fhaachen/strichlistensystem/graphs/contributors) who participated in this project.
 

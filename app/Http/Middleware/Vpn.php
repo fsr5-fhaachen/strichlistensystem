@@ -18,12 +18,7 @@ class Vpn
     public function handle(Request $request, Closure $next)
     {
         // skip if not in production
-        if (app()->environment() !== 'production') {
-            return $next($request);
-        }
-
-
-        if (!$_SERVER['HTTP_X_REAL_IP'] || $_SERVER['HTTP_X_REAL_IP'] != env('APP_VPN_IP')) {
+        if (!env('APP_IS_VPN')) {
             return Redirect::route('error');
         }
 
