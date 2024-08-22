@@ -93,10 +93,10 @@ class PortalsController extends Controller
                 $person->course = $abbreviation;
             }
 
-            // import image
-            $person->img = (!empty($user['avatarUrl']) ? $user['avatarUrl'] : '');
+            // import image path
+            $person->img = $user['avatar'];
 
-            // cheeck roles
+            // check roles
             $roles = $user['roles'];
 
             // loop through roles

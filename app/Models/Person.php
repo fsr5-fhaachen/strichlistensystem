@@ -6,6 +6,7 @@ use App\Utils\Telegram;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 use NotificationChannels\Telegram\TelegramMessage;
 
 class Person extends Model
@@ -47,9 +48,15 @@ class Person extends Model
      */
     public function getImageAttribute()
     {
-        if (!empty($this->img)) {
-            return $this->img;
+        // check if image is set and file exists
+        if (!empty($this->img) && Storage::disk('s3')->exists($this->img)) {
+            // generate presigned url for s3 with path stored in "img"
+            return Storage::disk('s3')->temporaryUrl(
+                $this->img,
+                now()->addMinutes(60)
+            );
         } else {
+            // no image is set, return default image
             return '/images/default.jpg';
         }
     }
