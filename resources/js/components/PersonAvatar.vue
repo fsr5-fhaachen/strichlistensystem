@@ -18,15 +18,13 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const target = ref(null);
+    const target = ref();
     const targetIsVisible = useElementVisibility(target);
     const targetWasVisibleOnce = ref(false);
-    const imageUrl = ref(null);
+    const imageUrl = ref();
 
     watch(targetIsVisible, () => {
       if (!targetWasVisibleOnce.value && targetIsVisible) {
-        console.log("Avatar of person " + props.person.id + " is visible for the first time.");
-
         targetWasVisibleOnce.value = true;
 
         // get image from backend for current person object (can be presigned url or path to default image)

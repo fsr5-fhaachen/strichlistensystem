@@ -20674,27 +20674,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   setup: function setup(props) {
-    var target = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var target = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var targetIsVisible = (0,_vueuse_core__WEBPACK_IMPORTED_MODULE_1__.useElementVisibility)(target);
     var targetWasVisibleOnce = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
-    var imageUrl = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var imageUrl = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(targetIsVisible, function () {
       if (!targetWasVisibleOnce.value && targetIsVisible) {
-        console.log("person " + props.person.id + " visible for first time.");
-
-        // timeout, wait 10 seconds before loading image
-        setTimeout(function () {
-          console.log("loading image for person " + props.person.id);
-          targetWasVisibleOnce.value = true;
-          // get image from backend for current person object (can be presigned url or path to default image)
-          imageUrl.value = props.person.image;
-        }, 10000);
+        targetWasVisibleOnce.value = true;
 
         // get image from backend for current person object (can be presigned url or path to default image)
-        //imageUrl.value = props.person.image;
+        imageUrl.value = props.person.image;
       }
     });
-
     return {
       target: target,
       targetIsVisible: targetIsVisible,
