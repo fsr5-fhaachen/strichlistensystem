@@ -35,6 +35,8 @@ class PortalsController extends Controller
             ], 401);
         }
 
+        // if "deleteUsers" url parameter is set to true, all users that are not in the import anymore will be deleted
+        $deleteUsers = ($request->deleteUsers == 'true');
 
         // call APP_PORTALS_URL
         $client = new Client();
@@ -60,14 +62,31 @@ class PortalsController extends Controller
         // get users
         $users = json_decode($body, true)['users'];
 
+        // save all removed and added users
+        $removedUsers = [];
+        $addedUsers = [];
+        $updatedUsers = [];
+        $doNotRemovePersonIds = [];
+
         // loop through users
         foreach($users as $user) {
             // check if Person with id exists if not create new Person
             $person = Person::firstOrNew(['id' => $user['id']]);
+            
+            array_push($doNotRemovePersonIds, $user['id']);
 
             // set attributes
             if($person->id == null) {
+                // this could be a problem if the id is/was used by a another person that was created/imported before
+                // because we handle the complete user management via portals import and do not manage persons manually here, this is not a problem
                 $person->id = $user['id'];
+                array_push($addedUsers, $user['id'] . " (" . $user['email'] . ")");
+            } else {
+                if ($person->email == $user['email']) {
+                    array_push($updatedUsers, $person->id . " (" . $person->email . ")");
+                } else {
+                    array_push($updatedUsers, $person->id . " (" . $person->email . " - " . $user['email'] . ")");
+                }
             }
             $person->firstname = $user['firstname'];
             $person->lastname = $user['lastname'];
@@ -93,10 +112,14 @@ class PortalsController extends Controller
                 $person->course = $abbreviation;
             }
 
-            // import image
-            $person->img = (!empty($user['avatarUrl']) ? $user['avatarUrl'] : '');
+            // import image path, if null set empty string
+            if (isset($user['avatar'])) {
+                $person->img = $user['avatar'];
+            } else {
+                $person->img = "";
+            }
 
-            // cheeck roles
+            // check roles
             $roles = $user['roles'];
 
             // loop through roles
@@ -116,13 +139,23 @@ class PortalsController extends Controller
 
             // save Person
             $person->save();
+        }
 
+        if ($deleteUsers) {
+            $deletePersons = Person::whereNotIn('id', $doNotRemovePersonIds)->get();
+            foreach($deletePersons as $person) {
+                $person->delete();
+                array_push($removedUsers, $person->id . " (" . $person->email . ")");
+            }
         }
 
         // return response
         return response()->json([
             'message' => 'User imported',
-            'status' => $statusCode
+            'status' => $statusCode,
+            'addedUsers' => $addedUsers,
+            'removedUsers' => $removedUsers,
+            'updatedUsers' => $updatedUsers
         ], 200);
     }
 }

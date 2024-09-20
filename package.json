@@ -4,8 +4,8 @@
     "version": "2.0.0",
     "license": "MIT",
     "repository": {
-      "type": "git",
-      "url": "https://github.com/fsr5-fhaachen/strichlistensystem"
+        "type": "git",
+        "url": "https://github.com/fsr5-fhaachen/strichlistensystem"
     },
     "scripts": {
         "dev": "npm run development",
@@ -35,6 +35,7 @@
         "@fortawesome/vue-fontawesome": "^3.0.0-5",
         "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/inertia-vue3": "^0.6.0",
+        "@vueuse/core": "^11.0.1",
         "nprogress": "^0.2.0",
         "postcss-import": "^15.0.0",
         "vue": "^3.2.41",
