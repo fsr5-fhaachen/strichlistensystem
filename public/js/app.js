@@ -21211,7 +21211,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = ["disabled"];
 var _hoisted_6 = {
-  "class": "text-2xl md:text-4xl"
+  "class": "text-4xl md:text-8xl"
 };
 var _hoisted_7 = ["disabled"];
 var _hoisted_8 = ["disabled"];
@@ -21226,13 +21226,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.removeAmount && _ctx.removeAmount.apply(_ctx, arguments);
     }),
     disabled: _ctx.amount <= 1,
-    "class": "text-2xl md:text-4xl"
+    "class": "text-4xl md:text-8xl"
   }, " - ", 8 /* PROPS */, _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.amount), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return _ctx.addAmount && _ctx.addAmount.apply(_ctx, arguments);
     }),
     disabled: _ctx.amount >= _ctx.maxAmount,
-    "class": "text-2xl md:text-4xl"
+    "class": "text-4xl md:text-8xl"
   }, " + ", 8 /* PROPS */, _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "bg-green-500 dark:bg-green-700 hover:bg-green-700 dark:hover:bg-green-900 px-4 py-2 text-2xl md:text-4x rounded-lg disabled:opacity-10",
     onClick: _cache[2] || (_cache[2] = function () {

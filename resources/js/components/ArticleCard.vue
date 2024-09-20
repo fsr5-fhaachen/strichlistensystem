@@ -6,15 +6,15 @@
     </div>
    
     <div class="flex gap-8 justify-center">
-      <button @click="removeAmount" :disabled="amount <= 1" class="text-2xl md:text-4xl">
+      <button @click="removeAmount" :disabled="amount <= 1" class="text-4xl md:text-8xl">
         -
       </button>
 
-      <div class="text-2xl md:text-4xl">
+      <div class="text-4xl md:text-8xl">
         {{ amount }}
       </div>
 
-      <button  @click="addAmount" :disabled="amount >= maxAmount"  class="text-2xl md:text-4xl">
+      <button @click="addAmount" :disabled="amount >= maxAmount" class="text-4xl md:text-8xl">
         +
       </button>
     </div>
