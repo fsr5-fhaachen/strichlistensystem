@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PortalsController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +25,7 @@ Route::get('/error', [AppController::class, 'error'])->name('error');
 
 Route::group([
     'prefix' => 'person',
-    'middleware' => ['vpn.or.person']
+    'middleware' => ['vpn.or.person'],
 ], function () {
     Route::get('/{id}', [PersonController::class, 'show'])->name('person.show');
     Route::post('/{id}/buy/{articleId}', [PersonController::class, 'buy'])->where('id', '[0-9]+')->where('articleId', '[0-9]+')->name('person.buy.article');

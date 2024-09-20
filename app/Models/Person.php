@@ -2,24 +2,21 @@
 
 namespace App\Models;
 
-use App\Utils\Telegram;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
-use NotificationChannels\Telegram\TelegramMessage;
 
 class Person extends Model
 {
     use HasFactory;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected $table = 'persons';
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected $fillable = [
         'firstname',
@@ -34,11 +31,11 @@ class Person extends Model
     ];
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected $appends = [
         'fullName',
-        'image'
+        'image',
     ];
 
     /**
@@ -49,7 +46,7 @@ class Person extends Model
     public function getImageAttribute()
     {
         // check if image is set and file exists
-        if (!empty($this->img) && Storage::disk('s3')->exists($this->img)) {
+        if (! empty($this->img) && Storage::disk('s3')->exists($this->img)) {
             // generate presigned url for s3 with path stored in "img"
             return Storage::disk('s3')->temporaryUrl(
                 $this->img,
@@ -74,9 +71,7 @@ class Person extends Model
     /**
      * buy an give article
      *
-     * @param  Article $article
-     * @param  string $ip
-     * 
+     *
      * @return void
      */
     public function buyArticle(Article $article, string $ip)
@@ -91,8 +86,7 @@ class Person extends Model
     /**
      * cancel an article by given article action log
      *
-     * @param  ArticleActionLog $articleActionLog
-     * 
+     *
      * @return bool
      */
     public function cancelArticle(ArticleActionLog $articleActionLog)
@@ -127,12 +121,12 @@ class Person extends Model
         // generate the route
         $personAuthWithTokenRoute = route('person.authWithToken', [
             'id' => $this->id,
-            'token' => $this->auth_token
+            'token' => $this->auth_token,
         ]);
 
         // get only the path
         $personAuthWithTokenRoute = parse_url($personAuthWithTokenRoute, PHP_URL_PATH);
 
-        return config('app.public_url') . $personAuthWithTokenRoute;
+        return config('app.public_url').$personAuthWithTokenRoute;
     }
 }

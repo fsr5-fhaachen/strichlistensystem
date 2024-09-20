@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use App\Utils\Telegram;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
 
 class AppController extends Controller
 {
@@ -26,10 +25,6 @@ class AppController extends Controller
 
     /**
      * logout and destroy all sessions
-     *
-     * @param  Request $request
-     * 
-     * @return 
      */
     public function logout(Request $request)
     {
@@ -44,10 +39,6 @@ class AppController extends Controller
 
     /**
      * error page
-     *
-     * @param  Request $request
-     * 
-     * @return 
      */
     public function error(Request $request)
     {

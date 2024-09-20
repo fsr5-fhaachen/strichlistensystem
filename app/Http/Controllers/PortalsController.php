@@ -4,34 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use GuzzleHttp\Client;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-
+use Illuminate\Http\Request;
 
 class PortalsController extends Controller
 {
     /**
      * Validate request
      *
-     * @param string $password
-     * @return boolean
+     * @return bool
      */
-    public function validateRequest(string $password){
+    public function validateRequest(string $password)
+    {
         return $password == env('APP_PORTALS_IMPORT_PW');
     }
 
     /**
      * validate auth token
      *
-     * @param  Request $request
-     * 
+     *
      * @return JsonResponse
      */
     public function importUsers(Request $request)
     {
-        if (!$this->validateRequest($request->password)) {
+        if (! $this->validateRequest($request->password)) {
             return response()->json([
-                'message' => 'Unauthorized'
+                'message' => 'Unauthorized',
             ], 401);
         }
 
@@ -41,26 +39,26 @@ class PortalsController extends Controller
         // build url
         $url = '';
         if (str_ends_with(env('APP_PORTALS_URL'), '/')) {
-            $url = env('APP_PORTALS_URL') . 'api/v1/users';
+            $url = env('APP_PORTALS_URL').'api/v1/users';
         } else {
-            $url = env('APP_PORTALS_URL') . '/api/v1/users';
+            $url = env('APP_PORTALS_URL').'/api/v1/users';
         }
 
         // call APP_PORTALS_URL
-        $client = new Client();
+        $client = new Client;
         $response = $client->request('GET', $url, [
             'headers' => [
-                'Authorization' => env('APP_PORTALS_API_SECRET')
-            ]
+                'Authorization' => env('APP_PORTALS_API_SECRET'),
+            ],
         ]);
 
         // get status code
         $statusCode = $response->getStatusCode();
 
-        if($statusCode != 200) {
+        if ($statusCode != 200) {
             return response()->json([
                 'message' => 'Unauthorized',
-                'status' => $statusCode
+                'status' => $statusCode,
             ], 401);
         }
 
@@ -77,23 +75,23 @@ class PortalsController extends Controller
         $doNotRemovePersonIds = [];
 
         // loop through users
-        foreach($users as $user) {
+        foreach ($users as $user) {
             // check if Person with id exists if not create new Person
             $person = Person::firstOrNew(['id' => $user['id']]);
-            
+
             array_push($doNotRemovePersonIds, $user['id']);
 
             // set attributes
-            if($person->id == null) {
+            if ($person->id == null) {
                 // this could be a problem if the id is/was used by a another person that was created/imported before
                 // because we handle the complete user management via portals import and do not manage persons manually here, this is not a problem
                 $person->id = $user['id'];
-                array_push($addedUsers, $user['id'] . " (" . $user['email'] . ")");
+                array_push($addedUsers, $user['id'].' ('.$user['email'].')');
             } else {
                 if ($person->email == $user['email']) {
-                    array_push($updatedUsers, $person->id . " (" . $person->email . ")");
+                    array_push($updatedUsers, $person->id.' ('.$person->email.')');
                 } else {
-                    array_push($updatedUsers, $person->id . " (" . $person->email . " - " . $user['email'] . ")");
+                    array_push($updatedUsers, $person->id.' ('.$person->email.' - '.$user['email'].')');
                 }
             }
             $person->firstname = $user['firstname'];
@@ -101,16 +99,16 @@ class PortalsController extends Controller
             $person->email = $user['email'];
 
             // check if course is set
-            if(isset($user['course'])) {
+            if (isset($user['course'])) {
                 $abbreviation = strtoupper($user['course']['abbreviation']);
 
                 // add fallbacks for other courses if abbreviation is not INF, ET, WI, DIB or MCD
-                if(!in_array($abbreviation, ['INF', 'ET', 'WI', 'DIB', 'MCD'])) {
-                    if($abbreviation == 'SBE') {
+                if (! in_array($abbreviation, ['INF', 'ET', 'WI', 'DIB', 'MCD'])) {
+                    if ($abbreviation == 'SBE') {
                         $abbreviation = 'ET';
-                    } else if($abbreviation == 'ET-MASTER') {
+                    } elseif ($abbreviation == 'ET-MASTER') {
                         $abbreviation = 'ET';
-                    } else if($abbreviation == 'ISE-MASTER') {
+                    } elseif ($abbreviation == 'ISE-MASTER') {
                         $abbreviation = 'INF';
                     } else {
                         $abbreviation = 'INF';
@@ -124,20 +122,20 @@ class PortalsController extends Controller
             if (isset($user['avatar'])) {
                 $person->img = $user['avatar'];
             } else {
-                $person->img = "";
+                $person->img = '';
             }
 
             // check roles
             $roles = $user['roles'];
 
             // loop through roles
-            foreach($roles as $role) {
+            foreach ($roles as $role) {
                 // check if role is tutor
-                if($role['name'] == 'tutor') {
+                if ($role['name'] == 'tutor') {
                     $person->is_tutor = true;
                 }
                 // check if role is special
-                if($role['name'] == 'special') {
+                if ($role['name'] == 'special') {
                     $person->is_special = true;
                 }
             }
@@ -151,9 +149,9 @@ class PortalsController extends Controller
 
         if ($deleteUsers) {
             $deletePersons = Person::whereNotIn('id', $doNotRemovePersonIds)->get();
-            foreach($deletePersons as $person) {
+            foreach ($deletePersons as $person) {
                 $person->delete();
-                array_push($removedUsers, $person->id . " (" . $person->email . ")");
+                array_push($removedUsers, $person->id.' ('.$person->email.')');
             }
         }
 
@@ -163,7 +161,7 @@ class PortalsController extends Controller
             'status' => $statusCode,
             'addedUsers' => $addedUsers,
             'removedUsers' => $removedUsers,
-            'updatedUsers' => $updatedUsers
+            'updatedUsers' => $updatedUsers,
         ], 200);
     }
 }

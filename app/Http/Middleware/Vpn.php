@@ -11,14 +11,12 @@ class Vpn
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
         // skip if not in production
-        if (!env('APP_IS_VPN')) {
+        if (! env('APP_IS_VPN')) {
             return Redirect::route('error');
         }
 
