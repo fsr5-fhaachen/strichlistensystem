@@ -1,4 +1,4 @@
-FROM php:8.1-cli-alpine
+FROM php:8.2-cli-alpine
 
 WORKDIR /var/www/html
 
@@ -9,7 +9,7 @@ RUN chown www-data:www-data -R /var/www/html
 # install packages for php
 #RUN apk add --no-cache bzip2-dev curl-dev libxml2-dev enchant-2
 
-RUN apk add libpq-dev
+RUN apk add libpq-dev linux-headers
 
 # install php extensions
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
