@@ -38,9 +38,17 @@ class PortalsController extends Controller
         // if "deleteUsers" url parameter is set to true, all users that are not in the import anymore will be deleted
         $deleteUsers = ($request->deleteUsers == 'true');
 
+        // build url
+        $url = '';
+        if (str_ends_with(env('APP_PORTALS_URL'), '/')) {
+            $url = env('APP_PORTALS_URL') . 'api/v1/users';
+        } else {
+            $url = env('APP_PORTALS_URL') . '/api/v1/users';
+        }
+
         // call APP_PORTALS_URL
         $client = new Client();
-        $response = $client->request('GET', env('APP_PORTALS_URL') . '/api/v1/users', [
+        $response = $client->request('GET', $url, [
             'headers' => [
                 'Authorization' => env('APP_PORTALS_API_SECRET')
             ]

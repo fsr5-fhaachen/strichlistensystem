@@ -83,9 +83,16 @@ class PersonController extends Controller
 
         $article = Article::findOrFail($articleID);
 
-        $person->buyArticle($article, $request->ip());
+        $amount = $request['amount'];
+        if (!is_numeric($amount) || $amount < 1 || $amount > env('MIX_APP_MAX_ORDER_COUNT')) {
+            return Redirect::route('person.show', ['id' => $id]);
+        }
 
-        Telegram::info('Bought the article "*' . $article->name . '*" (ID: `' . $article->id . '`)', $request, $person);
+        for ($i = 0; $i < $amount; $i++) {
+            $person->buyArticle($article, $request->ip());
+        }
+
+        Telegram::info('Bought the article "*' . $article->name . '*" (' . $amount . 'x) (ID: `' . $article->id . '`)', $request, $person);
 
         $count = ArticleActionLog::where('person_id', $person->id)
             ->where('created_at', '>=', now()->subMinutes(5))
