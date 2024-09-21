@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticleActionLogsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,8 +17,8 @@ class CreateArticleActionLogsTable extends Migration
             $table->id();
             $table->softDeletes();
             $table->timestamps();
-            $table->foreignId('person_id')->nullable(False)->constrained('persons')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('article_id')->nullable(False)->constrained('articles')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('person_id')->nullable(false)->constrained('persons')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('article_id')->nullable(false)->constrained('articles')->onUpdate('cascade')->onDelete('cascade');
             $table->text('ip')->nullable();
         });
     }
@@ -32,4 +32,4 @@ class CreateArticleActionLogsTable extends Migration
     {
         Schema::dropIfExists('article_action_logs');
     }
-}
+};

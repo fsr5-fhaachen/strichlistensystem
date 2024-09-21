@@ -74,7 +74,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'schema' => 'public',
+            'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
 
@@ -124,31 +124,24 @@ return [
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
             'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
-            'password' => env('REDIS_PASSWORD'),
         ],
 
-        'clusters' => [
-            'default' => [
-                [
-                    'host' => env('REDIS_HOST', '127.0.0.1'),
-                    'username' => env('REDIS_USERNAME'),
-                    'password' => env('REDIS_PASSWORD', null),
-                    'port' => env('REDIS_PORT', '6379'),
-                    'database' => env('REDIS_DB', '0'),
-                    'prefix' => '',
-                ],
-            ],
+        'default' => [
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_DB', '0'),
+            'prefix' => '',
+        ],
 
-            'cache' => [
-                [
-                    'host' => env('REDIS_HOST', '127.0.0.1'),
-                    'username' => env('REDIS_USERNAME'),
-                    'password' => env('REDIS_PASSWORD', null),
-                    'port' => env('REDIS_PORT', '6379'),
-                    'database' => env('REDIS_CACHE_DB', '1'),
-                    'prefix' => 'cache',
-                ],
-            ],
+        'cache' => [
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_CACHE_DB', '1'),
+            'prefix' => 'cache',
         ],
     ],
 ];

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticlesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -16,9 +16,9 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name', 50)->nullable(False);
-            $table->enum('icon', ['beer', 'lemon', 'wine-bottle', 'faucet'])->nullable(False);
-            $table->integer('show_order')->nullable(False);
+            $table->string('name', 50)->nullable(false);
+            $table->enum('icon', ['beer', 'lemon', 'wine-bottle', 'faucet'])->nullable(false);
+            $table->integer('show_order')->nullable(false);
         });
     }
 
@@ -31,4 +31,4 @@ class CreateArticlesTable extends Migration
     {
         Schema::dropIfExists('articles');
     }
-}
+};

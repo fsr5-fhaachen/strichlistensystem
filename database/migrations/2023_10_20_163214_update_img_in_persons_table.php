@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateImgInPersonsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class UpdateImgInPersonsTable extends Migration
     {
         Schema::table('persons', function (Blueprint $table) {
             // old: $table->string('img', 100); change to text
-            $table->text('img')->nullable(False)->change();
-            
+            $table->text('img')->nullable(false)->change();
+
         });
     }
 
@@ -28,7 +28,7 @@ class UpdateImgInPersonsTable extends Migration
     public function down()
     {
         Schema::table('persons', function (Blueprint $table) {
-            $table->string('img', 100)->nullable(False)->change();
+            $table->string('img', 100)->nullable(false)->change();
         });
     }
-}
+};

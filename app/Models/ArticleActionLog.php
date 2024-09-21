@@ -13,16 +13,16 @@ class ArticleActionLog extends Model
     use SoftDeletes;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected $fillable = [
         'person_id',
         'article_id',
-        'ip'
+        'ip',
     ];
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected $appends = [
         'article',
@@ -56,7 +56,7 @@ class ArticleActionLog extends Model
     /**
      * time stamp until which the article action log can be cancelled
      *
-     * @return Integer
+     * @return int
      */
     public function getCancelUntilTimestampAttribute()
     {
