@@ -1,4 +1,6 @@
 import { createApp, h } from 'vue';
+
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
@@ -49,7 +51,7 @@ Inertia.on('start', () => NProgress.start());
 Inertia.on('finish', () => NProgress.done());
 
 createInertiaApp({
-  resolve: name => require(`./Pages/${name}`),
+  resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) })
       .use(plugin)
