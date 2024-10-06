@@ -18,7 +18,7 @@ class PersonController extends Controller
     /**
      * validate auth token
      */
-    public function validateAuthToken(Request $request, Person $person, bool $enableLog = true): RedirectResponse
+    public function validateAuthToken(Request $request, Person $person, bool $enableLog = true)
     {
         if ($request->session()->missing('authToken')) {
             return;
