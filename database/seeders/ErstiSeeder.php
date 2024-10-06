@@ -13,7 +13,7 @@ class ErstiSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $importPath = resource_path('img_import/');
         $exportPath = public_path('images/imported_images.csv');

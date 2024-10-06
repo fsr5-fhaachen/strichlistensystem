@@ -12,7 +12,7 @@ class TutorSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $importPath = resource_path('tutors.csv');
         $csvFile = fopen($importPath, 'r');

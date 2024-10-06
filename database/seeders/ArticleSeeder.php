@@ -44,7 +44,7 @@ class ArticleSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach (self::$articles as $article) {
             Article::create($article);
