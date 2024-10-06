@@ -38,7 +38,7 @@ class ArticleActionLog extends Model
      *
      * @return Article
      */
-    public function getArticleAttribute()
+    public function getArticleAttribute(): Article
     {
         return Article::find($this->article_id);
     }
@@ -48,7 +48,7 @@ class ArticleActionLog extends Model
      *
      * @return \Illuminate\Support\Carbon
      */
-    public function getCancelUntilAttribute()
+    public function getCancelUntilAttribute(): \Illuminate\Support\Carbon
     {
         return $this->created_at->addSeconds(60);
     }
@@ -58,7 +58,7 @@ class ArticleActionLog extends Model
      *
      * @return int
      */
-    public function getCancelUntilTimestampAttribute()
+    public function getCancelUntilTimestampAttribute(): int
     {
         return $this->getCancelUntilAttribute()->timestamp;
     }
@@ -68,7 +68,7 @@ class ArticleActionLog extends Model
      *
      * @return string
      */
-    public function getCreatedAtFormattedAttribute()
+    public function getCreatedAtFormattedAttribute(): string
     {
         return Carbon::parse($this->created_at)->format('d.m.Y \u\m H:i:s \U\h\r');
     }
@@ -78,7 +78,7 @@ class ArticleActionLog extends Model
      *
      * @return string
      */
-    public function getDeletedAtFormattedAttribute()
+    public function getDeletedAtFormattedAttribute(): string
     {
         return Carbon::parse($this->deleted_at)->format('d.m.Y \u\m H:i:s \U\h\r');
     }
@@ -88,7 +88,7 @@ class ArticleActionLog extends Model
      *
      * @return Person
      */
-    public function getPersonAttribute()
+    public function getPersonAttribute(): Person
     {
         return Person::find($this->person_id);
     }

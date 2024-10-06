@@ -25,7 +25,7 @@ class PortalsController extends Controller
      *
      * @return JsonResponse
      */
-    public function importUsers(Request $request)
+    public function importUsers(Request $request): JsonResponse
     {
         if (! $this->validateRequest($request->password)) {
             return response()->json([

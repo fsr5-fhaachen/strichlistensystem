@@ -43,7 +43,7 @@ class Person extends Model
      *
      * @return string
      */
-    public function getImageAttribute()
+    public function getImageAttribute(): string
     {
         // check if image is set and file exists
         if (! empty($this->img) && Storage::disk('s3')->exists($this->img)) {
@@ -63,7 +63,7 @@ class Person extends Model
      *
      * @return string
      */
-    public function getFullnameAttribute()
+    public function getFullnameAttribute(): string
     {
         return "{$this->firstname} {$this->lastname}";
     }
@@ -74,7 +74,7 @@ class Person extends Model
      *
      * @return void
      */
-    public function buyArticle(Article $article, string $ip)
+    public function buyArticle(Article $article, string $ip): void
     {
         ArticleActionLog::create([
             'person_id' => $this->id,
@@ -89,7 +89,7 @@ class Person extends Model
      *
      * @return bool
      */
-    public function cancelArticle(ArticleActionLog $articleActionLog)
+    public function cancelArticle(ArticleActionLog $articleActionLog): bool
     {
         if ($articleActionLog->cancelUntil->addSeconds(10) > now()) {
             $articleActionLog->delete();
@@ -101,7 +101,7 @@ class Person extends Model
      *
      * @return string
      */
-    public function generateAuthToken()
+    public function generateAuthToken(): string
     {
         $this->auth_token = bin2hex(random_bytes(32));
         $this->save();
@@ -114,7 +114,7 @@ class Person extends Model
      *
      * @return string
      */
-    public function createAuthLink()
+    public function createAuthLink(): string
     {
         $this->generateAuthToken();
 

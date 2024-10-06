@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Models\ArticleActionLog;
 use App\Models\Person;
 
@@ -12,7 +13,7 @@ class ExportController extends Controller
         return $password == env('CSV_EXPORT_PW');
     }
 
-    public function createCsv()
+    public function createCsv(): StreamedResponse
     {
         $fileName = 'strichlisten_export.csv';
         $persons = Person::all();
