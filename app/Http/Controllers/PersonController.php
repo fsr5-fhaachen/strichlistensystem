@@ -75,7 +75,7 @@ class PersonController extends Controller
         $article = Article::findOrFail($articleID);
 
         $amount = $request['amount'];
-        if (! is_numeric($amount) || $amount < 1 || $amount > env('MIX_APP_MAX_ORDER_COUNT')) {
+        if (! is_numeric($amount) || $amount < 1 || $amount > env('VITE_APP_MAX_ORDER_COUNT')) {
             return Redirect::route('person.show', ['id' => $id]);
         }
 

@@ -48,7 +48,7 @@ export default defineComponent({
   emits: ['submit'],
   setup(props, ctx) {
     const amount = ref(1);
-    const maxAmount = parseInt(process.env.MIX_APP_MAX_ORDER_COUNT);
+    const maxAmount = parseInt(import.meta.env.VITE_APP_MAX_ORDER_COUNT);
     const disabled = ref(false);
     const timeoutSeconds = 3;
 
