@@ -6,17 +6,17 @@ use App\Models\Article;
 use App\Models\ArticleActionLog;
 use App\Models\Person;
 use App\Utils\Telegram;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class PersonController extends Controller
 {
     /**
      * validate auth token
-     *
-     *
-     * @return null|\Illuminate\Http\RedirectResponse
      */
     public function validateAuthToken(Request $request, Person $person, bool $enableLog = true)
     {
@@ -37,11 +37,8 @@ class PersonController extends Controller
 
     /**
      * show specific person
-     *
-     *
-     * @return \Inertia\Response
      */
-    public function show(Request $request, int $id)
+    public function show(Request $request, int $id): Response
     {
         $person = Person::findOrFail($id);
         if ($this->validateAuthToken($request, $person)) {
@@ -61,11 +58,8 @@ class PersonController extends Controller
 
     /**
      * buy an article for a user
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function buy(Request $request, int $id, int $articleID)
+    public function buy(Request $request, int $id, int $articleID): RedirectResponse
     {
         $person = Person::findOrFail($id);
         if ($this->validateAuthToken($request, $person)) {
@@ -98,11 +92,8 @@ class PersonController extends Controller
 
     /**
      * cancel an article for a user by article log id
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function cancel(Request $request, int $id, int $articleActionLogId)
+    public function cancel(Request $request, int $id, int $articleActionLogId): RedirectResponse
     {
         $person = Person::findOrFail($id);
         if ($this->validateAuthToken($request, $person)) {
@@ -130,11 +121,8 @@ class PersonController extends Controller
 
     /**
      * create new auth link for a person
-     *
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function generateAuthLink(Request $request, int $id)
+    public function generateAuthLink(Request $request, int $id): JsonResponse
     {
         $person = Person::findOrFail($id);
         if ($this->validateAuthToken($request, $person)) {
@@ -150,11 +138,8 @@ class PersonController extends Controller
 
     /**
      * auth a person with token
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function authWithToken(Request $request, int $id, string $token)
+    public function authWithToken(Request $request, int $id, string $token): RedirectResponse
     {
         $person = Person::findOrFail($id);
 

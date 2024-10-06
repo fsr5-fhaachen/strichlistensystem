@@ -41,10 +41,8 @@ class ArticleSeeder extends Seeder
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach (self::$articles as $article) {
             Article::create($article);

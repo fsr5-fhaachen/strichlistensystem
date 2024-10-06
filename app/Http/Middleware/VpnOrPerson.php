@@ -6,15 +6,14 @@ use App\Models\Person;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\HttpFoundation\Response;
 
 class VpnOrPerson
 {
     /**
      * Handle an incoming request.
-     *
-     * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         // skip if not in production
         if (! env('APP_IS_VPN') && ($request->session()->missing('authToken') ||
