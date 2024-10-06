@@ -46,7 +46,6 @@ COPY ["./app", "./app"]
 COPY ["./bootstrap", "./bootstrap"]
 COPY ["./config", "./config"]
 COPY ["./database", "./database"]
-COPY ["./lang", "./lang"]
 COPY ["./public", "./public"]
 COPY ["./resources/css", "./resources/css"]
 COPY ["./resources/views", "./resources/views"]
@@ -58,7 +57,7 @@ RUN composer install
 
 # get data from previous build
 COPY --from=node ["/app/public/build/", "./public/build/"]
-COPY --from=node ["/app/public/css/", "./public/css/"]
+#COPY --from=node ["/app/public/css/", "./public/css/"]
 
 # fix storage folder
 RUN mkdir -p /app/storage/logs
