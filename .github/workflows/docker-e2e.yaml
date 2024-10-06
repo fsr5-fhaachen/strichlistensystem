@@ -60,7 +60,7 @@ jobs:
       - name: Run DB Seed
         run: |
           # run "php artisan migrate:fresh --seed" inside docker container
-          docker exec portals-web php artisan migrate:fresh --seed
+          docker exec strichlistensystem-web php artisan migrate:fresh --seed
       - name: Debug
         run: |
           curl http://localhost:8000
