@@ -35,8 +35,6 @@ class ArticleActionLog extends Model
 
     /**
      * get the article that this action log belongs to
-     *
-     * @return Article
      */
     public function getArticleAttribute(): Article
     {
@@ -45,8 +43,6 @@ class ArticleActionLog extends Model
 
     /**
      * time until which the article action log can be cancelled
-     *
-     * @return \Illuminate\Support\Carbon
      */
     public function getCancelUntilAttribute(): \Illuminate\Support\Carbon
     {
@@ -55,8 +51,6 @@ class ArticleActionLog extends Model
 
     /**
      * time stamp until which the article action log can be cancelled
-     *
-     * @return int
      */
     public function getCancelUntilTimestampAttribute(): int
     {
@@ -65,8 +59,6 @@ class ArticleActionLog extends Model
 
     /**
      * get created at timestamp as formatted date
-     *
-     * @return string
      */
     public function getCreatedAtFormattedAttribute(): string
     {
@@ -75,8 +67,6 @@ class ArticleActionLog extends Model
 
     /**
      * get deleted at timestamp as formatted date
-     *
-     * @return string
      */
     public function getDeletedAtFormattedAttribute(): string
     {
@@ -85,8 +75,6 @@ class ArticleActionLog extends Model
 
     /**
      * get the person that this action log belongs to
-     *
-     * @return Person
      */
     public function getPersonAttribute(): Person
     {

@@ -21,9 +21,6 @@ class PortalsController extends Controller
 
     /**
      * validate auth token
-     *
-     *
-     * @return JsonResponse
      */
     public function importUsers(Request $request): JsonResponse
     {

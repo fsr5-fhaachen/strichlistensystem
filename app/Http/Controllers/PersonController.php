@@ -17,9 +17,6 @@ class PersonController extends Controller
 {
     /**
      * validate auth token
-     *
-     *
-     * @return null|\Illuminate\Http\RedirectResponse
      */
     public function validateAuthToken(Request $request, Person $person, bool $enableLog = true): RedirectResponse
     {
@@ -40,9 +37,6 @@ class PersonController extends Controller
 
     /**
      * show specific person
-     *
-     *
-     * @return \Inertia\Response
      */
     public function show(Request $request, int $id): Response
     {
@@ -64,9 +58,6 @@ class PersonController extends Controller
 
     /**
      * buy an article for a user
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function buy(Request $request, int $id, int $articleID): RedirectResponse
     {
@@ -101,9 +92,6 @@ class PersonController extends Controller
 
     /**
      * cancel an article for a user by article log id
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function cancel(Request $request, int $id, int $articleActionLogId): RedirectResponse
     {
@@ -133,9 +121,6 @@ class PersonController extends Controller
 
     /**
      * create new auth link for a person
-     *
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function generateAuthLink(Request $request, int $id): JsonResponse
     {
@@ -153,9 +138,6 @@ class PersonController extends Controller
 
     /**
      * auth a person with token
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function authWithToken(Request $request, int $id, string $token): RedirectResponse
     {

@@ -12,8 +12,6 @@ class AppController extends Controller
 {
     /**
      * list all users
-     *
-     * @return \Inertia\Response
      */
     public function index(): Response
     {

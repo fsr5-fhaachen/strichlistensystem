@@ -40,8 +40,6 @@ class Person extends Model
 
     /**
      * get the person's image.
-     *
-     * @return string
      */
     public function getImageAttribute(): string
     {
@@ -60,8 +58,6 @@ class Person extends Model
 
     /**
      * get the person's full name.
-     *
-     * @return string
      */
     public function getFullnameAttribute(): string
     {
@@ -70,9 +66,6 @@ class Person extends Model
 
     /**
      * buy an give article
-     *
-     *
-     * @return void
      */
     public function buyArticle(Article $article, string $ip): void
     {
@@ -85,9 +78,6 @@ class Person extends Model
 
     /**
      * cancel an article by given article action log
-     *
-     *
-     * @return bool
      */
     public function cancelArticle(ArticleActionLog $articleActionLog): bool
     {
@@ -98,8 +88,6 @@ class Person extends Model
 
     /**
      * generate an auth token
-     *
-     * @return string
      */
     public function generateAuthToken(): string
     {
@@ -111,8 +99,6 @@ class Person extends Model
 
     /**
      * create a new auth link
-     *
-     * @return string
      */
     public function createAuthLink(): string
     {
