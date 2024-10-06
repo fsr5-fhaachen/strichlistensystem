@@ -16,5 +16,6 @@ class Article extends Model
         'name',
         'icon',
         'show_order',
+        'max_order_amount',
     ];
 }

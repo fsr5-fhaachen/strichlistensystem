@@ -17,21 +17,25 @@ class ArticleSeeder extends Seeder
             'name' => 'Bier',
             'icon' => 'beer',
             'show_order' => 1,
+            'max_order_amount' => 8,
         ],
         [
             'name' => 'Radler',
             'icon' => 'lemon',
             'show_order' => 2,
+            'max_order_amount' => 8,
         ],
         [
             'name' => 'Softdrinks',
             'icon' => 'wine-bottle',
             'show_order' => 3,
+            'max_order_amount' => 8,
         ],
         [
             'name' => 'Wasser',
             'icon' => 'faucet',
             'show_order' => 4,
+            'max_order_amount' => 8,
         ],
     ];
 
