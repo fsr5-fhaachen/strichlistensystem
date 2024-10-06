@@ -79,7 +79,7 @@ class Person extends Model
     /**
      * cancel an article by given article action log
      */
-    public function cancelArticle(ArticleActionLog $articleActionLog): bool
+    public function cancelArticle(ArticleActionLog $articleActionLog): void
     {
         if ($articleActionLog->cancelUntil->addSeconds(10) > now()) {
             $articleActionLog->delete();
