@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Response;
 use App\Models\Person;
 use App\Utils\Telegram;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AppController extends Controller
 {
