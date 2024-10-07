@@ -1,60 +1,76 @@
-FROM php:8.1-cli-alpine
+# --------------------------------------------
+#       STAGE 1.1: Build JS with node
+# --------------------------------------------
 
-WORKDIR /var/www/html
+FROM node:20-alpine AS node
+WORKDIR /app
 
-COPY . .
-
-RUN chown www-data:www-data -R /var/www/html
-
-# install packages for php
-#RUN apk add --no-cache bzip2-dev curl-dev libxml2-dev enchant-2
-
-RUN apk add libpq-dev linux-headers
-
-# install php extensions
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
-RUN docker-php-ext-install bcmath sockets pdo_mysql pdo pdo_pgsql pgsql pcntl 
-#    ctype \
-#    json \
-#    mbstring \
-#    openssl \
-#    pdo \
-#    tokenizer \
-#    xml
-
-RUN apk add --no-cache pcre-dev $PHPIZE_DEPS && pecl install redis-5.3.7 && docker-php-ext-enable redis.so
-
-# install composer
-RUN EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
-RUN if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then >&2 echo 'ERROR: Invalid installer checksum' && rm composer-setup.php && exit 1; fi
-RUN php composer-setup.php --quiet
-RUN rm composer-setup.php
-
-# install php dependencies
-RUN php composer.phar install
-
-# install nodejs
-RUN apk add --no-cache nodejs npm
-
-# install node dependencies
+# install dependencies (only copy package lock here to use docker caching)
+COPY ["package.json", "package-lock.json", "./"] 
 RUN npm install
 
-# build application
-# RUN npm run build
+# copy project data
+COPY ["vite.config.js", "./"]
+COPY ["./resources/js/", "./resources/js/"]
+COPY ["./resources/css/", "./resources/css/"]
+COPY ["./resources/views/", "./resources/view/"]
+COPY ["postcss.config.cjs", "./"]
+COPY ["tailwind.config.cjs", "./"]
+COPY ["./database", "./database"]
 
-# install roadrunner
-COPY --from=spiralscout/roadrunner:2023.3.2 /usr/bin/rr /usr/bin/rr
+# build project
+RUN npm run build
 
-# configure roadrunner
-RUN php artisan octane:install --server=roadrunner
+# --------------------------------------------
+#    STAGE 1.2: Setup PHP and Dependencies
+# --------------------------------------------
 
-ENV ROADRUNNER_MAX_REQUESTS=512
-ENV ROADRUNNER_WORKERS="auto"
+FROM dunglas/frankenphp:1-php8.3-alpine AS frankenphp
+LABEL maintainer="FSR5 FH-Aachen"
+
+# use workfir from frankenphp container
+WORKDIR /app
+
+# install php extensions
+RUN apk add libpq-dev linux-headers
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
+RUN docker-php-ext-install bcmath pdo_mysql pdo pdo_pgsql pgsql pcntl sockets
+RUN apk add --no-cache pcre-dev $PHPIZE_DEPS && pecl install redis && docker-php-ext-enable redis.so
+
+# install composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# copy relevant project data
+COPY ["composer.json", "composer.lock", "artisan", "./"]
+COPY ["./app", "./app"]
+COPY ["./bootstrap", "./bootstrap"]
+COPY ["./config", "./config"]
+COPY ["./database", "./database"]
+COPY ["./public", "./public"]
+COPY ["./resources/css", "./resources/css"]
+COPY ["./resources/views", "./resources/views"]
+COPY ["./routes", "./routes"]
+COPY ["./storage", "./storage"]
+
+# install dependencies
+RUN composer install
+
+# get data from previous build
+COPY --from=node ["/app/public/build/", "./public/build/"]
+#COPY --from=node ["/app/public/css/", "./public/css/"]
+
+# fix storage folder
+RUN mkdir -p /app/storage/logs
+RUN chmod -R 777 ./storage
+
+# install and configure frankenphp
+#COPY --from=frankenphp /usr/local/bin/frankenphp /usr/local/bin/frankenphp
+
+ENV FRANKENPHP_MAX_REQUESTS=512
+ENV FRANKENPHP_WORKERS="auto"
 
 EXPOSE 8000
 
-CMD php artisan octane:start --server="roadrunner" --host="0.0.0.0" --workers=${ROADRUNNER_WORKERS} --max-requests=${ROADRUNNER_MAX_REQUESTS}
+CMD php artisan octane:frankenphp --host="0.0.0.0" --workers=${FRANKENPHP_WORKERS} --max-requests=${FRANKENPHP_MAX_REQUESTS}
 
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD php artisan octane:status --server="roadrunner"
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD php artisan octane:status
