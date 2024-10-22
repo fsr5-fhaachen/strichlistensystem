@@ -10,11 +10,12 @@ class Article extends Model
     use HasFactory;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected $fillable = [
         'name',
         'icon',
-        'show_order'
+        'show_order',
+        'max_order_amount',
     ];
 }

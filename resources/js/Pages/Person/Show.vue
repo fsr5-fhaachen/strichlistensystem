@@ -28,7 +28,7 @@
         <ArticleCard
           v-for="article in articles"
           :article="article"
-          @click="buy(article)"
+          @submit="buy"
         />
       </div>
     </div>    
@@ -102,11 +102,14 @@ export default defineComponent({
     const authLink = ref('');
     const axios = inject('axios');
 
-    const buy = (article) => {
+    const buy = (article, amount) => {
       redirectCountdown.value = 30;
-      Inertia.post('/person/' + props.person.id + '/buy/' + article.id, null, {
-        preserveScroll: true,
-      });
+      Inertia.post('/person/' + props.person.id + '/buy/' + article.id, {
+          amount,
+        }, {
+          preserveScroll: true,
+        }
+      );
     }
 
     const cancel = (articleActionLog) => {

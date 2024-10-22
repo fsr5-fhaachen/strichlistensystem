@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('persons', function (Blueprint $table) {
-            // old: $table->string('img', 100); change to text
-            $table->text('img')->nullable(false)->change();
-
+        Schema::table('articles', function (Blueprint $table) {
+            $table->integer('max_order_amount')->nullable(false)->default(1);
         });
     }
 
@@ -23,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('persons', function (Blueprint $table) {
-            $table->string('img', 100)->nullable(false)->change();
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropColumn('max_order_amount');
         });
     }
 };

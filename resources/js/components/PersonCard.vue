@@ -3,7 +3,7 @@
     class="bg-gray-100 border-gray-500 dark:bg-gray-800 dark:border-gray-900 border-2 w-full rounded-lg p-3 flex flex-col gap-2"
     :class="borderColor">
       <div class="flex-grow">
-        <img :src="person.image" class="w-full rounded-lg" loading="lazy" />
+        <PersonAvatar :person="person" />
       </div>
       <div>
         <h1 class="text-lg text-center">{{ person.firstname }}</h1>
@@ -24,11 +24,13 @@
 <script>
 import { computed, defineComponent } from "vue";
 import PersonBadge from "./PersonBadge.vue";
+import PersonAvatar from "./PersonAvatar.vue";
 
 export default defineComponent({
   name: "PersonCard",
   components: {
     PersonBadge,
+    PersonAvatar,
   },
   props: {
     person: {

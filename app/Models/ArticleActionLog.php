@@ -13,16 +13,16 @@ class ArticleActionLog extends Model
     use SoftDeletes;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected $fillable = [
         'person_id',
         'article_id',
-        'ip'
+        'ip',
     ];
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected $appends = [
         'article',
@@ -35,60 +35,48 @@ class ArticleActionLog extends Model
 
     /**
      * get the article that this action log belongs to
-     *
-     * @return Article
      */
-    public function getArticleAttribute()
+    public function getArticleAttribute(): Article
     {
         return Article::find($this->article_id);
     }
 
     /**
      * time until which the article action log can be cancelled
-     *
-     * @return \Illuminate\Support\Carbon
      */
-    public function getCancelUntilAttribute()
+    public function getCancelUntilAttribute(): \Illuminate\Support\Carbon
     {
         return $this->created_at->addSeconds(60);
     }
 
     /**
      * time stamp until which the article action log can be cancelled
-     *
-     * @return Integer
      */
-    public function getCancelUntilTimestampAttribute()
+    public function getCancelUntilTimestampAttribute(): int
     {
         return $this->getCancelUntilAttribute()->timestamp;
     }
 
     /**
      * get created at timestamp as formatted date
-     *
-     * @return string
      */
-    public function getCreatedAtFormattedAttribute()
+    public function getCreatedAtFormattedAttribute(): string
     {
         return Carbon::parse($this->created_at)->format('d.m.Y \u\m H:i:s \U\h\r');
     }
 
     /**
      * get deleted at timestamp as formatted date
-     *
-     * @return string
      */
-    public function getDeletedAtFormattedAttribute()
+    public function getDeletedAtFormattedAttribute(): string
     {
         return Carbon::parse($this->deleted_at)->format('d.m.Y \u\m H:i:s \U\h\r');
     }
 
     /**
      * get the person that this action log belongs to
-     *
-     * @return Person
      */
-    public function getPersonAttribute()
+    public function getPersonAttribute(): Person
     {
         return Person::find($this->person_id);
     }
