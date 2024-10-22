@@ -105,7 +105,9 @@ class PortalsController extends Controller
                         $abbreviation = 'ET';
                     } elseif ($abbreviation == 'ET-MASTER') {
                         $abbreviation = 'ET';
-                    } elseif ($abbreviation == 'ISE-MASTER') {
+                    } else if($abbreviation == 'IS-MASTER' ) {
+                        $abbreviation = 'WI';
+                    } else if($abbreviation == 'ISE-MASTER' || $abbreviation == 'INF-MASTER') {
                         $abbreviation = 'INF';
                     } else {
                         $abbreviation = 'INF';
