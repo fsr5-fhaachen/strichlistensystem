@@ -20,9 +20,9 @@ class Vpn
         if (env('APP_IS_VPN')) {
             return $next($request);
         }
-        if (env('APP_VPN_IP') && array_key_exists("HTTP_X_REAL_IP", $_SERVER)) {
+        if (env('APP_VPN_IP') && array_key_exists("REMOTE_ADDR", $_SERVER)) {
             $app_vpn_ip = Range::parse(env('APP_VPN_IP'));
-            if ($app_vpn_ip->contains(new IP($_SERVER['HTTP_X_REAL_IP']))) {
+            if ($app_vpn_ip->contains(new IP($_SERVER['REMOTE_ADDR']))) {
                 return $next($request);
             }
         }
