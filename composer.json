@@ -13,6 +13,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "league/flysystem-aws-s3-v3": "^3.0",
+        "s1lentium/iptools": "^1.2",
         "spiral/roadrunner": "^2024.2"
     },
     "require-dev": {
