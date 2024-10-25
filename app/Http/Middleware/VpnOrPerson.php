@@ -21,9 +21,9 @@ class VpnOrPerson
         if (env('APP_IS_VPN')) {
             return $next($request);
         }
-        if (env('APP_VPN_IP') && array_key_exists("REMOTE_ADDR", $_SERVER)) {
+        if (env('APP_VPN_IP') && array_key_exists("HTTP_CF_CONNECTING_IP", $_SERVER)) {
             $app_vpn_ip = Range::parse(env('APP_VPN_IP'));
-            if ($app_vpn_ip->contains(new IP($_SERVER['REMOTE_ADDR']))) {
+            if ($app_vpn_ip->contains(new IP($_SERVER['HTTP_CF_CONNECTING_IP']))) {
                 return $next($request);
             }
         }
