@@ -32,9 +32,15 @@ class ArticleSeeder extends Seeder
             'max_order_amount' => 8,
         ],
         [
+            'name' => 'Fassbrause',
+            'icon' => 'glass-water',
+            'show_order' => 4,
+            'max_order_amount' => 8,
+        ],
+        [
             'name' => 'Wasser',
             'icon' => 'faucet',
-            'show_order' => 4,
+            'show_order' => 5,
             'max_order_amount' => 8,
         ],
     ];
