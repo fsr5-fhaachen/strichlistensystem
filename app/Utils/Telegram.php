@@ -5,21 +5,17 @@ namespace App\Utils;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
-
 class Telegram
 {
     /**
      * send message to info telegram channel
      *
-     * @param  string $message
-     * @param  Request $request
-     * @param  Person $person
-     * 
+     *
      * @return string|false
      */
-    public static function info(string $message, Request $request = null, Person $person = null)
+    public static function info(string $message, ?Request $request = null, ?Person $person = null)
     {
-        if (!env('TELEGRAM_BOT_INFO_CHANNEL_ID')) {
+        if (! env('TELEGRAM_BOT_INFO_CHANNEL_ID')) {
             return;
         }
 
@@ -29,51 +25,43 @@ class Telegram
     /**
      * send message to warning telegram channel
      *
-     * @param  string $message
-     * @param  Request $request
-     * @param  Person $person
-     * 
+     *
      * @return string|false
      */
-    public static function warning(string $message, Request $request = null, Person $person = null)
+    public static function warning(string $message, ?Request $request = null, ?Person $person = null)
     {
-        if (!env('TELEGRAM_BOT_WARNING_CHANNEL_ID')) {
+        if (! env('TELEGRAM_BOT_WARNING_CHANNEL_ID')) {
             return;
         }
 
         return self::sendMessage(env('TELEGRAM_BOT_WARNING_CHANNEL_ID'), $message, $request, $person);
     }
 
-
     /**
      * send message to telegram channel
      *
-     * @param  string $channelID
-     * @param  string $message
-     * @param  Request $request
-     * @param  Person $person
-     * 
+     *
      * @return string|false
      */
-    public static function sendMessage(string $channelID, string $message = null, Request $request = null, Person $person = null)
+    public static function sendMessage(string $channelID, ?string $message = null, ?Request $request = null, ?Person $person = null)
     {
-        if (!env('TELEGRAM_BOT_TOKEN')) {
+        if (! env('TELEGRAM_BOT_TOKEN')) {
             return;
         }
 
         // parse output
         $output = '';
         if ($request->ip()) {
-            $output .= '*IP:* `' . (env('APP_IS_VPN') ? 'VPN' : $request->ip()) . '`' . PHP_EOL;
+            $output .= '*IP:* `'.(env('APP_IS_VPN') ? 'VPN' : $request->ip()).'`'.PHP_EOL;
         }
         if ($person) {
-            $output .= '*Person:* ' . $person->fullname . ' (ID: `' . $person->id . '`)' . PHP_EOL;
+            $output .= '*Person:* '.$person->fullname.' (ID: `'.$person->id.'`)'.PHP_EOL;
         }
         if ($request->session()->has('authToken')) {
-            $output .= '*AuthToken:* `' . $request->session()->get('authToken') . '`' . PHP_EOL;
+            $output .= '*AuthToken:* `'.$request->session()->get('authToken').'`'.PHP_EOL;
         }
         if ($message) {
-            $output .= '*Message:* ' . $message . PHP_EOL;
+            $output .= '*Message:* '.$message.PHP_EOL;
         }
 
         //TODO: make this async

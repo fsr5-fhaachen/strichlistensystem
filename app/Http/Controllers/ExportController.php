@@ -4,37 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\ArticleActionLog;
 use App\Models\Person;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ExportController extends Controller
 {
-    public function validateRequest(string $password){
+    public function validateRequest(string $password)
+    {
         return $password == env('CSV_EXPORT_PW');
     }
 
-    public function createCsv(){
+    public function createCsv(): StreamedResponse
+    {
         $fileName = 'strichlisten_export.csv';
         $persons = Person::all();
 
-        $headers = array(
+        $headers = [
             'Content-type' => 'text/csv; charset=UTF-8',
             'Content-Encoding' => 'UTF-8',
             'Content-Disposition' => "attachment; filename=$fileName",
             'Pragma' => 'no-cache',
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires' => '0'
-        );
+            'Expires' => '0',
+        ];
 
-        $columns = array(
+        $columns = [
             'Nachname',
             'Vorname',
             'Anz_Bier',
             'Anz_Radler',
             'Anz_Softdrinks',
-            'Anz_Wasser'
-        );
+            'Anz_Wasser',
+        ];
 
-        $callback = function() use($persons, $columns){
+        $callback = function () use ($persons, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns, ';');
 
@@ -44,22 +46,22 @@ class ExportController extends Controller
                 $row['Email'] = $person->email;
                 $row['Anz_Bier'] = ArticleActionLog::where([
                     ['person_id', '=', $person->id],
-                    ['article_id', '=', 1]
+                    ['article_id', '=', 1],
                 ])->count();
                 $row['Anz_Radler'] = ArticleActionLog::where([
                     ['person_id', '=', $person->id],
-                    ['article_id', '=', 2]
+                    ['article_id', '=', 2],
                 ])->count();
                 $row['Anz_Softdrink'] = ArticleActionLog::where([
                     ['person_id', '=', $person->id],
-                    ['article_id', '=', 3]
+                    ['article_id', '=', 3],
                 ])->count();
                 $row['Anz_Wasser'] = ArticleActionLog::where([
                     ['person_id', '=', $person->id],
-                    ['article_id', '=', 4]
+                    ['article_id', '=', 4],
                 ])->count();
-                $array = array($row['Nachname'], $row['Vorname'], $row['Anz_Bier'], $row['Anz_Radler'], $row['Anz_Softdrink'], $row['Anz_Wasser']);
-                $array = array_map("utf8_decode", $array);
+                $array = [$row['Nachname'], $row['Vorname'], $row['Anz_Bier'], $row['Anz_Radler'], $row['Anz_Softdrink'], $row['Anz_Wasser']];
+                $array = array_map('utf8_decode', $array);
                 fputcsv($file, $array, ';');
             }
             fclose($file);
@@ -68,8 +70,11 @@ class ExportController extends Controller
         return response()->stream($callback, 200, $headers);
     }
 
-    public function exportCsv(string $password){
-        if (!$this->validateRequest($password)) return "Incorrect Password!";
+    public function exportCsv(string $password)
+    {
+        if (! $this->validateRequest($password)) {
+            return 'Incorrect Password!';
+        }
 
         return $this->createCsv();
     }

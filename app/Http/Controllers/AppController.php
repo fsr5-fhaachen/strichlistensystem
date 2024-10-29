@@ -4,18 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use App\Utils\Telegram;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
+use Inertia\Response;
 
 class AppController extends Controller
 {
     /**
      * list all users
-     *
-     * @return \Inertia\Response
      */
-    public function index()
+    public function index(): Response
     {
         $persons = Person::where('is_disabled', '=', false)->orderBy('firstname')->orderBy('lastname')->get();
 
@@ -26,12 +24,8 @@ class AppController extends Controller
 
     /**
      * logout and destroy all sessions
-     *
-     * @param  Request $request
-     * 
-     * @return 
      */
-    public function logout(Request $request)
+    public function logout(Request $request): Response
     {
         $authTokenPerson = Person::where('auth_token', $request->session()->get('authToken'))->first();
 
@@ -44,12 +38,8 @@ class AppController extends Controller
 
     /**
      * error page
-     *
-     * @param  Request $request
-     * 
-     * @return 
      */
-    public function error(Request $request)
+    public function error(Request $request): Response
     {
         $request->session()->flush();
 
