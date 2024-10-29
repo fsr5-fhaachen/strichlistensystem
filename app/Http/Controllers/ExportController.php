@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ArticleActionLog;
 use App\Models\Person;
+use App\Models\Article;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ExportController extends Controller
@@ -30,38 +31,29 @@ class ExportController extends Controller
         $columns = [
             'Nachname',
             'Vorname',
-            'Anz_Bier',
-            'Anz_Radler',
-            'Anz_Softdrinks',
-            'Anz_Wasser',
         ];
 
-        $callback = function () use ($persons, $columns) {
+        $articles = Article::all();
+        foreach ($articles as $article) {
+            $columns[] = 'Anz_' . $article->name;
+        }
+
+        $callback = function () use ($persons, $columns, $articles) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns, ';');
 
             foreach ($persons as $person) {
                 $row['Nachname'] = $person->lastname;
                 $row['Vorname'] = $person->firstname;
-                $row['Email'] = $person->email;
-                $row['Anz_Bier'] = ArticleActionLog::where([
-                    ['person_id', '=', $person->id],
-                    ['article_id', '=', 1],
-                ])->count();
-                $row['Anz_Radler'] = ArticleActionLog::where([
-                    ['person_id', '=', $person->id],
-                    ['article_id', '=', 2],
-                ])->count();
-                $row['Anz_Softdrink'] = ArticleActionLog::where([
-                    ['person_id', '=', $person->id],
-                    ['article_id', '=', 3],
-                ])->count();
-                $row['Anz_Wasser'] = ArticleActionLog::where([
-                    ['person_id', '=', $person->id],
-                    ['article_id', '=', 4],
-                ])->count();
-                $array = [$row['Nachname'], $row['Vorname'], $row['Anz_Bier'], $row['Anz_Radler'], $row['Anz_Softdrink'], $row['Anz_Wasser']];
-                $array = array_map('utf8_decode', $array);
+
+                foreach ($articles as $article) {
+                    $row['Anz_' . $article->name] = ArticleActionLog::where([
+                        ['person_id', '=', $person->id],
+                        ['article_id', '=', $article->id],
+                    ])->count();
+                }
+
+                $array = array_map('utf8_decode', array_values($row));
                 fputcsv($file, $array, ';');
             }
             fclose($file);
