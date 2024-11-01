@@ -1,7 +1,7 @@
 import { createApp, h } from "vue";
 
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import { createInertiaApp } from "@inertiajs/inertia-vue3";
+import { createInertiaApp } from "@inertiajs/vue3";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
     faArrowLeft,
@@ -26,7 +26,7 @@ import VueQrcode from "@chenfengyuan/vue-qrcode";
 import axios from "axios";
 import VueAxios from "vue-axios";
 //import { InertiaProgress } from '@inertiajs/progress'
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 import NProgress from "nprogress";
 
 // fontawesome
@@ -49,8 +49,8 @@ library.add(
     faGlassWater
 );
 
-Inertia.on("start", () => NProgress.start());
-Inertia.on("finish", () => NProgress.done());
+router.on("start", () => NProgress.start());
+router.on("finish", () => NProgress.done());
 
 createInertiaApp({
     resolve: (name) =>
