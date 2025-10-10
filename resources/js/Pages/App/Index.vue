@@ -10,17 +10,20 @@
       <AppButton title="Tutor" bgColor="bg-indigo-500 hover:bg-indigo-700" bgColorActive="bg-indigo-700" :icon="['fas', 'robot']" :active="filter == 'tutor'" @click="filter = 'tutor'"/>
       <AppButton title="Special" bgColor="bg-pink-500 hover:bg-pink-700" bgColorActive="bg-pink-700" :icon="['fas', 'star']" :active="filter == 'special'" @click="filter = 'special'"/>
     </div>
-    <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:col-span-2 md:grid-cols-4 lg:col-span-4"> 
-      <Link
+    <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:col-span-2 md:grid-cols-4 lg:col-span-4">
+      <div
         v-for="person in filteredPersons"
         :key="person.id"
-        :href="'/person/' + person.id + '/'">
+        :href="'/person/' + person.id + '/'"
+        @click="openPinField()"
+        :showPinField="showPinField">
         <PersonCard
           :person="person"
           class="h-full"
         />
-      </Link>
+      </div>
     </div>
+    <PinField v-show="showPinField" v-model="showPinField" />
   </LayoutContainer>
 </template>
 <script>
@@ -30,10 +33,17 @@ import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
 import PersonCard from "../../components/PersonCard.vue";
 import NProgress from 'nprogress';
+import PinField from "@/components/PinField.vue";
 
 export default defineComponent({
   name: "Index",
+    data: function() {
+      return {
+        showPinField: false,
+      }
+    },
   components: {
+      PinField,
     AppButton,
     LayoutContainer,
     Link,
@@ -45,6 +55,14 @@ export default defineComponent({
       required: true,
     },
   },
+  methods:{
+    openPinField(){
+        this.showPinField = true;
+        setTimeout(()=>{
+            this.showPinField = false;
+        }, 30000);
+    }
+  },
   setup(props) {
     var filter = ref("all");
 
@@ -52,7 +70,7 @@ export default defineComponent({
       console.log(filter, prevFilter);
       NProgress.start();
     })
-    
+
     var filteredPersons = computed(() => {
       if (filter.value === "all") {
         const tmp = props.persons;
