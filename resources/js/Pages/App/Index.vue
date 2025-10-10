@@ -71,14 +71,19 @@
         <div
             class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:col-span-2 md:grid-cols-4 lg:col-span-4"
         >
-            <Link
+            <div
                 v-for="person in filteredPersons"
                 :key="person.id"
                 :href="'/person/' + person.id + '/'"
-            >
-                <PersonCard :person="person" class="h-full" />
-            </Link>
+                @click="openPinField()"
+                :showPinField="showPinField">
+                <PersonCard
+                    :person="person"
+                    class="h-full"
+                />
+            </div>
         </div>
+        <PinField v-show="showPinField" v-model="showPinField" />
     </LayoutContainer>
 </template>
 <script>
@@ -87,24 +92,39 @@ import { Link } from "@inertiajs/vue3";
 import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
 import PersonCard from "../../components/PersonCard.vue";
-import NProgress from "nprogress";
+import NProgress from 'nprogress';
+import PinField from "@/components/PinField.vue";
 
 export default defineComponent({
-    name: "Index",
-    components: {
-        AppButton,
-        LayoutContainer,
-        Link,
-        PersonCard,
+  name: "Index",
+    data: function() {
+      return {
+        showPinField: false,
+      }
     },
-    props: {
-        persons: {
-            type: Array,
-            required: true,
-        },
+  components: {
+      PinField,
+    AppButton,
+    LayoutContainer,
+    Link,
+    PersonCard,
+  },
+  props: {
+    persons: {
+      type: Array,
+      required: true,
     },
-    setup(props) {
-        var filter = ref("all");
+  },
+  methods:{
+    openPinField(){
+        this.showPinField = true;
+        setTimeout(()=>{
+            this.showPinField = false;
+        }, 30000);
+    }
+  },
+  setup(props) {
+    var filter = ref("all");
 
         watch(filter, (filter, prevFilter) => {
             console.log(filter, prevFilter);
@@ -147,3 +167,5 @@ export default defineComponent({
 </script>
 
 <style></style>
+
+</style>

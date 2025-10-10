@@ -13,5 +13,8 @@ declare module 'vue' {
     PersonAvatar: typeof import('./../components/PersonAvatar.vue')['default']
     PersonBadge: typeof import('./../components/PersonBadge.vue')['default']
     PersonCard: typeof import('./../components/PersonCard.vue')['default']
+    PinField: typeof import('./../components/PinField.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
   }
 }
