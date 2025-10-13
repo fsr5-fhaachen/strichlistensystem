@@ -26,13 +26,13 @@ class ArticleSeeder extends Seeder
             'max_order_amount' => 8,
         ],
         [
-            'name' => 'Softdrinks',
+            'name' => 'Cola',
             'icon' => 'wine-bottle',
             'show_order' => 3,
             'max_order_amount' => 8,
         ],
         [
-            'name' => 'Fassbrause',
+            'name' => 'Spezi',
             'icon' => 'glass-water',
             'show_order' => 4,
             'max_order_amount' => 8,
@@ -41,7 +41,13 @@ class ArticleSeeder extends Seeder
             'name' => 'Wasser',
             'icon' => 'faucet',
             'show_order' => 5,
-            'max_order_amount' => 8,
+            'max_order_amount' => 2,
+        ],
+        [
+            'name' => 'Barcardi',
+            'icon' => 'faucet',
+            'show_order' => 6,
+            'max_order_amount' => 1,
         ],
     ];
 
