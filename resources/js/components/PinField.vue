@@ -1,38 +1,44 @@
 <script setup>
-    const props = defineProps({
-        showPinField: {
-            type: Boolean,
-            required: true
+    import { ref } from "vue";
+    const pin = ref("");
+    const pinSymbol = ref("");
+
+    function addNumber(number) {
+        pin.value = pin.value + number;
+        pinSymbol.value = pinSymbol.value +  "*";
+
+        if(pin.value.length >= 4) {
+
         }
-    })
+    }
 </script>
 
 <template>
     <div class="backGround">
         <div class="pinField">
             <div class="row">
-                <div class="number">1</div>
-                <div class="number">2</div>
-                <div class="number">3</div>
+                <div class="number" @click="addNumber(1)">1</div>
+                <div class="number" @click="addNumber(2)">2</div>
+                <div class="number" @click="addNumber(3)">3</div>
             </div>
             <div class="row">
-                <div class="number">4</div>
-                <div class="number">5</div>
-                <div class="number">6</div>
+                <div class="number" @click="addNumber(4)">4</div>
+                <div class="number" @click="addNumber(5)">5</div>
+                <div class="number" @click="addNumber(6)">6</div>
             </div>
             <div class="row">
-                <div class="number">7</div>
-                <div class="number">8</div>
-                <div class="number">9</div>
+                <div class="number" @click="addNumber(7)">7</div>
+                <div class="number" @click="addNumber(8)">8</div>
+                <div class="number" @click="addNumber(9)">9</div>
             </div>
             <div class="row">
-                <div class="number">0</div>
+                <div class="number" @click="addNumber(0)">0</div>
             </div>
             <div class="row">
-                <div class="number"></div>
-                <div class="number"></div>
-                <div class="number"></div>
-                <div class="number"></div>
+                <div class="number">{{pinSymbol[0]}}</div>
+                <div class="number">{{pinSymbol[1]}}</div>
+                <div class="number">{{pinSymbol[2]}}</div>
+                <div class="number">{{pinSymbol[3]}}</div>
             </div>
             <div class="row">
             </div>
