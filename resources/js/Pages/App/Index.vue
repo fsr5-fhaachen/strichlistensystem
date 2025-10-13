@@ -15,8 +15,7 @@
         v-for="person in filteredPersons"
         :key="person.id"
         :href="'/person/' + person.id + '/'"
-        @click="openPinField()"
-        :showPinField="showPinField">
+        @click="openPinField()">
         <PersonCard
           :person="person"
           class="h-full"
