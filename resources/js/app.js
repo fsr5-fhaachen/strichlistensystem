@@ -28,6 +28,7 @@ import VueAxios from "vue-axios";
 //import { InertiaProgress } from '@inertiajs/progress'
 import { Inertia } from "@inertiajs/inertia";
 import NProgress from "nprogress";
+import router from "./router";
 
 // fontawesome
 library.add(
@@ -61,6 +62,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(router)
             .use(VueAxios, axios)
             .component("font-awesome-icon", FontAwesomeIcon)
             .component(VueQrcode.name, VueQrcode);

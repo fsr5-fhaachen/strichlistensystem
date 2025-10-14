@@ -1,5 +1,6 @@
 <script setup>
     import { ref } from "vue";
+
     const pin = ref("");
     const pinSymbol = ref("");
 
@@ -8,7 +9,7 @@
         pinSymbol.value = pinSymbol.value +  "*";
 
         if(pin.value.length >= 4) {
-
+            this.$router.push("/person/0");
         }
     }
 </script>
