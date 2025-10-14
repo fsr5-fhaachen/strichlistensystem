@@ -1,16 +1,47 @@
 <script setup>
     import { ref } from "vue";
+    import axios from "axios";
+    import Cookies from "js-cookie";
 
     const pin = ref("");
     const pinSymbol = ref("");
 
     function addNumber(number) {
-        pin.value = pin.value + number;
-        pinSymbol.value = pinSymbol.value +  "*";
+        if(pin.value.length !== 4) {
+            pin.value = pin.value + number;
+            pinSymbol.value = pinSymbol.value + "*";
+        }
 
         if(pin.value.length >= 4) {
-            this.$router.push("/person/0");
+            validatePin();
         }
+    }
+
+    function validatePin() {
+        axios.post("/checkPin", {
+            pin: pin.value,
+            user: 0
+        })
+            .then(response => {
+                switch (response.status){
+                    case 200:
+                        Cookies.set("token", response.data.token);
+                        window.location.href= "/person/0";
+                        break;
+                }
+            })
+            .catch(error => {
+                switch (error.response.status){
+                    case 401:
+                        pin.value = "";
+                        pinSymbol.value = "";
+                        alert("Wrong PIN");
+                        break;
+                    default:
+                        alert("An error occurred. Please try again.");
+                        break;
+                }
+            });
     }
 </script>
 
