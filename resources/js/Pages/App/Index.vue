@@ -116,10 +116,12 @@ export default defineComponent({
     },
   },
   methods:{
-    openPinField(){
+    openPinField(id){
+        this.selectedPerson = id;
         this.showPinField = true;
         setTimeout(()=>{
             this.showPinField = false;
+            this.selectedPerson = null;
         }, 30000);
     }
   },
@@ -166,6 +168,6 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style>
 
 </style>
