@@ -26,7 +26,7 @@
     function validatePin() {
         axios.post("/checkPin", {
             pin: pin.value,
-            user: 0
+            user: props.id
         })
             .then(response => {
                 switch (response.status){
