@@ -16,7 +16,10 @@ class CheckPin
         $id = $request->input('user');
         $pin = $request->input('pin');
 
-        $person = Person::findOrFail($id)->where('pin', $pin)->first();
+        $person = Person::findOrFail(1)
+            ->where('pin', $pin)
+            ->where('id', $id)
+            ->first();
 
         if(!$person)
             return response()->json(['status' => 'error', 'message' => 'Invalid PIN'], 401);
