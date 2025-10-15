@@ -15,14 +15,14 @@
         v-for="person in filteredPersons"
         :key="person.id"
         :href="'/person/' + person.id + '/'"
-        @click="openPinField()">
+        @click="openPinField(person.id)">
         <PersonCard
           :person="person"
           class="h-full"
         />
       </div>
     </div>
-    <PinField v-show="showPinField" v-model="showPinField" />
+    <PinField :id="selectedPerson" v-show="showPinField" v-model="showPinField" />
   </LayoutContainer>
 </template>
 <script>
@@ -39,6 +39,7 @@ export default defineComponent({
     data: function() {
       return {
         showPinField: false,
+        selectedPerson: null
       }
     },
   components: {
@@ -55,10 +56,12 @@ export default defineComponent({
     },
   },
   methods:{
-    openPinField(){
+    openPinField(id){
+        this.selectedPerson = id;
         this.showPinField = true;
         setTimeout(()=>{
             this.showPinField = false;
+            this.selectedPerson = null;
         }, 30000);
     }
   },
