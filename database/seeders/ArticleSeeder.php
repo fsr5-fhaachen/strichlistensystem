@@ -44,7 +44,7 @@ class ArticleSeeder extends Seeder
             'max_order_amount' => 2,
         ],
         [
-            'name' => 'Barcardi',
+            'name' => 'Bacardi',
             'icon' => 'faucet',
             'show_order' => 6,
             'max_order_amount' => 1,
