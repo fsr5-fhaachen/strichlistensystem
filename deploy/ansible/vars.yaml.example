@@ -1,0 +1,27 @@
+strichlistensystem_repo_url: "https://github.com/fsr5-fhaachen/strichlistensystem.git"
+strichlistensystem_local_path: "/opt/strichlistensystem"
+strichlistensystem_branch_or_tag: "main"
+strichlistensystem_seed_database: false
+
+octane_workers: 2
+octane_max_requests: 512
+
+php_version: "8.4"
+node_version: "24.10.0"
+
+redis_password: "strichlistensystem"
+db_name: "strichlistensystem"
+db_user: "strichlistensystem"
+db_password: "strichlistensystem"
+
+letsencrypt_email: "your-mail@example.com"
+
+env_app_name: "Your Event Name"
+env_app_key: "base64:your-app-key"
+env_app_debug: false
+env_app_public_url: "https://strichliste.fsr5.de"
+env_app_is_vpn: true
+env_app_portals_url: "https://portals.fsr5.de"
+env_app_portals_api_secret: "your-api-secret"
+env_app_portals_import_pw: "your-password"
+env_app_csv_export_pw: "your-password"
