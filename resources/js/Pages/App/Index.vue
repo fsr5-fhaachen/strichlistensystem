@@ -22,7 +22,7 @@
         />
       </div>
     </div>
-    <PinField :id="selectedPerson" v-show="showPinField" v-model="showPinField" />
+    <PinField :id="selectedPerson" v-show="showPinField" v-model="showPinField" @closePinFieldEarly="showPinField = false" />
   </LayoutContainer>
 </template>
 <script>

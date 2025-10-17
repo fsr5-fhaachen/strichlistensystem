@@ -14,6 +14,8 @@
         }
     });
 
+    const emit = defineEmits(['closePinFieldEarly']);
+
     function addNumber(number) {
         pin.value = pin.value + number;
         pinSymbol.value = pinSymbol.value + "*";
@@ -44,10 +46,18 @@
                 inputEnabled.value = true;
             });
     }
+
+    function closeEarly(){
+        pin.value = "";
+        pinSymbol.value = "";
+        inputEnabled.value = true;
+        isShaking.value = false;
+        emit('closePinFieldEarly');
+    }
 </script>
 
 <template>
-    <div class="backGround">
+    <div @click="closeEarly" class="backGround">
         <div class="pinField" :class="{shake: isShaking}">
             <div class="row">
                 <div class="number" @click="inputEnabled && addNumber(1)">1</div>
