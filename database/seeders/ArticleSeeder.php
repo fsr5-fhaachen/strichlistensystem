@@ -45,7 +45,7 @@ class ArticleSeeder extends Seeder
         ],
         [
             'name' => 'Bacardi',
-            'icon' => 'faucet',
+            'icon' => 'cocktail',
             'show_order' => 6,
             'max_order_amount' => 1,
         ],
