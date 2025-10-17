@@ -20,6 +20,7 @@ import {
     faWineBottle,
     faBriefcase,
     faGlassWater,
+    faCocktail,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
@@ -46,7 +47,8 @@ library.add(
     faUsers,
     faWineBottle,
     faBriefcase,
-    faGlassWater
+    faGlassWater,
+    faCocktail
 );
 
 router.on("start", () => NProgress.start());
