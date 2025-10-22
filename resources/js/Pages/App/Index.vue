@@ -22,7 +22,19 @@
         />
       </div>
     </div>
-    <PinField :id="selectedPerson" v-show="showPinField" v-model="showPinField" @closePinFieldEarly="showPinField = false" />
+    <PinField :id="selectedPerson"
+              v-show="showPinField"
+              v-model="showPinField"
+              @closePinFieldEarly="showPinField = false"
+              @redirectToUser="redirect(selectedPerson)"
+              @newPinRequired="showNewPinField = true; showPinField= false"
+    />
+    <NewPinField
+        :id="selectedPerson"
+        v-show="showNewPinField"
+        v-model="showNewPinField"
+        @closeNewPinFieldEarly="showNewPinField = false"
+    />
   </LayoutContainer>
 </template>
 <script>
@@ -33,16 +45,19 @@ import LayoutContainer from "../../components/LayoutContainer.vue";
 import PersonCard from "../../components/PersonCard.vue";
 import NProgress from 'nprogress';
 import PinField from "@/components/PinField.vue";
+import NewPinField from "@/components/newPinField.vue";
 
 export default defineComponent({
   name: "Index",
     data: function() {
       return {
         showPinField: false,
+        showNewPinField: false,
         selectedPerson: null
       }
     },
   components: {
+      NewPinField,
       PinField,
     AppButton,
     LayoutContainer,
@@ -63,6 +78,10 @@ export default defineComponent({
             this.showPinField = false;
             this.selectedPerson = null;
         }, 30000);
+    },
+    redirect(id){
+        window.location.href = '/person/' + id ;
+
     }
   },
   setup(props) {
