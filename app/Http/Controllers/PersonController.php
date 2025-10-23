@@ -153,4 +153,26 @@ class PersonController extends Controller
 
         return Redirect::route('person.show', ['id' => $id]);
     }
+
+    public function setPin(Request $request): JsonResponse
+    {
+        $id = $request->input('id') ?? null;
+        $token = $request->input('token') ?? null;
+        $pin = $request->input('pin') ?? null;
+
+        if ($id === null || $token === null || $pin === null) {
+            return response()->json(['status' => 'error', 'message' => 'invalid parameters'], 400);
+        }
+
+        $person = Person::findOrFail($id);
+
+        if ($person->auth_token != $token) {
+            return response()->json(['status' => 'error', 'message' => 'no permission'], 403);
+        }
+
+        $person->pin = $pin;
+        $person->first_time_login = false;
+        $person->save();
+        return response()->json(['status' => 'success'], 200);
+    }
 }

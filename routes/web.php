@@ -36,3 +36,4 @@ Route::get('/exportcsv/{password}', [ExportController::class, 'exportCsv']);
 Route::get('/importusers/{password}', [PortalsController::class, 'importUsers']);
 
 Route::post('/checkPin', [CheckPin::class, 'handle']);
+Route::post('/setPin', [PersonController::class, 'setPin']);

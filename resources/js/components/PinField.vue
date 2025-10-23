@@ -41,8 +41,8 @@ function validatePin(completePin) {
 
 <template>
     <PinInput :id="props.id"
-              :isShaking="isShaking"
               :clearPinTask="clearPin"
+              :clearPinType="'error'"
               @pinComplete="validatePin"
               @closeEarly="emit('closePinFieldEarly')"
               @pinCleared="clearPin = false"

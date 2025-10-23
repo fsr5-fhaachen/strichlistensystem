@@ -8,16 +8,22 @@ const emit = defineEmits(['pinComplete',"pinCleared"]);
 const isShaking = ref(false);
 const props = defineProps({
     clearPinTask:{
-        type: Boolean || false,
-        required: false
+        type: Boolean,
+        required: true
+    },
+    clearPinType: {
+        type: String,
+        required: true
     }
 });
 
 watch(() => props.clearPinTask, () => {
     pin.value = "";
     pinSymbol.value = "";
-    isShaking.value = true;
-    setTimeout(() => isShaking.value = false, 400)
+    if (props.clearPinType === "error") {
+        isShaking.value = true;
+        setTimeout(() => isShaking.value = false, 400);
+    }
     inputEnabled.value = true;
     emit('pinCleared');
 });

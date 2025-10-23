@@ -34,6 +34,7 @@
         v-show="showNewPinField"
         v-model="showNewPinField"
         @closeNewPinFieldEarly="showNewPinField = false"
+        @redirectToUser="redirect(selectedPerson)"
     />
   </LayoutContainer>
 </template>
