@@ -45,8 +45,8 @@ import AppButton from "../../components/AppButton.vue";
 import LayoutContainer from "../../components/LayoutContainer.vue";
 import PersonCard from "../../components/PersonCard.vue";
 import NProgress from 'nprogress';
-import PinField from "@/components/PinField.vue";
-import NewPinField from "@/components/newPinField.vue";
+import PinField from "../../components/PinField.vue";
+import NewPinField from "../../components/NewPinField.vue";
 
 export default defineComponent({
   name: "Index",
