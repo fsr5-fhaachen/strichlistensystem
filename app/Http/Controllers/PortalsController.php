@@ -94,6 +94,7 @@ class PortalsController extends Controller
             $person->firstname = $user['firstname'];
             $person->lastname = $user['lastname'];
             $person->email = $user['email'];
+            $person->pin = $user['matrikelNr'];
 
             // check if course is set
             if (isset($user['course'])) {
