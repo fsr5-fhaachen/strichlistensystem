@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('persons', function (Blueprint $table) {
-            $table->boolean('first_time_login')
+            $table->boolean('pin_change_required')
                 ->default(true)
                 ->after('is_active')
                 ->nullable(false);
@@ -24,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('persons', function (Blueprint $table) {
+            $table->dropColumn('pin_change_required');
+        });
     }
 };
