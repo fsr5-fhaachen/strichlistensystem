@@ -31,6 +31,10 @@ function validatePin(completePin) {
                 id: props.id,
                 pin: pins.value[0],
                 token: Cookies.get("token")
+            },{
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`
+                }
             })
                 .then(response => {
                     switch (response.status){

@@ -157,7 +157,7 @@ class PersonController extends Controller
     public function setPin(Request $request): JsonResponse
     {
         $id = $request->input('id') ?? null;
-        $token = $request->input('token') ?? null;
+        $token = $request->bearerToken() ?? null;
         $pin = $request->input('pin') ?? null;
 
         if ($id === null || $token === null || $pin === null) {

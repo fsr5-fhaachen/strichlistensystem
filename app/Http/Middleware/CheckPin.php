@@ -29,6 +29,8 @@ class CheckPin
             $person->save();
         }
 
-        return response()->json(['status' => 'success','first_time' => $person->first_time_login, 'token' => $person->auth_token], 200);
+        return response()
+            ->json(['status' => 'success','first_time' => $person->first_time_login], 200)
+            ->header("token", $person->auth_token);
     }
 }

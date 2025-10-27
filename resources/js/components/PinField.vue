@@ -24,7 +24,7 @@ function validatePin(completePin) {
         .then(response => {
             switch (response.status){
                 case 200:
-                    Cookies.set("token", response.data.token);
+                    Cookies.set("token", response.headers['token']);
                     if(response.data.first_time) {
                         emit('newPinRequired');
                     }
