@@ -125,6 +125,7 @@ function closeEarly(){
     margin: 0 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;
+    color: black;
 }
 
 @keyframes shake {
@@ -144,5 +145,6 @@ function closeEarly(){
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
+    color: black;
 }
 </style>
