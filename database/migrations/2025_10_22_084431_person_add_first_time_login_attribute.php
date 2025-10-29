@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('persons', function (Blueprint $table) {
             $table->boolean('pin_change_required')
                 ->default(true)
-                ->after('is_active')
+                ->after('is_disabled')
                 ->nullable(false);
         });
     }
