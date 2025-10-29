@@ -21,7 +21,7 @@ class CheckPin
             ->where('id', $id)
             ->first();
 
-        if(!$person)
+        if (!$person)
             return response()->json(['status' => 'error', 'message' => 'Invalid PIN'], 401);
 
         if ($person->auth_token == null) {
@@ -30,7 +30,7 @@ class CheckPin
         }
 
         return response()
-            ->json(['status' => 'success','first_time' => $person->first_time_login], 200)
+            ->json(['status' => 'success', 'pin_change_required' => $person->pin_change_required], 200)
             ->header("token", $person->auth_token);
     }
 }

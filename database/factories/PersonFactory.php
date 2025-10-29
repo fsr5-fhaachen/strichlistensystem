@@ -22,6 +22,8 @@ class PersonFactory extends Factory
             'is_tutor' => $this->faker->boolean(10), // 10% Chance
             'is_special' => $this->faker->boolean(5), // 5% Chance
             'is_disabled' => $this->faker->boolean(2), // 2% Chance
+            'pin' => 9999,
+            'pin_change_required' => true,
         ];
     }
 }

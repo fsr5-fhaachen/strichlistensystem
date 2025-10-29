@@ -10,44 +10,49 @@ const clearPin = ref(false);
 const props = defineProps({
     id: {
         type: Number || null,
-        required: true
-    }
+        required: true,
+    },
 });
 
-const emit = defineEmits(['closePinFieldEarly','newPinRequired','redirectToUser']);
+const emit = defineEmits([
+    "closePinFieldEarly",
+    "newPinRequired",
+    "redirectToUser",
+]);
 
 function validatePin(completePin) {
-    axios.post("/checkPin", {
-        pin: completePin,
-        user: props.id
-    })
-        .then(response => {
-            switch (response.status){
+    axios
+        .post("/checkPin", {
+            pin: completePin,
+            user: props.id,
+        })
+        .then((response) => {
+            switch (response.status) {
                 case 200:
-                    Cookies.set("token", response.headers['token']);
-                    if(response.data.first_time) {
-                        emit('newPinRequired');
-                    }
-                    else{
-                        emit('redirectToUser');
+                    Cookies.set("token", response.headers["token"]);
+                    if (response.data.pin_change_required) {
+                        emit("newPinRequired");
+                    } else {
+                        emit("redirectToUser");
                     }
             }
         })
-        .catch(error => {
+        .catch((error) => {
             clearPin.value = true;
         });
 }
 </script>
 
 <template>
-    <PinInput :id="props.id"
-              :clearPinTask="clearPin"
-              :clearPinType="'error'"
-              @pinComplete="validatePin"
-              @closeEarly="emit('closePinFieldEarly')"
-              @pinCleared="clearPin = false"
-    >Pin eingeben</PinInput>
+    <PinInput
+        :id="props.id"
+        :clearPinTask="clearPin"
+        :clearPinType="'error'"
+        @pinComplete="validatePin"
+        @closeEarly="emit('closePinFieldEarly')"
+        @pinCleared="clearPin = false"
+        >Pin eingeben</PinInput
+    >
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

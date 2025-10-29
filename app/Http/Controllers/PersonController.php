@@ -28,7 +28,7 @@ class PersonController extends Controller
 
         if ($person->id != $authTokenPerson->id) {
             if ($enableLog) {
-                Telegram::warning('Try to access "*'.$person->fullname.'*"\'s (ID: `'.$person->id.'`) page with an invalid auth token', $request, $authTokenPerson);
+                Telegram::warning('Try to access "*' . $person->fullname . '*"\'s (ID: `' . $person->id . '`) page with an invalid auth token', $request, $authTokenPerson);
             }
 
             return Redirect::route('error');
@@ -77,14 +77,14 @@ class PersonController extends Controller
             $person->buyArticle($article, $request->ip());
         }
 
-        Telegram::info('Bought the article "*'.$article->name.'*" ('.$amount.'x) (ID: `'.$article->id.'`)', $request, $person);
+        Telegram::info('Bought the article "*' . $article->name . '*" (' . $amount . 'x) (ID: `' . $article->id . '`)', $request, $person);
 
         $count = ArticleActionLog::where('person_id', $person->id)
             ->where('created_at', '>=', now()->subMinutes(5))
             ->count();
 
         if ($count >= 6) {
-            Telegram::warning('Bought *'.$count.'* articles in the last 5 minutes', $request, $person);
+            Telegram::warning('Bought *' . $count . '* articles in the last 5 minutes', $request, $person);
         }
 
         return Redirect::route('person.show', ['id' => $id]);
@@ -105,14 +105,14 @@ class PersonController extends Controller
         if ($person->id == $articleActionLog->person_id) {
             $person->cancelArticle($articleActionLog);
 
-            Telegram::info('Cancel the article "*'.$articleActionLog->article->name.'*" (ID: `'.$articleActionLog->article->id.'`). Bought at "'.$articleActionLog->created_at.'" and canceld at "'.$articleActionLog->deleted_at.'". Could have cancelled by "'.$articleActionLog->cancelUntil.'" (ID: `'.$articleActionLog->id.'`)', $request, $person);
+            Telegram::info('Cancel the article "*' . $articleActionLog->article->name . '*" (ID: `' . $articleActionLog->article->id . '`). Bought at "' . $articleActionLog->created_at . '" and canceld at "' . $articleActionLog->deleted_at . '". Could have cancelled by "' . $articleActionLog->cancelUntil . '" (ID: `' . $articleActionLog->id . '`)', $request, $person);
 
             $count = ArticleActionLog::withTrashed()->where('person_id', $person->id)
                 ->where('deleted_at', '>=', now()->subMinutes(5))
                 ->count();
 
             if ($count >= 3) {
-                Telegram::warning('Cancel *'.$count.'* articles in the last 5 minutes', $request, $person);
+                Telegram::warning('Cancel *' . $count . '* articles in the last 5 minutes', $request, $person);
             }
         }
 
@@ -129,7 +129,7 @@ class PersonController extends Controller
             return $this->validateAuthToken($request, $person, false);
         }
 
-        Telegram::info('Generate an auth link for "*'.$person->fullname.'*" (ID: `'.$person->id.'`)', $request, $person);
+        Telegram::info('Generate an auth link for "*' . $person->fullname . '*" (ID: `' . $person->id . '`)', $request, $person);
 
         return response()->json([
             'authLink' => $person->createAuthLink(),
@@ -149,7 +149,7 @@ class PersonController extends Controller
 
         $request->session()->put('authToken', $person->auth_token);
 
-        Telegram::info('Auth "*'.$person->fullname.'*" (ID: `'.$person->id.'`)', $request, $person);
+        Telegram::info('Auth "*' . $person->fullname . '*" (ID: `' . $person->id . '`)', $request, $person);
 
         return Redirect::route('person.show', ['id' => $id]);
     }
@@ -171,7 +171,7 @@ class PersonController extends Controller
         }
 
         $person->pin = $pin;
-        $person->first_time_login = false;
+        $person->pin_change_required = false;
         $person->save();
         return response()->json(['status' => 'success'], 200);
     }
