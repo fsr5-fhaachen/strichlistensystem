@@ -29,6 +29,10 @@ function validatePin(completePin) {
         .then((response) => {
             switch (response.status) {
                 case 200:
+                    // Set token from response as cookie
+                    if (response.data.token) {
+                        Cookies.set("token", response.data.token, { expires: 7 });
+                    }
                     if (response.data.pin_change_required) {
                         emit("newPinRequired");
                     } else {
