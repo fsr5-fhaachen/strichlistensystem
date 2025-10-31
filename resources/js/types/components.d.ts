@@ -16,7 +16,5 @@ declare module 'vue' {
     PersonCard: typeof import('./../components/PersonCard.vue')['default']
     PinField: typeof import('./../components/PinField.vue')['default']
     PinInput: typeof import('./../components/PinInput.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
   }
 }

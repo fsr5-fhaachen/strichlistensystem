@@ -2,6 +2,9 @@ version: '3'
 services:
   web:
     image: ghcr.io/fsr5-fhaachen/strichlistensystem:latest
+    build:
+        context: .
+        dockerfile: Dockerfile
     container_name: strichlistensystem-web
     restart: unless-stopped
     depends_on:
@@ -23,6 +26,7 @@ services:
       OCTANE_MAX_REQUESTS: '${OCTANE_MAX_REQUESTS}'
       LOG_CHANNEL: '${LOG_CHANNEL}'
       LOG_LEVEL: '${LOG_LEVEL}'
+      APP_IS_VPN: '${APP_IS_VPN}'
       DB_CONNECTION: mysql
       DB_HOST: mariadb
       DB_PORT: 3306

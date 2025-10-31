@@ -29,7 +29,12 @@ function validatePin(completePin) {
         .then((response) => {
             switch (response.status) {
                 case 200:
-                    Cookies.set("token", response.headers["token"]);
+                    // Cookie is now set by backend via Set-Cookie header
+                    // No need to set it manually from frontend
+                    console.log('CheckPin Success - Cookie should be set by backend');
+                    console.log('Response token:', response.data.token);
+                    console.log('All cookies:', document.cookie);
+
                     if (response.data.pin_change_required) {
                         emit("newPinRequired");
                     } else {
@@ -56,3 +61,4 @@ function validatePin(completePin) {
 </template>
 
 <style scoped></style>
+

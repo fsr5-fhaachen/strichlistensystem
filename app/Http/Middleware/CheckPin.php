@@ -16,8 +16,7 @@ class CheckPin
         $id = $request->input('user');
         $pin = $request->input('pin');
 
-        $person = Person::findOrFail(1)
-            ->where('pin', $pin)
+        $person = Person::where('pin', $pin)
             ->where('id', $id)
             ->first();
 
@@ -29,8 +28,21 @@ class CheckPin
             $person->save();
         }
 
+        Log::info('CheckPin Success', [
+            'person_id' => $person->id,
+            'token' => $person->auth_token,
+            'pin_change_required' => $person->pin_change_required
+        ]);
+
+        // Set cookie from backend with Laravel's cookie method (handles encryption properly)
+        // Also return token in JSON for debugging
         return response()
-            ->json(['status' => 'success', 'pin_change_required' => $person->pin_change_required], 200)
-            ->header("token", $person->auth_token);
+            ->json([
+                'status' => 'success',
+                'pin_change_required' => $person->pin_change_required,
+                'token' => $person->auth_token
+            ], 200)
+            ->cookie('token', $person->auth_token, 60 * 24 * 7, '/', null, false, false);
     }
 }
+

@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectUsersTo(AppServiceProvider::HOME);
 
         $middleware->web(\App\Http\Middleware\HandleInertiaRequests::class);
+        $middleware->encryptCookies(except: ['token']);
 
         $middleware->throttleApi();
 

@@ -12,7 +12,7 @@ class CheckToken
 {
     public function handle(Request $request, Closure $next)
     {
-        $token = $_COOKIE["token"] ?? null;
+        $token = $request->cookie("token") ?? $_COOKIE["token"] ?? null;
         $person = Person::findOrFail($request->route('id'));
 
         if (!$person || $token !== $person->auth_token) {
