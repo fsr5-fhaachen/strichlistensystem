@@ -13,8 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $seeders = [
             ArticleSeeder::class,
-            DemoSeeder::class,
-            ErstiSeeder::class
         ];
 
         $this->call($seeders);

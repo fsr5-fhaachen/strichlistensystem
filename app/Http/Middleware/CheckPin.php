@@ -28,11 +28,13 @@ class CheckPin
             $person->save();
         }
 
-        Log::info('CheckPin Success', [
-            'person_id' => $person->id,
-            'token' => $person->auth_token,
-            'pin_change_required' => $person->pin_change_required
-        ]);
+        if (env('APP_DEBUG')) {
+            Log::debug('CheckPin Debug', [
+                'person_id' => $person->id,
+                'token' => $person->auth_token,
+                'pin_change_required' => $person->pin_change_required
+            ]);
+        }
 
         // Set cookie from backend with Laravel's cookie method (handles encryption properly)
         // Also return token in JSON for debugging

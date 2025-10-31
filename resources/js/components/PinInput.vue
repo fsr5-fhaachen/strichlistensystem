@@ -38,7 +38,7 @@ function addNumber(number) {
 }
 
 function closeEarly(){
-    props.pin = "";
+    pin.value = "";
     pinSymbol.value = "";
     inputEnabled.value = true;
     emit('closeEarly');
