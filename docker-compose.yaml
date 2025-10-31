@@ -59,8 +59,10 @@ services:
     image: mariadb
     container_name: strichlistensystem-mariadb
     restart: unless-stopped
-#    ports:
-#      - "3306:3306"
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
     environment:
       MARIADB_DATABASE: strichlistensystem
       MARIADB_ROOT_PASSWORD: secret-root-password
