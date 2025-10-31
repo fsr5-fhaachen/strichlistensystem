@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(AppServiceProvider::HOME);
 
+        $middleware->encryptCookies(except: [
+            'token',
+        ]);
         $middleware->web(\App\Http\Middleware\HandleInertiaRequests::class);
 
         $middleware->throttleApi();
@@ -26,7 +29,13 @@ return Application::configure(basePath: dirname(__DIR__))
             'vpn' => \App\Http\Middleware\Vpn::class,
             'vpn.or.person' => \App\Http\Middleware\VpnOrPerson::class,
         ]);
+
+        $middleware->validateCsrfTokens(except: [
+            '/checkPin',
+            '/setPin',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
+

@@ -6,7 +6,7 @@ FROM node:20-alpine AS node
 WORKDIR /app
 
 # install dependencies (only copy package lock here to use docker caching)
-COPY ["package.json", "package-lock.json", "./"] 
+COPY ["package.json", "package-lock.json", "./"]
 RUN npm install
 
 # copy project data
@@ -49,6 +49,7 @@ COPY ["./database", "./database"]
 COPY ["./public", "./public"]
 COPY ["./resources/css", "./resources/css"]
 COPY ["./resources/views", "./resources/views"]
+COPY ["./resources/img_import", "./resources/img_import"]
 COPY ["./routes", "./routes"]
 COPY ["./storage", "./storage"]
 

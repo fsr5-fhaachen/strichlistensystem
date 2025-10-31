@@ -10,8 +10,11 @@ declare module 'vue' {
     AppButton: typeof import('./../components/AppButton.vue')['default']
     ArticleCard: typeof import('./../components/ArticleCard.vue')['default']
     LayoutContainer: typeof import('./../components/LayoutContainer.vue')['default']
+    NewPinField: typeof import('./../components/NewPinField.vue')['default']
     PersonAvatar: typeof import('./../components/PersonAvatar.vue')['default']
     PersonBadge: typeof import('./../components/PersonBadge.vue')['default']
     PersonCard: typeof import('./../components/PersonCard.vue')['default']
+    PinField: typeof import('./../components/PinField.vue')['default']
+    PinInput: typeof import('./../components/PinInput.vue')['default']
   }
 }

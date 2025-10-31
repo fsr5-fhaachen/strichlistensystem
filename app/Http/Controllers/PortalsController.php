@@ -36,9 +36,9 @@ class PortalsController extends Controller
         // build url
         $url = '';
         if (str_ends_with(env('APP_PORTALS_URL'), '/')) {
-            $url = env('APP_PORTALS_URL').'api/v1/users';
+            $url = env('APP_PORTALS_URL') . 'api/v1/users';
         } else {
-            $url = env('APP_PORTALS_URL').'/api/v1/users';
+            $url = env('APP_PORTALS_URL') . '/api/v1/users';
         }
 
         // call APP_PORTALS_URL
@@ -83,17 +83,18 @@ class PortalsController extends Controller
                 // this could be a problem if the id is/was used by a another person that was created/imported before
                 // because we handle the complete user management via portals import and do not manage persons manually here, this is not a problem
                 $person->id = $user['id'];
-                array_push($addedUsers, $user['id'].' ('.$user['email'].')');
+                array_push($addedUsers, $user['id'] . ' (' . $user['email'] . ')');
             } else {
                 if ($person->email == $user['email']) {
-                    array_push($updatedUsers, $person->id.' ('.$person->email.')');
+                    array_push($updatedUsers, $person->id . ' (' . $person->email . ')');
                 } else {
-                    array_push($updatedUsers, $person->id.' ('.$person->email.' - '.$user['email'].')');
+                    array_push($updatedUsers, $person->id . ' (' . $person->email . ' - ' . $user['email'] . ')');
                 }
             }
             $person->firstname = $user['firstname'];
             $person->lastname = $user['lastname'];
             $person->email = $user['email'];
+            $person->pin = $user['pin'];
 
             // check if course is set
             if (isset($user['course'])) {
@@ -105,9 +106,9 @@ class PortalsController extends Controller
                         $abbreviation = 'ET';
                     } elseif ($abbreviation == 'ET-MASTER') {
                         $abbreviation = 'ET';
-                    } elseif($abbreviation == 'IS-MASTER' ) {
+                    } elseif ($abbreviation == 'IS-MASTER') {
                         $abbreviation = 'WI';
-                    } elseif($abbreviation == 'ISE-MASTER' || $abbreviation == 'INF-MASTER') {
+                    } elseif ($abbreviation == 'ISE-MASTER' || $abbreviation == 'INF-MASTER') {
                         $abbreviation = 'INF';
                     } else {
                         $abbreviation = 'INF';
@@ -150,7 +151,7 @@ class PortalsController extends Controller
             $deletePersons = Person::whereNotIn('id', $doNotRemovePersonIds)->get();
             foreach ($deletePersons as $person) {
                 $person->delete();
-                array_push($removedUsers, $person->id.' ('.$person->email.')');
+                array_push($removedUsers, $person->id . ' (' . $person->email . ')');
             }
         }
 
